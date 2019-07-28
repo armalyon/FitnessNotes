@@ -3,4 +3,6 @@
     <string name="action_settings">Settings</string>
     <string name="workouts_title">Workouts</string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="table_exercises">EXERCISES</string>
+    <string name="table_sets">SETS</string>
 </resources>
