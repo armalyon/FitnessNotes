@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">Fitness Notes</string>
     <string name="action_settings">Settings</string>
-    <string name="workouts_title">Workouts</string>
+    <string name="title_workouts">Workouts</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="table_exercises">EXERCISES</string>
     <string name="table_sets">SETS</string>
+    <string name="title_categories">Categories</string>
+    <string name="title_add_ex">Add Exercise</string>
+    <string name="field_name">Name:</string>
+    <string name="field_catgory">Category:</string>
 </resources>
