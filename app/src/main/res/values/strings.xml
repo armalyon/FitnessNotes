@@ -8,7 +8,7 @@
     <string name="title_categories">Categories</string>
     <string name="title_add_ex">Add Exercise</string>
     <string name="field_name">Name:</string>
-    <string name="field_catgory">Category:</string>
+    <string name="field_category">Category:</string>
     <string name="field_type">Type:</string>
     <string name="item_save">Save</string>
 </resources>

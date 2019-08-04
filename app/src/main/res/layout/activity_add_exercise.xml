@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
-        android:text="@string/field_catgory"
+        android:text="@string/field_category"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editName" />
@@ -71,10 +71,11 @@
 
     <Spinner
         android:id="@+id/categoriesSpinner"
-        android:layout_width="204dp"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:spinnerMode="dropdown"
+        android:entries="@array/categoriesItems"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
@@ -93,11 +94,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
-        android:text="@string/field_catgory"
+        android:text="@string/field_type"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider4"
-        tools:text="@string/field_type" />
+        app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
     <View
         android:id="@+id/divider5"
@@ -110,9 +110,10 @@
 
     <Spinner
         android:id="@+id/typeSpinner"
-        android:layout_width="204dp"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
+        android:entries="@array/typesItems"
         android:spinnerMode="dropdown"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider5" />
