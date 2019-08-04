@@ -3,7 +3,6 @@ package com.n0153.fitnessnotes;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,7 +12,6 @@ import com.n0153.fitnessnotes.db_utils.DBhelper;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private ActionBar actionBar;
     private FloatingActionButton floatingActionButton;
     private final String LOG_TAG_MAIN = "Workouts Log:";
 
@@ -24,9 +22,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        actionBar = getSupportActionBar();
-        actionBar.setTitle(R.string.title_workouts);
 
         floatingActionButton = findViewById(R.id.addTrainingButton);
         floatingActionButton.setOnClickListener(this);
@@ -44,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case (R.id.addTrainingButton):
                 Log.d(LOG_TAG_MAIN, "Add pressed");
-                intent = new Intent(this, TrainingsActivity.class);
+                intent = new Intent(this, CategoriesActivity.class);
                 startActivity(intent);
                 break;
         }

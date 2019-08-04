@@ -9,11 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddExerciseActivity"
-            android:screenOrientation="portrait"></activity>
+
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:label="@string/title_workouts">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,8 +21,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".TrainingsActivity"
+            android:label="@string/title_categories"
+            android:name=".CategoriesActivity"
             android:screenOrientation="portrait" />
+
+        <activity android:name=".AddExerciseActivity"
+            android:label="@string/title_add_ex"
+            android:screenOrientation="portrait"></activity>
+
     </application>
 
 </manifest>

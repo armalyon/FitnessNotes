@@ -7,17 +7,11 @@ import android.view.Menu;
 
 public class AddExerciseActivity extends AppCompatActivity {
 
-    private ActionBar actionBar;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_exercise);
 
-        actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.setTitle(R.string.title_add_ex);
 
     }
 

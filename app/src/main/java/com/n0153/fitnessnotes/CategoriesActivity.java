@@ -8,20 +8,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-public class TrainingsActivity extends AppCompatActivity implements View.OnClickListener {
+public class CategoriesActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private ActionBar actionBar;
+
     private FloatingActionButton floatingActionButton;
     private final String LOG_TAG_WORKOUTS = "Catgories Log:";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_trainings);
-
-
-        actionBar = getSupportActionBar();
-        actionBar.setTitle(R.string.title_categories);
+        setContentView(R.layout.activity_categories);
 
         floatingActionButton = findViewById(R.id.add_exercise);
         floatingActionButton.setOnClickListener(this);
