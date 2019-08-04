@@ -1,14 +1,18 @@
 <resources>
     <string name="app_name">Fitness Notes</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_workouts">Workouts</string>
-    <string name="title_activity_main2">Main2Activity</string>
-    <string name="table_exercises">EXERCISES</string>
-    <string name="table_sets">SETS</string>
-    <string name="title_categories">Categories</string>
-    <string name="title_add_ex">Add Exercise</string>
-    <string name="field_name">Name:</string>
-    <string name="field_category">Category:</string>
-    <string name="field_type">Type:</string>
-    <string name="item_save">Save</string>
+    <string name="action_settings" translatable="false">Settings</string>
+    <string name="title_workouts" translatable="false">Workouts</string>
+    <string name="title_activity_main2" translatable="false">Main2Activity</string>
+    <string name="table_exercises" translatable="false">EXERCISES</string>
+    <string name="table_sets" translatable="false">SETS</string>
+    <string name="title_categories" translatable="false">Categories</string>
+    <string name="title_add_ex" translatable="false">Add Exercise</string>
+    <string name="field_name" translatable="false">Name:</string>
+    <string name="field_category" translatable="false">Category:</string>
+    <string name="field_type" translatable="false">Type:</string>
+    <string name="item_save" translatable="false">Save</string>
+    <string name="title_add_category_dialog" translatable="false">Add Category:</string>
+    <string name="toast_save_category">New category created!</string>
+
+
 </resources>
