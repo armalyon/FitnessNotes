@@ -9,4 +9,5 @@
     <string name="title_add_ex">Add Exercise</string>
     <string name="field_name">Name:</string>
     <string name="field_catgory">Category:</string>
+    <string name="field_type">Type:</string>
 </resources>
