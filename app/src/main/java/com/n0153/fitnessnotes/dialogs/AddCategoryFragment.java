@@ -1,10 +1,11 @@
 package com.n0153.fitnessnotes.dialogs;
 
-import android.content.Context;
-import android.net.Uri;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.n0153.fitnessnotes.R;
+import com.n0153.fitnessnotes.db_utils.DBhelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.widget.Toast.LENGTH_LONG;
 
@@ -21,6 +26,8 @@ public class AddCategoryFragment extends DialogFragment implements View.OnClickL
 
     Button saveBtn;
     EditText inputNewCategory;
+    DBhelper dBhelper;
+    private final String LOG_TAG = "Dialog log";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,6 +36,7 @@ public class AddCategoryFragment extends DialogFragment implements View.OnClickL
         saveBtn = v.findViewById(R.id.buttonSaveNewCategory);
         saveBtn.setOnClickListener(this);
         inputNewCategory = v.findViewById(R.id.editNewCategory);
+        dBhelper = new DBhelper(getContext());
 
         return v;
     }
@@ -36,13 +44,86 @@ public class AddCategoryFragment extends DialogFragment implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        if (v.getId()== R.id.buttonSaveNewCategory){
+        if (v.getId() == R.id.buttonSaveNewCategory) {
 
-
-            Toast.makeText(getContext(), R.string.toast_save_category, LENGTH_LONG).show();
+            if (inputNewCategory.getText().toString().equals("")) {
+                Log.d(LOG_TAG, "Empty category cannot be added");
+                Toast.makeText(getContext(), getString(R.string.toast_please_enter_category), LENGTH_LONG).show();
+            } else {
+                addCategory();
+                inputNewCategory.setText("");
+            }
             dismiss();
         }
 
 
     }
+
+
+    private void addCategory() {
+
+
+        //get text from EditText
+        String newCategoryName = inputNewCategory.getText().toString() + " ";
+
+        //Get database
+        SQLiteDatabase db = dBhelper.getWritableDatabase();
+
+        //get categories values
+        String[] column = new String[]{DBhelper.KEY_CATEGORIES};
+        Cursor cursor = db.query(DBhelper.TABLE_CATEGORIES_NAME, column, null, null, null, null, null);
+
+        List<String> categoriesList = new ArrayList<>();
+
+        //get put categories to the list
+
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    int categoryIndex = cursor.getColumnIndex(DBhelper.KEY_CATEGORIES);
+                    categoriesList.add(cursor.getString(categoryIndex));
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        }
+
+
+
+        //check if the category was not added before
+        boolean flag = false;
+
+        if (categoriesList.size() > 0) {
+
+            for (int i = 0; i < categoriesList.size(); i++) {
+                Log.d(LOG_TAG, categoriesList.get(i));
+                if (categoriesList.get(i).equals(newCategoryName)) flag = true;
+            }
+
+        }
+
+        Log.d(LOG_TAG, "List size is " + categoriesList.size());
+        for (int i = 0; i < categoriesList.size(); i++) {
+            Log.d(LOG_TAG, categoriesList.get(i));
+
+        }
+
+
+        //add category do DB
+        if (!flag) {
+            Log.d(LOG_TAG, "Trying to add new category");
+
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(DBhelper.KEY_CATEGORIES, newCategoryName);
+
+            db.insert(DBhelper.TABLE_CATEGORIES_NAME, null, contentValues);
+
+            Toast.makeText(getContext(), getString(R.string.toast_new_category) + newCategoryName, LENGTH_LONG).show();
+
+
+        } else Toast.makeText(getContext(), getString(R.string.toast_category_already_exist), LENGTH_LONG ).show();
+
+
+    }
+
+
 }
