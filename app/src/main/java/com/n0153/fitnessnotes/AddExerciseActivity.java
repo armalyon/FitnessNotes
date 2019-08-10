@@ -92,7 +92,7 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
 
 
 
-    private void updateSpinner(){
+    public void updateSpinner(){
 
         Cursor cursor = dBhelper.getCategories();
         List <String> categoriesList = new ArrayList<>();

@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.n0153.fitnessnotes.AddExerciseActivity;
 import com.n0153.fitnessnotes.R;
 import com.n0153.fitnessnotes.db_utils.DBhelper;
 
@@ -124,8 +125,9 @@ public class AddCategoryFragment extends DialogFragment implements View.OnClickL
 
             //clear editText and dismiss dialog
             inputNewCategory.setText("");
+
             dismiss();
-            
+            ((AddExerciseActivity)getActivity()).updateSpinner();
 
         } else
             Toast.makeText(getContext(), getString(R.string.toast_category_already_exist), LENGTH_LONG).show();
