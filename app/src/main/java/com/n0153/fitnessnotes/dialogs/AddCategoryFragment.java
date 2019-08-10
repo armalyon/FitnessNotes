@@ -125,6 +125,7 @@ public class AddCategoryFragment extends DialogFragment implements View.OnClickL
             //clear editText and dismiss dialog
             inputNewCategory.setText("");
             dismiss();
+            
 
         } else
             Toast.makeText(getContext(), getString(R.string.toast_category_already_exist), LENGTH_LONG).show();

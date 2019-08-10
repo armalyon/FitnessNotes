@@ -17,6 +17,7 @@
     <string name="toast_please_enter_category">Please enter category name</string>
     <string name="toast_category_already_exist">Category already exists</string>
     <string name="item_cancel">Cancel</string>
+    <string name="sp_please_select">- Please select -</string>
 
 
 </resources>

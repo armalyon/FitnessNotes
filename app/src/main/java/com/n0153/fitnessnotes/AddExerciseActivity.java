@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -16,7 +17,9 @@ import android.widget.Spinner;
 import com.n0153.fitnessnotes.db_utils.DBhelper;
 import com.n0153.fitnessnotes.dialogs.AddCategoryFragment;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class AddExerciseActivity extends AppCompatActivity implements View.OnClickListener {
@@ -43,7 +46,7 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
 
         dialogAddCategory = new AddCategoryFragment();
 
-
+        updateSpinner();
 
     }
 
@@ -57,9 +60,22 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
 
-
         return true;
     }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        updateSpinner();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateSpinner();
+    }
+
+
 
 
     @Override
@@ -77,9 +93,22 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
 
 
     private void updateSpinner(){
+
         Cursor cursor = dBhelper.getCategories();
+        List <String> categoriesList = new ArrayList<>();
+        categoriesList.add(getString(R.string.sp_please_select));
+        if (cursor.moveToFirst()){
+            do {
+                int index = cursor.getColumnIndex(DBhelper.KEY_CATEGORIES);
+                categoriesList.add(cursor.getString(index));
 
+            }while (cursor.moveToNext());
+            cursor.close();
+        }
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categoriesList);
 
-
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categoriesSpinner.setAdapter(adapter);
     }
 }
