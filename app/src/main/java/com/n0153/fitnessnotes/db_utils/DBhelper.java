@@ -1,6 +1,7 @@
 package com.n0153.fitnessnotes.db_utils;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -70,6 +71,12 @@ public class DBhelper extends SQLiteOpenHelper {
         db.execSQL("drop table if exists " + TABLE_CATEGORIES_NAME);
         db.execSQL("drop table if exists " + TABLE_EXERISES_NAME);
 
+    }
+
+    public Cursor getCategories(){
+        SQLiteDatabase db = getReadableDatabase();
+        String[] column = new String[]{DBhelper.KEY_CATEGORIES};
+        return db.query(DBhelper.TABLE_CATEGORIES_NAME, column, null, null, null, null, null);
     }
 
 

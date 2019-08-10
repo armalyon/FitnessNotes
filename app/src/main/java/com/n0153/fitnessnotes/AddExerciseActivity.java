@@ -1,5 +1,6 @@
 package com.n0153.fitnessnotes;
 
+import android.database.Cursor;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -10,15 +11,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 
 import com.n0153.fitnessnotes.db_utils.DBhelper;
 import com.n0153.fitnessnotes.dialogs.AddCategoryFragment;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class AddExerciseActivity extends AppCompatActivity implements View.OnClickListener {
 
     private String dialogNewCatTag = "start dialog new category";
 
     ImageButton addCategoryBtn;
+    Spinner categoriesSpinner;
     DBhelper dBhelper;
     AddCategoryFragment dialogAddCategory;
 
@@ -32,6 +38,8 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
 
         addCategoryBtn = findViewById(R.id.addCategoryButton);
         addCategoryBtn.setOnClickListener(this);
+
+        categoriesSpinner = findViewById(R.id.categoriesSpinner);
 
         dialogAddCategory = new AddCategoryFragment();
 
@@ -63,6 +71,15 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
 
                 break;
         }
+
+    }
+
+
+
+    private void updateSpinner(){
+        Cursor cursor = dBhelper.getCategories();
+
+
 
     }
 }

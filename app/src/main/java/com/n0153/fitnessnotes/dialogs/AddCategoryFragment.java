@@ -76,13 +76,11 @@ public class AddCategoryFragment extends DialogFragment implements View.OnClickL
         SQLiteDatabase db = dBhelper.getWritableDatabase();
 
         //get categories values
-        String[] column = new String[]{DBhelper.KEY_CATEGORIES};
-        Cursor cursor = db.query(DBhelper.TABLE_CATEGORIES_NAME, column, null, null, null, null, null);
 
         List<String> categoriesList = new ArrayList<>();
 
-        //get put categories to the list
-
+        //get put categories to the list/**/
+        Cursor cursor = dBhelper.getCategories();
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 do {
