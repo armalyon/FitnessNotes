@@ -8,6 +8,14 @@
      >
 
 
+    <ListView
+        android:id="@+id/lvCategories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textSize="@dimen/categ_list_text_size"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="28dp"></ListView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_exercise"
@@ -27,8 +35,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:rippleColor="@android:color/background_light"
         />
-
-
 
 
 </android.support.constraint.ConstraintLayout>
