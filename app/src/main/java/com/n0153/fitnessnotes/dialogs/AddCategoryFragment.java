@@ -24,7 +24,7 @@ import static android.widget.Toast.LENGTH_LONG;
 
 public class AddCategoryFragment extends DialogFragment implements View.OnClickListener {
 
-    Button saveBtn;
+    Button saveBtn, cancelBtn;
     EditText inputNewCategory;
     DBhelper dBhelper;
     private final String LOG_TAG = "Dialog log";
@@ -35,6 +35,8 @@ public class AddCategoryFragment extends DialogFragment implements View.OnClickL
         View v = inflater.inflate(R.layout.fragment_add_category, container, false);
         saveBtn = v.findViewById(R.id.buttonSaveNewCategory);
         saveBtn.setOnClickListener(this);
+        cancelBtn = v.findViewById(R.id.buttonCancel);
+        cancelBtn.setOnClickListener(this);
         inputNewCategory = v.findViewById(R.id.editNewCategory);
         dBhelper = new DBhelper(getContext());
 
@@ -48,11 +50,15 @@ public class AddCategoryFragment extends DialogFragment implements View.OnClickL
 
             if (inputNewCategory.getText().toString().equals("")) {
                 Log.d(LOG_TAG, "Empty category cannot be added");
-                Toast.makeText(getContext(), getString(R.string.toast_please_enter_category), LENGTH_LONG).show();
+                Toast.makeText(getContext(), getString(R.string.toast_please_enter_category), Toast.LENGTH_SHORT).show();
             } else {
                 addCategory();
-                inputNewCategory.setText("");
+
             }
+
+        }
+        if (v.getId() == R.id.buttonCancel) {
+            inputNewCategory.setText("");
             dismiss();
         }
 
@@ -88,7 +94,6 @@ public class AddCategoryFragment extends DialogFragment implements View.OnClickL
         }
 
 
-
         //check if the category was not added before
         boolean flag = false;
 
@@ -119,8 +124,12 @@ public class AddCategoryFragment extends DialogFragment implements View.OnClickL
 
             Toast.makeText(getContext(), getString(R.string.toast_new_category) + newCategoryName, LENGTH_LONG).show();
 
+            //clear editText and dismiss dialog
+            inputNewCategory.setText("");
+            dismiss();
 
-        } else Toast.makeText(getContext(), getString(R.string.toast_category_already_exist), LENGTH_LONG ).show();
+        } else
+            Toast.makeText(getContext(), getString(R.string.toast_category_already_exist), LENGTH_LONG).show();
 
 
     }
