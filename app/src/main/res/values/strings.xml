@@ -14,10 +14,13 @@
     <string name="title_add_category_dialog" translatable="false">Add Category:</string>
     <string name="toast_new_category">New category: </string>
     <string name="toast_created">created</string>
-    <string name="toast_please_enter_category">Please enter category name</string>
+    <string name="toast_please_enter_category" translatable="false">Please enter category name</string>
+    <string name="toast_please_fill_fields" translatable="false">Please all fields</string>
     <string name="toast_category_already_exist">Category already exists</string>
     <string name="item_cancel">Cancel</string>
     <string name="sp_please_select">- Please select -</string>
+    <string name="sp_weight_reps">Weight and Reps</string>
+    <string name="sp_dist_time">Distance and Time</string>
 
 
 </resources>

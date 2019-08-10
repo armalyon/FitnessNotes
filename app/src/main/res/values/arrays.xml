@@ -2,11 +2,8 @@
 <resources>
     <string-array name="typesItems">
         <item>- Please Select -</item>
-        <item>Weight and Reps</item>
-        <item>Distance and Time</item>
+        <item>@string/sp_weight_reps</item>
+        <item>@string/sp_dist_time</item>
     </string-array>
 
-    <string-array name="categoriesItems">
-        <item>- Please Select -</item>
-    </string-array>
 </resources>

@@ -8,7 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textSize">18sp</item>
         <item name="android:actionMenuTextAppearance">@style/SaveExTextAppearance</item>
-
+       <!-- <item name="android:fontFamily">@font/droid_sans_mono</item>
+-->
     </style>
 
     <style name="AppTheme.NoActionBar">

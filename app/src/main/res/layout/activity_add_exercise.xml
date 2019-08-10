@@ -75,7 +75,6 @@
         android:layout_width="220dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
-        android:entries="@array/categoriesItems"
         android:spinnerMode="dropdown"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider3" />

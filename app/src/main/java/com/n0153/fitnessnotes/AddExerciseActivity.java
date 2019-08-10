@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.n0153.fitnessnotes.db_utils.DBhelper;
 import com.n0153.fitnessnotes.dialogs.AddCategoryFragment;
@@ -27,9 +28,14 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
     private String dialogNewCatTag = "start dialog new category";
 
     ImageButton addCategoryBtn;
-    Spinner categoriesSpinner;
+    Spinner categoriesSpinner, typeSpinner;
     DBhelper dBhelper;
     AddCategoryFragment dialogAddCategory;
+    MenuItem saveExButton;
+    EditText editName;
+
+    String exerciseName, exerciseCategory;
+    int exerciseType;
 
 
     @Override
@@ -41,10 +47,11 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
 
         addCategoryBtn = findViewById(R.id.addCategoryButton);
         addCategoryBtn.setOnClickListener(this);
-
+        editName = findViewById(R.id.editName);
         categoriesSpinner = findViewById(R.id.categoriesSpinner);
-
+        typeSpinner = findViewById(R.id.typeSpinner);
         dialogAddCategory = new AddCategoryFragment();
+
 
         updateSpinner();
 
@@ -58,7 +65,8 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
 
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
+        addExerciseToDB();
 
         return true;
     }
@@ -76,33 +84,30 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
     }
 
 
-
-
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()){
+        switch (v.getId()) {
             case (R.id.addCategoryButton):
                 dialogAddCategory.show(getSupportFragmentManager(), dialogNewCatTag);
-
                 break;
         }
+
 
     }
 
 
-
-    public void updateSpinner(){
+    public void updateSpinner() {
 
         Cursor cursor = dBhelper.getCategories();
-        List <String> categoriesList = new ArrayList<>();
+        List<String> categoriesList = new ArrayList<>();
         categoriesList.add(getString(R.string.sp_please_select));
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             do {
                 int index = cursor.getColumnIndex(DBhelper.KEY_CATEGORIES);
                 categoriesList.add(cursor.getString(index));
 
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
             cursor.close();
         }
         ArrayAdapter<String> adapter =
@@ -111,4 +116,27 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categoriesSpinner.setAdapter(adapter);
     }
+
+
+    private void addExerciseToDB() {
+        exerciseName = editName.getText().toString();
+        exerciseCategory = categoriesSpinner.getSelectedItem().toString();
+        String typeString = typeSpinner.getSelectedItem().toString();
+
+        if (exerciseName.equals("")|| exerciseCategory.equals(getString(R.string.sp_please_select))||
+                typeString.equals(getString(R.string.sp_please_select))){
+            Toast.makeText(this, getString(R.string.toast_please_fill_fields), Toast.LENGTH_SHORT).show();
+        } else {
+
+
+
+
+        }
+
+
+
+
+    }
+
+
 }

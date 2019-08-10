@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TableRow;
 
 import com.n0153.fitnessnotes.db_utils.DBhelper;
 
@@ -73,11 +74,13 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, categoriesList);
+                R.layout.listraw_layout, R.id.textView2, categoriesList);
 
         listView.setAdapter(adapter);
 
     }
+
+
 
 
 }
