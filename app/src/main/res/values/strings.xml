@@ -10,13 +10,16 @@
     <string name="field_name" translatable="false">Name:</string>
     <string name="field_category" translatable="false">Category:</string>
     <string name="field_type" translatable="false">Type:</string>
+    <string name="field_units" translatable="false">Mesurment units:</string>
+
     <string name="item_save" translatable="false">Save</string>
     <string name="title_add_category_dialog" translatable="false">Add Category:</string>
     <string name="toast_new_category">New category: </string>
     <string name="toast_created">created</string>
     <string name="toast_please_enter_category" translatable="false">Please enter category name</string>
-    <string name="toast_please_fill_fields" translatable="false">Please all fields</string>
+    <string name="toast_please_fill_fields" translatable="false">Please fill all fields</string>
     <string name="toast_category_already_exist">Category already exists</string>
+    <string name="toast_ex_name_already_exist">Exercise already exists</string>
     <string name="item_cancel">Cancel</string>
     <string name="sp_please_select">- Please select -</string>
     <string name="sp_weight_reps">Weight and Reps</string>

@@ -1,6 +1,8 @@
 package com.n0153.fitnessnotes;
 
+import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -31,11 +33,11 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
     Spinner categoriesSpinner, typeSpinner;
     DBhelper dBhelper;
     AddCategoryFragment dialogAddCategory;
-    MenuItem saveExButton;
-    EditText editName;
 
-    String exerciseName, exerciseCategory;
-    int exerciseType;
+    EditText editName, editUnits;
+
+    String exerciseName, exerciseCategory, exerciseType, exrciseUnits;
+
 
 
     @Override
@@ -48,6 +50,8 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
         addCategoryBtn = findViewById(R.id.addCategoryButton);
         addCategoryBtn.setOnClickListener(this);
         editName = findViewById(R.id.editName);
+        editUnits = findViewById(R.id.editUnits);
+
         categoriesSpinner = findViewById(R.id.categoriesSpinner);
         typeSpinner = findViewById(R.id.typeSpinner);
         dialogAddCategory = new AddCategoryFragment();
@@ -119,29 +123,50 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
 
 
     private void addExerciseToDB() {
+
+        //get values
         exerciseName = editName.getText().toString();
         exerciseCategory = categoriesSpinner.getSelectedItem().toString();
-        String typeString = typeSpinner.getSelectedItem().toString();
+        exerciseType = typeSpinner.getSelectedItem().toString();
+        exrciseUnits = editUnits.getText().toString();
 
-        if (exerciseName.equals("")|| exerciseCategory.equals(getString(R.string.sp_please_select))||
-                typeString.equals(getString(R.string.sp_please_select))){
+        //check if all fields are filled
+        if (exerciseName.equals("") || exerciseCategory.equals(getString(R.string.sp_please_select)) ||
+                exerciseType.equals(getString(R.string.sp_please_select)) || exrciseUnits.equals("")) {
             Toast.makeText(this, getString(R.string.toast_please_fill_fields), Toast.LENGTH_SHORT).show();
         } else {
+            //Check if an exercise name exists
             boolean flag = false;
             List<String> exercisesList = dBhelper.getExNamesList();
-            for (int i = 0; i < exercisesList.size() ; i++) {
-                if (exercisesList.get(i).equals(exerciseName))
-
+            for (int i = 0; i < exercisesList.size(); i++) {
+                if (exercisesList.get(i).equals(exerciseName)) flag = true;
             }
-
+            if (flag) {
+                Toast.makeText(this, getString(R.string.toast_ex_name_already_exist), Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                //add to db
+               ContentValues contentValues = new ContentValues();
+               contentValues.put(DBhelper.KEY_CATEGORY, exerciseCategory);
+               contentValues.put(DBhelper.KEY_NAME, exerciseName);
+               contentValues.put(DBhelper.KEY_TYPE, exerciseType);
+               contentValues.put(DBhelper.KEY_UNITS, exrciseUnits);
+               dBhelper.getWritableDatabase().insert(DBhelper.TABLE_EXERISES_NAME, null, contentValues);
+               finish();
+            }
 
 
         }
 
 
-
-
     }
 
 
+
+
+
 }
+
+
+
+

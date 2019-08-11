@@ -35,9 +35,9 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
         android:background="@android:color/transparent"
+        android:ems="10"
+        android:inputType="textCapSentences"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameTextView" />
 
@@ -88,6 +88,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/categoriesSpinner" />
 
+    <ImageButton
+        android:id="@+id/addCategoryButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toEndOf="@+id/categoriesSpinner"
+        app:layout_constraintTop_toTopOf="@+id/categoriesSpinner"
+        app:srcCompat="@drawable/ic_action_name" />
+
     <TextView
         android:id="@+id/typeTextView"
         android:layout_width="wrap_content"
@@ -127,14 +137,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/typeSpinner" />
 
-    <ImageButton
-        android:id="@+id/addCategoryButton"
-        android:layout_width="40dp"
+    <TextView
+        android:id="@+id/unitsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/field_units"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider6" />
+
+    <View
+        android:id="@+id/divider7"
+        android:layout_width="0dp"
+        android:layout_height="3dp"
+        android:layout_marginStart="8dp"
+        android:background="@color/colorActionBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/unitsTextView" />
+
+    <View
+        android:id="@+id/divider8"
+        android:layout_width="0dp"
+        android:layout_height="3dp"
+        android:layout_marginStart="8dp"
+        android:background="@color/colorActionBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editUnits" />
+
+    <EditText
+        android:id="@+id/editUnits"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:background="@android:color/transparent"
-        app:layout_constraintStart_toEndOf="@+id/categoriesSpinner"
-        app:layout_constraintTop_toTopOf="@+id/categoriesSpinner"
-        app:srcCompat="@drawable/ic_action_name" />
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider7" />
 
 </android.support.constraint.ConstraintLayout>

@@ -52,7 +52,7 @@ public class DBhelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE " + TABLE_EXERISES_NAME + " (" + KEY_ID + " integer primary key autoincrement, " +
                         KEY_CATEGORY + TYPE_TEXT_COMMA + KEY_NAME + TYPE_TEXT_COMMA +  KEY_TYPE +
-                        TYPE_INTEGER + KEY_UNITS + TYPE_TEXT + " )");
+                        TYPE_TEXT_COMMA + KEY_UNITS + TYPE_TEXT + " )");
 
         db.execSQL("CREATE TABLE " + TABLE_SETS_NAME + " (" + KEY_DATE + TYPE_INTEGER + KEY_POS_IN_A_DATE +
                 TYPE_INTEGER + KEY_NAME + TYPE_TEXT_COMMA + KEY_WEIGHT_DIST + TYPE_REAL_COMMA +
