@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.List;
+
 public class DBhelper extends SQLiteOpenHelper {
 
     public final static String DB_NAME = "Fit DB";
@@ -77,6 +79,12 @@ public class DBhelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         String[] column = new String[]{DBhelper.KEY_CATEGORIES};
         return db.query(DBhelper.TABLE_CATEGORIES_NAME, column, null, null, null, null, null);
+    }
+
+
+    public List getExNamesList(){
+        SQLiteDatabase db = getReadableDatabase();
+
     }
 
 
