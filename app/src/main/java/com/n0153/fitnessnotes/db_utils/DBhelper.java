@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DBhelper extends SQLiteOpenHelper {
@@ -77,14 +78,25 @@ public class DBhelper extends SQLiteOpenHelper {
 
     public Cursor getCategories(){
         SQLiteDatabase db = getReadableDatabase();
-        String[] column = new String[]{DBhelper.KEY_CATEGORIES};
-        return db.query(DBhelper.TABLE_CATEGORIES_NAME, column, null, null, null, null, null);
+        String[] column = new String[]{KEY_CATEGORIES};
+        return db.query(TABLE_CATEGORIES_NAME, column, null, null, null, null, null);
     }
 
 
     public List getExNamesList(){
         SQLiteDatabase db = getReadableDatabase();
+        List<String> exNamesList = new ArrayList<>();
+        String[] column = new String[]{KEY_NAME};
+        Cursor cursor = db.query(TABLE_EXERISES_NAME, column, null, null, null, null, null);
 
+            if (cursor.moveToFirst()){
+                do {
+                    int categoryIndex = cursor.getColumnIndex(KEY_NAME);
+                    exNamesList.add(cursor.getString(categoryIndex));
+                } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return exNamesList;
     }
 
 

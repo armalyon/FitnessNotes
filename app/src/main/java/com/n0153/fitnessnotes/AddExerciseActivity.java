@@ -127,7 +127,12 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
                 typeString.equals(getString(R.string.sp_please_select))){
             Toast.makeText(this, getString(R.string.toast_please_fill_fields), Toast.LENGTH_SHORT).show();
         } else {
+            boolean flag = false;
+            List<String> exercisesList = dBhelper.getExNamesList();
+            for (int i = 0; i < exercisesList.size() ; i++) {
+                if (exercisesList.get(i).equals(exerciseName))
 
+            }
 
 
 
