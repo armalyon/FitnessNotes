@@ -12,8 +12,8 @@
 
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_workouts">
+            android:label="@string/title_workouts"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,14 +21,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:label="@string/title_categories"
             android:name=".CategoriesActivity"
+            android:label="@string/title_categories"
             android:screenOrientation="portrait" />
-
-        <activity android:name=".AddExerciseActivity"
+        <activity
+            android:name=".AddExerciseActivity"
             android:label="@string/title_add_ex"
-            android:screenOrientation="portrait"></activity>
-
+            android:screenOrientation="portrait" />
+        <activity android:name=".ActivityExercises"
+            android:label="@string/title_activity_exercises"
+            android:screenOrientation="portrait"
+            />
     </application>
 
 </manifest>

@@ -8,22 +8,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TableRow;
+import android.widget.TextView;
 
 import com.n0153.fitnessnotes.db_utils.DBhelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoriesActivity extends AppCompatActivity implements View.OnClickListener {
+public class CategoriesActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
 
     private FloatingActionButton floatingActionButton;
     private final String LOG_TAG = "Categories_Log:";
     private DBhelper dBhelper;
     private ListView listView;
+    final static String CATEGORY_EXTRA = "CATEGORY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,7 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
         floatingActionButton.setOnClickListener(this);
         dBhelper = new DBhelper(this);
         listView = findViewById(R.id.lvCategories);
+        listView.setOnItemClickListener(this);
 
         updateList();
 
@@ -61,15 +65,15 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
     }
 
 
-    private void updateList(){
+    private void updateList() {
         Cursor cursor = dBhelper.getCategories();
         List<String> categoriesList = new ArrayList<>();
-           if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             do {
                 int index = cursor.getColumnIndex(DBhelper.KEY_CATEGORIES);
                 categoriesList.add(cursor.getString(index));
 
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
             cursor.close();
         }
 
@@ -81,6 +85,12 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
     }
 
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        String selectedCategory  =  (String)parent.getItemAtPosition(position);
+        Intent intent = new Intent(this, ActivityExercises.class);
+        intent.putExtra(CATEGORY_EXTRA, selectedCategory);
+        startActivity(intent);
 
-
+    }
 }
