@@ -20,6 +20,8 @@ import java.util.List;
 
 public class ActivityExercises extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
+    public final static String EXERCISE_EXTRA = "Exercise";
+
     String categoryToOpen;
     DBhelper dBhelper;
     ListView listView;
@@ -33,6 +35,7 @@ public class ActivityExercises extends AppCompatActivity implements AdapterView.
         dBhelper = new DBhelper(this);
         listView = findViewById(R.id.exercisesListView);
         updateList();
+        listView.setOnItemClickListener(this);
 
     }
 
@@ -52,7 +55,10 @@ public class ActivityExercises extends AppCompatActivity implements AdapterView.
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        String selectedExercise  =  (String)parent.getItemAtPosition(position);
+        Intent intent = new Intent(this, NewSetActivity.class);
+        intent.putExtra(EXERCISE_EXTRA, selectedExercise );
+        startActivity(intent);
 
 
     }

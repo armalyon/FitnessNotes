@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".NewSetActivity"></activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/title_workouts"
@@ -28,10 +28,10 @@
             android:name=".AddExerciseActivity"
             android:label="@string/title_add_ex"
             android:screenOrientation="portrait" />
-        <activity android:name=".ActivityExercises"
+        <activity
+            android:name=".ActivityExercises"
             android:label="@string/title_activity_exercises"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -121,7 +121,7 @@ public class AddCategoryFragment extends DialogFragment implements View.OnClickL
 
             db.insert(DBhelper.TABLE_CATEGORIES_NAME, null, contentValues);
 
-            Toast.makeText(getContext(), getString(R.string.toast_new_category) + newCategoryName, LENGTH_LONG).show();
+            Toast.makeText(getContext(), getString(R.string.toast_new_category) + newCategoryName, Toast.LENGTH_SHORT).show();
 
             //clear editText and dismiss dialog
             inputNewCategory.setText("");

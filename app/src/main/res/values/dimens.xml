@@ -1,4 +1,4 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="categ_list_text_size">32sp</dimen>
+    <dimen name="categ_list_text_size">24sp</dimen>
 </resources>
