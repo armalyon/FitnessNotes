@@ -4,5 +4,120 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CategoriesActivity"
-    />
+    tools:context=".CategoriesActivity">
+
+
+    <View
+        android:id="@+id/divider11"
+        android:layout_width="0dp"
+        android:layout_height="3dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="76dp"
+        android:background="@color/colorActionBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/unitsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="52dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/field_units"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/divider11" />
+
+
+    <EditText
+        android:id="@+id/unitsAmountEditText"
+        android:layout_width="164dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/unitsTextView"
+        app:layout_constraintTop_toBottomOf="@+id/divider11" />
+
+    <View
+        android:id="@+id/divider12"
+        android:layout_width="0dp"
+        android:layout_height="3dp"
+        android:layout_marginStart="16dp"
+        android:background="@color/colorActionBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/unitsAmountEditText" />
+
+    <View
+        android:id="@+id/divider13"
+        android:layout_width="0dp"
+        android:layout_height="9dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="44dp"
+        android:background="@color/colorActionBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider12" />
+
+    <TextView
+        android:id="@+id/amountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="52dp"
+        android:layout_marginStart="16dp"
+        android:text="Amount:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider13" />
+
+    <EditText
+        android:id="@+id/unitsAmountEditText2"
+        android:layout_width="164dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/amountTextView"
+        app:layout_constraintTop_toBottomOf="@+id/divider13" />
+
+
+    <View
+        android:id="@+id/divider14"
+        android:layout_width="0dp"
+        android:layout_height="9dp"
+        android:layout_marginStart="16dp"
+        android:background="@color/colorActionBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/unitsAmountEditText2" />
+
+    <LinearLayout
+        android:id="@+id/setButtonslatout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/unitsAmountEditText2">
+
+        <Button
+            android:id="@+id/buttonSaveSet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorActionBar"
+            android:text="@string/item_save"
+            android:textColor="@android:color/background_light" />
+
+        <Button
+            android:id="@+id/buttonClearSet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorActionBar"
+            android:text="@string/item_clear"
+            android:textColor="@android:color/background_light" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

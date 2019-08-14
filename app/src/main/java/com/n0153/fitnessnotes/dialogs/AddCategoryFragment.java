@@ -34,7 +34,7 @@ public class AddCategoryFragment extends DialogFragment implements View.OnClickL
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_add_category, container, false);
-        saveBtn = v.findViewById(R.id.buttonSaveNewCategory);
+        saveBtn = v.findViewById(R.id.buttonSave);
         saveBtn.setOnClickListener(this);
         cancelBtn = v.findViewById(R.id.buttonCancel);
         cancelBtn.setOnClickListener(this);
@@ -47,7 +47,7 @@ public class AddCategoryFragment extends DialogFragment implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.buttonSaveNewCategory) {
+        if (v.getId() == R.id.buttonSave) {
 
             if (inputNewCategory.getText().toString().equals("")) {
                 Log.d(LOG_TAG, "Empty category cannot be added");

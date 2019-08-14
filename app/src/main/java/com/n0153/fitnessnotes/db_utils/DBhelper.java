@@ -102,7 +102,7 @@ public class DBhelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Log.d(LOG_TAG, "category " + category);
         Cursor cursor = db.query(TABLE_EXERISES_NAME, new String[]{KEY_NAME},
-               KEY_CATEGORY + " = ?", new String[]{category}, null, null, null );
+                KEY_CATEGORY + " = ?", new String[]{category}, null, null, null);
 
         Log.d(LOG_TAG, "cursor size: " + cursor.getCount());
 
@@ -117,6 +117,22 @@ public class DBhelper extends SQLiteOpenHelper {
         }
         cursor.close();
         return exercisesList;
+    }
+
+    public ExOptionsData getExOptionsData(String exercise) {
+        SQLiteDatabase db = getReadableDatabase();
+        String[] columns = new String[]{KEY_TYPE, KEY_UNITS};
+
+        Cursor cursor = db.query(TABLE_EXERISES_NAME, columns, KEY_NAME + " = ?",
+                new String[]{exercise}, null, null, null);
+        String type = null, units = null;
+
+        if (cursor != null) {
+            type = cursor.getString(cursor.getColumnIndex(KEY_TYPE));
+            units = cursor.getString(cursor.getColumnIndex(KEY_UNITS));
+
+        }
+        return new ExOptionsData(type, units);
     }
 
 

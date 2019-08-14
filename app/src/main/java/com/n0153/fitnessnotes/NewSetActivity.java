@@ -20,6 +20,7 @@ public class NewSetActivity extends AppCompatActivity {
     private SectionsPageAdapter sectionsPageAdapter;
 
     private ViewPager viewPager;
+    String label;
 
 
     @Override
@@ -30,7 +31,7 @@ public class NewSetActivity extends AppCompatActivity {
         Log.d(LOG_TAG, "onCreate started");
 
         Intent intent = getIntent();
-        String label = intent.getStringExtra(ActivityExercises.EXERCISE_EXTRA);
+        label = intent.getStringExtra(ActivityExercises.EXERCISE_EXTRA);
         setTitle(label);
 
         viewPager = findViewById(R.id.container);
@@ -49,6 +50,7 @@ public class NewSetActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
-
-
+    public String getLabel() {
+        return label;
+    }
 }
