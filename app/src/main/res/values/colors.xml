@@ -4,5 +4,6 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorActionBar">#039DFC</color>
+    <color name="colorTabs">#039DFC</color>
 
 </resources>

@@ -27,5 +27,10 @@
     <string name="sp_weight_reps">Weight and Reps</string>
     <string name="sp_dist_time">Distance and Time</string>
 
+    <string name="tab_track">Track</string>
+    <string name="tab_history">History</string>
+
+
+
 
 </resources>
