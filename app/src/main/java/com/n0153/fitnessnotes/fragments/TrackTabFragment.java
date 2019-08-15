@@ -1,13 +1,18 @@
 package com.n0153.fitnessnotes.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.n0153.fitnessnotes.ActivityExercises;
@@ -17,10 +22,13 @@ import com.n0153.fitnessnotes.db_utils.DBhelper;
 import com.n0153.fitnessnotes.db_utils.ExOptionsData;
 
 
-public class TrackTabFragment extends Fragment {
+public class TrackTabFragment extends Fragment implements View.OnClickListener {
 
     private DBhelper dBhelper;
     TextView unitsTextView, amountTextView;
+    EditText unitsAmountEditText, amountEditText;
+    Button saveBtn, clearBtn;
+    View divider11, divider12, divider13, divider14;
     private final String LOG_TAG = "Track Tab";
 
 
@@ -41,9 +49,29 @@ public class TrackTabFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_track_tab, container, false);
+
+        Log.d(LOG_TAG, "onCreateView");
         unitsTextView = v.findViewById(R.id.unitsTextView);
         amountTextView = v.findViewById(R.id.amountTextView);
+
+        amountEditText = v.findViewById(R.id.amountEditText);
+        unitsAmountEditText = v.findViewById(R.id.unitsAmountEditText);
+
+        saveBtn = v.findViewById(R.id.buttonSaveSet);
+        clearBtn = v.findViewById(R.id.buttonClearSet);
+
+        divider11 = v.findViewById(R.id.divider11);
+        divider12 = v.findViewById(R.id.divider12);
+        divider13 = v.findViewById(R.id.divider13);
+        divider14 = v.findViewById(R.id.divider14);
+
+
+        saveBtn.setOnClickListener(this);
+        clearBtn.setOnClickListener(this);
+
         setTextFields();
+        setDividersSize();
+
         return v;
 
 
@@ -67,4 +95,51 @@ public class TrackTabFragment extends Fragment {
         amountTextView.setText(amountOf);
     }
 
+    private void setDividersSize() {
+        Display display = ((Activity) getContext()).getWindowManager().getDefaultDisplay();
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        display.getMetrics(outMetrics);
+
+        float density = getResources().getDisplayMetrics().density;
+        float dpWidth = outMetrics.widthPixels;
+
+        ViewGroup.LayoutParams params = divider11.getLayoutParams();
+        int widthhToset = (int) (dpWidth - 2 * (getResources().getDimension(R.dimen.divider_margin)));
+
+
+        params.width = widthhToset;
+        divider11.setLayoutParams(params);
+
+        params = divider12.getLayoutParams();
+        params.width = widthhToset;
+        divider12.setLayoutParams(params);
+
+        params = divider13.getLayoutParams();
+        params.width = widthhToset;
+        divider13.setLayoutParams(params);
+
+        params = divider14.getLayoutParams();
+        params.width = widthhToset;
+        divider14.setLayoutParams(params);
+
+
+
+    }
+
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+            case (R.id.buttonClearSet):
+                unitsAmountEditText.setText("");
+                amountEditText.setText("");
+                break;
+
+            case (R.id.buttonSaveSet):
+
+                break;
+        }
+
+    }
 }

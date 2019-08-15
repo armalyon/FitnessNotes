@@ -1,5 +1,6 @@
 package com.n0153.fitnessnotes.db_utils;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -137,6 +138,13 @@ public class DBhelper extends SQLiteOpenHelper {
 
         }
         return new ExOptionsData(type, units);
+    }
+
+
+    public void saveSet(){
+        ContentValues contentValues;
+
+
     }
 
 
