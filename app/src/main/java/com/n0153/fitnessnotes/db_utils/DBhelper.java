@@ -125,7 +125,11 @@ public class DBhelper extends SQLiteOpenHelper {
 
         Cursor cursor = db.query(TABLE_EXERISES_NAME, columns, KEY_NAME + " = ?",
                 new String[]{exercise}, null, null, null);
+
+        Log.d(LOG_TAG, "Cursor size" + cursor.getCount());
         String type = null, units = null;
+
+        cursor.moveToFirst();
 
         if (cursor != null) {
             type = cursor.getString(cursor.getColumnIndex(KEY_TYPE));

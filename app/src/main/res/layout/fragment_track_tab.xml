@@ -50,7 +50,7 @@
     <View
         android:id="@+id/divider13"
         android:layout_width="0dp"
-        android:layout_height="9dp"
+        android:layout_height="3dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="44dp"
         android:background="@color/colorActionBar"
@@ -80,7 +80,7 @@
     <View
         android:id="@+id/divider14"
         android:layout_width="0dp"
-        android:layout_height="9dp"
+        android:layout_height="3dp"
         android:layout_marginStart="16dp"
         android:background="@color/colorActionBar"
         app:layout_constraintStart_toStartOf="parent"
