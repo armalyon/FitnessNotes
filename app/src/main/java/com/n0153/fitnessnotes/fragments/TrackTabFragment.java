@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.n0153.fitnessnotes.ActivityExercises;
@@ -26,9 +27,11 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
 
     private DBhelper dBhelper;
     TextView unitsTextView, amountTextView;
-    EditText unitsAmountEditText, amountEditText;
+    EditText unitsAmountEditText, amountEditText, notesEditText;
     Button saveBtn, clearBtn;
     View divider11, divider12, divider13, divider14;
+    LinearLayout setButtonsLayout;
+
     private final String LOG_TAG = "Track Tab";
 
 
@@ -56,6 +59,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
 
         amountEditText = v.findViewById(R.id.amountEditText);
         unitsAmountEditText = v.findViewById(R.id.unitsAmountEditText);
+        notesEditText = v.findViewById(R.id.notesEditText);
 
         saveBtn = v.findViewById(R.id.buttonSaveSet);
         clearBtn = v.findViewById(R.id.buttonClearSet);
@@ -64,6 +68,8 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
         divider12 = v.findViewById(R.id.divider12);
         divider13 = v.findViewById(R.id.divider13);
         divider14 = v.findViewById(R.id.divider14);
+
+        setButtonsLayout = v.findViewById(R.id.setButtonslatout);
 
 
         saveBtn.setOnClickListener(this);
@@ -122,7 +128,9 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
         params.width = widthhToset;
         divider14.setLayoutParams(params);
 
-
+        params = setButtonsLayout.getLayoutParams();
+        params.width = widthhToset;
+        setButtonsLayout.setLayoutParams(params);
 
     }
 
@@ -134,6 +142,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
             case (R.id.buttonClearSet):
                 unitsAmountEditText.setText("");
                 amountEditText.setText("");
+                notesEditText.setText("");
                 break;
 
             case (R.id.buttonSaveSet):

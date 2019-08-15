@@ -21,7 +21,7 @@
         android:id="@+id/unitsAmountLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/divider_margin"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider11">
@@ -39,7 +39,8 @@
             android:layout_height="52dp"
             android:ems="10"
             android:inputType="number"
-            android:textSize="@dimen/textview_text_size" />
+            android:textSize="@dimen/textview_text_size"
+            android:background="@android:color/transparent"/>
     </LinearLayout>
 
     <View
@@ -66,7 +67,7 @@
         android:id="@+id/amountLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/divider_margin"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider13">
@@ -85,7 +86,8 @@
             android:layout_height="52dp"
             android:ems="10"
             android:inputType="number"
-            android:textSize="@dimen/textview_text_size" />
+            android:textSize="@dimen/textview_text_size"
+            android:background="@android:color/transparent"/>
 
     </LinearLayout>
 
@@ -98,18 +100,67 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/amountLayout" />
 
+    <View
+        android:id="@+id/divider15"
+        android:layout_width="350dp"
+        android:layout_height="3dp"
+        android:layout_marginStart="@dimen/divider_margin"
+        android:layout_marginTop="44dp"
+        android:background="@color/colorActionBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider14" />
+
     <LinearLayout
-        android:id="@+id/setButtonslatout"
-        android:layout_width="match_parent"
+        android:id="@+id/linearLayoutNotes"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="@dimen/divider_margin"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider14">
+        app:layout_constraintTop_toBottomOf="@+id/divider15">
+
+        <TextView
+            android:id="@+id/notesTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/item_notes"
+            android:textSize="@dimen/textview_text_size" />
+
+        <EditText
+            android:id="@+id/notesEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="@dimen/textview_text_size"
+            android:background="@android:color/transparent"/>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider16"
+        android:layout_width="350dp"
+        android:layout_height="3dp"
+        android:layout_marginStart="@dimen/divider_margin"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorActionBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutNotes" />
+
+    <LinearLayout
+        android:id="@+id/setButtonslatout"
+        android:layout_width="387dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider16">
 
         <Button
             android:id="@+id/buttonSaveSet"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="5dp"
@@ -120,7 +171,7 @@
 
         <Button
             android:id="@+id/buttonClearSet"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="5dp"

@@ -16,6 +16,7 @@
 
     <string name="item_reps" translatable="false">Reps:</string>
     <string name="item_time" translatable="false">Time:</string>
+    <string name="item_notes" translatable="false">Notes:</string>
 
 
     <string name="item_cancel">Cancel</string>
