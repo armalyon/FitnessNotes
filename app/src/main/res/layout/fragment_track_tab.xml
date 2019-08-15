@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".NewSetActivity">
+    android:layout_height="match_parent">
 
 
     <View
@@ -37,10 +36,10 @@
             android:id="@+id/unitsAmountEditText"
             android:layout_width="164dp"
             android:layout_height="52dp"
+            android:background="@android:color/transparent"
             android:ems="10"
             android:inputType="number"
-            android:textSize="@dimen/textview_text_size"
-            android:background="@android:color/transparent"/>
+            android:textSize="@dimen/textview_text_size" />
     </LinearLayout>
 
     <View
@@ -84,10 +83,10 @@
             android:id="@+id/amountEditText"
             android:layout_width="164dp"
             android:layout_height="52dp"
+            android:background="@android:color/transparent"
             android:ems="10"
             android:inputType="number"
-            android:textSize="@dimen/textview_text_size"
-            android:background="@android:color/transparent"/>
+            android:textSize="@dimen/textview_text_size" />
 
     </LinearLayout>
 
@@ -122,20 +121,23 @@
         <TextView
             android:id="@+id/notesTextView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="52dp"
             android:layout_weight="1"
+            android:maxLines="1"
             android:text="@string/item_notes"
             android:textSize="@dimen/textview_text_size" />
 
         <EditText
             android:id="@+id/notesEditText"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="52dp"
             android:layout_weight="1"
             android:ems="10"
+            android:maxLength="20"
             android:inputType="textPersonName"
             android:textSize="@dimen/textview_text_size"
             android:background="@android:color/transparent"/>
+
     </LinearLayout>
 
     <View
@@ -143,7 +145,6 @@
         android:layout_width="350dp"
         android:layout_height="3dp"
         android:layout_marginStart="@dimen/divider_margin"
-        android:layout_marginTop="8dp"
         android:background="@color/colorActionBar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayoutNotes" />

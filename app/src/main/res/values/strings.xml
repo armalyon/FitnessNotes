@@ -18,7 +18,6 @@
     <string name="item_time" translatable="false">Time:</string>
     <string name="item_notes" translatable="false">Notes:</string>
 
-
     <string name="item_cancel">Cancel</string>
     <string name="item_save" translatable="false">Save</string>
     <string name="item_clear" translatable="false">Clear</string>
