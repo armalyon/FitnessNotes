@@ -2,6 +2,7 @@ package com.n0153.fitnessnotes.fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -106,7 +107,6 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
         DisplayMetrics outMetrics = new DisplayMetrics();
         display.getMetrics(outMetrics);
 
-        float density = getResources().getDisplayMetrics().density;
         float dpWidth = outMetrics.widthPixels;
 
         ViewGroup.LayoutParams params = divider11.getLayoutParams();
@@ -146,6 +146,17 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case (R.id.buttonSaveSet):
+                float weightOrDist = Float.parseFloat(unitsAmountEditText.getText().toString());
+                float repsOrTime = Float.parseFloat(amountEditText.getText().toString());
+                String notes = notesEditText.getText().toString();
+                String name = ((NewSetActivity) getActivity()).getLabel();
+                dBhelper.saveSet(name, weightOrDist, repsOrTime, notes);
+                Log.d(LOG_TAG, " new set added to DB");
+
+                Cursor c = dBhelper.getWritableDatabase().query(DBhelper.TABLE_SETS_NAME, null, null,
+                null, null, null, null);
+
+                Log.d(LOG_TAG, "Set table rows: " + c.getCount());
 
                 break;
         }

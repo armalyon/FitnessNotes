@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DBhelper extends SQLiteOpenHelper {
@@ -54,8 +55,8 @@ public class DBhelper extends SQLiteOpenHelper {
                 KEY_CATEGORY + TYPE_TEXT_COMMA + KEY_NAME + TYPE_TEXT_COMMA + KEY_TYPE +
                 TYPE_TEXT_COMMA + KEY_UNITS + TYPE_TEXT + " )");
 
-        db.execSQL("CREATE TABLE " + TABLE_SETS_NAME + " (" + KEY_DATE + TYPE_INTEGER + KEY_POS_IN_A_DATE +
-                TYPE_INTEGER + KEY_NAME + TYPE_TEXT_COMMA + KEY_WEIGHT_DIST + TYPE_REAL_COMMA +
+        db.execSQL("CREATE TABLE " + TABLE_SETS_NAME + " (" + KEY_DATE + TYPE_INTEGER +
+                KEY_NAME + TYPE_TEXT_COMMA + KEY_WEIGHT_DIST + TYPE_REAL_COMMA +
                 KEY_REPS_TIME + TYPE_REAL_COMMA + KEY_NOTES + TYPE_TEXT + " )");
 
         db.execSQL("CREATE TABLE " + TABLE_CATEGORIES_NAME + " (" + KEY_ID + " integer primary key autoincrement, " +
@@ -105,7 +106,7 @@ public class DBhelper extends SQLiteOpenHelper {
         Cursor cursor = db.query(TABLE_EXERISES_NAME, new String[]{KEY_NAME},
                 KEY_CATEGORY + " = ?", new String[]{category}, null, null, null);
 
-        Log.d(LOG_TAG, "cursor size: " + cursor.getCount());
+        Log.d(LOG_TAG, "Exercises list size: " + cursor.getCount());
 
 
         List<String> exercisesList = new ArrayList<>();
@@ -141,9 +142,17 @@ public class DBhelper extends SQLiteOpenHelper {
     }
 
 
-    public void saveSet(){
-        ContentValues contentValues;
+    public void saveSet(String name, float weighOrDist, float repsOrTime, String notes){
+        long dateMills = new Date().getTime();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(KEY_REPS_TIME, repsOrTime);
+        contentValues.put(KEY_WEIGHT_DIST, weighOrDist);
+        contentValues.put(KEY_DATE, dateMills);
+        contentValues.put(KEY_NOTES, notes);
+        contentValues.put(KEY_NAME, name);
 
+        SQLiteDatabase db = getWritableDatabase();
+        db.insert(TABLE_SETS_NAME, null, contentValues);
 
     }
 
