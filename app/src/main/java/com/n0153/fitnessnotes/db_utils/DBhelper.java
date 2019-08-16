@@ -33,7 +33,6 @@ public class DBhelper extends SQLiteOpenHelper {
     public static final String TYPE_TEXT = " text ";
     public static final String TYPE_INTEGER = " integer, ";
     public static final String TYPE_REAL_COMMA = " real, ";
-    public static final String TYPE_REAL = " real";
 
     public static final String TABLE_EXERISES_NAME = "EXERSISES";
     public static final String TABLE_SETS_NAME = "SETS";
@@ -146,6 +145,8 @@ public class DBhelper extends SQLiteOpenHelper {
 
     public void saveSet(String name, float weighOrDist, float repsOrTime, String notes){
         long dateMills = new Date().getTime();
+
+
         ContentValues contentValues = new ContentValues();
         contentValues.put(KEY_REPS_TIME, repsOrTime);
         contentValues.put(KEY_WEIGHT_DIST, weighOrDist);
@@ -165,7 +166,10 @@ public class DBhelper extends SQLiteOpenHelper {
 
         int index = cursor.getColumnIndex(KEY_TYPE);
 
-        return cursor.getString(index);
+        String type = cursor.getString(index);
+        cursor.close();
+
+        return type;
     }
 
 

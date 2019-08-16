@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.n0153.fitnessnotes.ActivityExercises;
 import com.n0153.fitnessnotes.NewSetActivity;
@@ -163,24 +164,8 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
                 amountEditText.setText("");
                 notesEditText.setText("");
                 break;
-
             case (R.id.buttonSaveSet):
-                String unitsAmountValue = unitsAmountEditText.getText().toString();
-
-                float weightOrDist = Float.parseFloat(unitsAmountValue);
-                float repsOrTime = Float.parseFloat(amountEditText.getText().toString());
-                String notes = notesEditText.getText().toString();
-                String name = ((NewSetActivity) getActivity()).getLabel();
-
-
-                dBhelper.saveSet(name, weightOrDist, repsOrTime, notes);
-                Log.d(LOG_TAG, " new set added to DB");
-
-                Cursor c = dBhelper.getWritableDatabase().query(DBhelper.TABLE_SETS_NAME, null, null,
-                        null, null, null, null);
-
-                Log.d(LOG_TAG, "Set table rows: " + c.getCount());
-
+                saveSet();
                 break;
         }
 
@@ -194,7 +179,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
         String timeType = getString(R.string.sp_time);
         String repsType = getString(R.string.sp_reps);
 
-        if (type.equals(timeType)||type.equals(repsType)) {
+        if (type.equals(timeType) || type.equals(repsType)) {
 
             divider11.setVisibility(View.INVISIBLE);
             divider12.setVisibility(View.INVISIBLE);
@@ -210,6 +195,55 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
 
         }
 
+    }
+
+
+//method to validete inputs and save set to DB
+
+    private void saveSet() {
+
+        String type = dBhelper.getExeriseType(exercise);
+        String name = ((NewSetActivity) getActivity()).getLabel();
+
+        String weightOrDistString = unitsAmountEditText.getText().toString();
+        String repsOrTimeString = amountEditText.getText().toString();
+        String notes = notesEditText.getText().toString();
+        float weightOrDist = 0, repsOrTime = 0;
+
+        //validations for weight/reps and dist/time
+        if (type.equals(getString(R.string.sp_dist_time)) || type.equals(getString(R.string.sp_weight_reps))) {
+            if (weightOrDistString.equals("") || weightOrDistString.equals("0") ||
+                    repsOrTimeString.equals("") || repsOrTimeString.equals("0")) {
+
+                Toast.makeText(getContext(), getString(R.string.toast_please_enter_valid_values),
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                weightOrDist = Float.parseFloat(weightOrDistString);
+                repsOrTime = Float.parseFloat(repsOrTimeString);
+                dBhelper.saveSet(name, weightOrDist, repsOrTime, notes);
+                Log.d(LOG_TAG, " new set added to DB");
+            }
+        }
+
+        // validations for reps/time
+        if (type.equals(getString(R.string.sp_time)) || type.equals(getString(R.string.sp_reps))) {
+            if (repsOrTimeString.equals("") || repsOrTimeString.equals("0")) {
+                Toast.makeText(getContext(), getString(R.string.toast_please_enter_valid_values),
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                repsOrTime = Float.parseFloat(repsOrTimeString);
+                dBhelper.saveSet(name, weightOrDist, repsOrTime, notes);
+                Log.d(LOG_TAG, " new set added to DB");
+            }
+
+
+        }
+
+        Cursor c = dBhelper.getWritableDatabase().query(DBhelper.TABLE_SETS_NAME, null, null,
+                null, null, null, null);
+
+        Log.d(LOG_TAG, "Set table rows: " + c.getCount());
+        c.close();
     }
 
 
