@@ -32,11 +32,14 @@
     <string name="sp_please_select">- Please select -</string>
     <string name="sp_weight_reps">Weight and Reps</string>
     <string name="sp_dist_time">Distance and Time</string>
+    <string name="sp_time">Time</string>
+    <string name="sp_reps">Reps</string>
+
 
     <string name="tab_track">Track</string>
     <string name="tab_history">History</string>
 
-    <string name="hint_units">example: kg, lb for weight, km, mi for distance</string>
+    <string name="hint_units">e.g. kg, lb for weight, km, mi for distance</string>
 
 
 

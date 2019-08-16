@@ -11,7 +11,7 @@
         android:layout_width="350dp"
         android:layout_height="3dp"
         android:layout_marginStart="@dimen/divider_margin"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="@dimen/new_set_margin_top"
         android:background="@color/colorActionBar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

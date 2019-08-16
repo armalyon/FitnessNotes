@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
+import android.support.constraint.ConstraintSet;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -30,8 +32,9 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
     TextView unitsTextView, amountTextView;
     EditText unitsAmountEditText, amountEditText, notesEditText;
     Button saveBtn, clearBtn;
-    View divider11, divider12, divider13, divider14;
+    View divider11, divider12, divider13, divider14, divider15, divider16;
     LinearLayout setButtonsLayout, unitsAmountLayout;
+    String exercise;
 
     private final String LOG_TAG = "Track Tab";
 
@@ -54,7 +57,9 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_track_tab, container, false);
 
-        Log.d(LOG_TAG, "onCreateView");
+        exercise = ((NewSetActivity) getActivity()).getLabel();
+
+        Log.d(LOG_TAG, "onCreateView, exercise: " + exercise);
         unitsTextView = v.findViewById(R.id.unitsTextView);
         amountTextView = v.findViewById(R.id.amountTextView);
 
@@ -69,6 +74,9 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
         divider12 = v.findViewById(R.id.divider12);
         divider13 = v.findViewById(R.id.divider13);
         divider14 = v.findViewById(R.id.divider14);
+        divider15 = v.findViewById(R.id.divider15);
+        divider16 = v.findViewById(R.id.divider16);
+
 
         setButtonsLayout = v.findViewById(R.id.setButtonslatout);
         unitsAmountLayout = v.findViewById(R.id.unitsAmountLayout);
@@ -79,6 +87,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
 
         setTextFields();
         setDividersSize();
+        rearangeElements();
 
         return v;
 
@@ -88,7 +97,6 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
 
     private void setTextFields() {
 
-        String exercise = ((NewSetActivity) getActivity()).getLabel();
         Log.d(LOG_TAG, exercise);
         ExOptionsData exOptionsData = dBhelper.getExOptionsData(exercise);
         unitsTextView.setText(exOptionsData.getUnits() + ": ");
@@ -104,6 +112,8 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
     }
 
     private void setDividersSize() {
+
+        //method for setting of sizes for different screens
         Display display = ((Activity) getContext()).getWindowManager().getDefaultDisplay();
         DisplayMetrics outMetrics = new DisplayMetrics();
         display.getMetrics(outMetrics);
@@ -129,6 +139,14 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
         params.width = widthhToset;
         divider14.setLayoutParams(params);
 
+        params = divider15.getLayoutParams();
+        params.width = widthhToset;
+        divider15.setLayoutParams(params);
+
+        params = divider16.getLayoutParams();
+        params.width = widthhToset;
+        divider16.setLayoutParams(params);
+
         params = setButtonsLayout.getLayoutParams();
         params.width = widthhToset;
         setButtonsLayout.setLayoutParams(params);
@@ -147,7 +165,9 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case (R.id.buttonSaveSet):
-                float weightOrDist = Float.parseFloat(unitsAmountEditText.getText().toString());
+                String unitsAmountValue = unitsAmountEditText.getText().toString();
+
+                float weightOrDist = Float.parseFloat(unitsAmountValue);
                 float repsOrTime = Float.parseFloat(amountEditText.getText().toString());
                 String notes = notesEditText.getText().toString();
                 String name = ((NewSetActivity) getActivity()).getLabel();
@@ -157,7 +177,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
                 Log.d(LOG_TAG, " new set added to DB");
 
                 Cursor c = dBhelper.getWritableDatabase().query(DBhelper.TABLE_SETS_NAME, null, null,
-                null, null, null, null);
+                        null, null, null, null);
 
                 Log.d(LOG_TAG, "Set table rows: " + c.getCount());
 
@@ -166,12 +186,31 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
 
     }
 
-        private void rearangeElements(){
-        divider11.setVisibility(View.INVISIBLE);
-        divider12.setVisibility(View.INVISIBLE);
-        unitsAmountLayout.setVisibility(View.INVISIBLE);
+    private void rearangeElements() {
+
+        //method to hide
+
+        String type = dBhelper.getExeriseType(exercise);
+        String timeType = getString(R.string.sp_time);
+        String repsType = getString(R.string.sp_reps);
+
+        if (type.equals(timeType)||type.equals(repsType)) {
+
+            divider11.setVisibility(View.INVISIBLE);
+            divider12.setVisibility(View.INVISIBLE);
+            unitsAmountLayout.setVisibility(View.INVISIBLE);
+
+            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) divider13.getLayoutParams();
+            params.topToTop = ConstraintLayout.LayoutParams.PARENT_ID;
+            params.topMargin = (int) getResources().getDimension(R.dimen.new_set_margin_top);
+
+            if (type.equals(timeType)) amountTextView.setText(timeType);
+            if (type.equals(repsType)) amountTextView.setText(repsType);
+
 
         }
+
+    }
 
 
 }

@@ -3,4 +3,5 @@
     <dimen name="categ_list_text_size">24sp</dimen>
     <dimen name="textview_text_size">27sp</dimen>
     <dimen name="divider_margin">16dp</dimen>
+    <dimen name="new_set_margin_top">64dp</dimen>
 </resources>

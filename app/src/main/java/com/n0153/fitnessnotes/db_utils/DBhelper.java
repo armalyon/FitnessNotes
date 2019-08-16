@@ -41,10 +41,12 @@ public class DBhelper extends SQLiteOpenHelper {
 
 
     private final static String LOG_TAG = "DB Helper log";
+    public SQLiteDatabase db;
 
 
     public DBhelper(Context context) {
         super(context, DB_NAME, null, DB_VER);
+        db = getWritableDatabase();
     }
 
     @Override
@@ -78,14 +80,14 @@ public class DBhelper extends SQLiteOpenHelper {
     }
 
     public Cursor getCategories() {
-        SQLiteDatabase db = getReadableDatabase();
+
         String[] column = new String[]{KEY_CATEGORIES};
         return db.query(TABLE_CATEGORIES_NAME, column, null, null, null, null, null);
     }
 
 
     public List getExNamesList() {
-        SQLiteDatabase db = getReadableDatabase();
+
         List<String> exNamesList = new ArrayList<>();
         String[] column = new String[]{KEY_NAME};
         Cursor cursor = db.query(TABLE_EXERISES_NAME, column, null, null, null, null, null);
@@ -101,7 +103,7 @@ public class DBhelper extends SQLiteOpenHelper {
     }
 
     public List getExercisesList(String category) {
-        SQLiteDatabase db = this.getWritableDatabase();
+
         Log.d(LOG_TAG, "category " + category);
         Cursor cursor = db.query(TABLE_EXERISES_NAME, new String[]{KEY_NAME},
                 KEY_CATEGORY + " = ?", new String[]{category}, null, null, null);
@@ -122,7 +124,7 @@ public class DBhelper extends SQLiteOpenHelper {
     }
 
     public ExOptionsData getExOptionsData(String exercise) {
-        SQLiteDatabase db = getReadableDatabase();
+
         String[] columns = new String[]{KEY_TYPE, KEY_UNITS};
 
         Cursor cursor = db.query(TABLE_EXERISES_NAME, columns, KEY_NAME + " = ?",
@@ -151,9 +153,19 @@ public class DBhelper extends SQLiteOpenHelper {
         contentValues.put(KEY_NOTES, notes);
         contentValues.put(KEY_NAME, name);
 
-        SQLiteDatabase db = getWritableDatabase();
         db.insert(TABLE_SETS_NAME, null, contentValues);
 
+    }
+
+    public String getExeriseType(String exerciseName){
+
+        Cursor cursor = db.query(TABLE_EXERISES_NAME, new String[]{KEY_TYPE}, KEY_NAME + " = ?",
+                new String[]{exerciseName}, null, null, null);
+        cursor.moveToFirst();
+
+        int index = cursor.getColumnIndex(KEY_TYPE);
+
+        return cursor.getString(index);
     }
 
 

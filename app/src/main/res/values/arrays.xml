@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="typesItems">
-        <item>- Please Select -</item>
+        <item>@string/sp_please_select</item>
         <item>@string/sp_weight_reps</item>
         <item>@string/sp_dist_time</item>
+        <item>@string/sp_reps</item>
+        <item>@string/sp_time</item>
     </string-array>
 
 </resources>
