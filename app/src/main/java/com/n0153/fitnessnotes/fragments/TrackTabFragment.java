@@ -188,7 +188,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
 
     private void rearangeElements() {
 
-        //method to hide
+        //method to hide unnecessary views (dividers and text) if type requires only one value
 
         String type = dBhelper.getExeriseType(exercise);
         String timeType = getString(R.string.sp_time);

@@ -10,11 +10,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.n0153.fitnessnotes.db_utils.DBhelper;
@@ -25,7 +27,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class AddExerciseActivity extends AppCompatActivity implements View.OnClickListener {
+public class AddExerciseActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private String dialogNewCatTag = "start dialog new category";
 
@@ -33,11 +35,11 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
     Spinner categoriesSpinner, typeSpinner;
     DBhelper dBhelper;
     AddCategoryFragment dialogAddCategory;
-
+    TextView amountTextView;
     EditText editName, editUnits;
+    View divider7, divider8;
 
     String exerciseName, exerciseCategory, exerciseType, exrciseUnits;
-
 
 
     @Override
@@ -54,12 +56,19 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
 
         categoriesSpinner = findViewById(R.id.categoriesSpinner);
         typeSpinner = findViewById(R.id.typeSpinner);
+        typeSpinner.setOnItemSelectedListener(this);
+
         dialogAddCategory = new AddCategoryFragment();
 
+        amountTextView = findViewById(R.id.amountTextView);
+        divider7 = findViewById(R.id.divider7);
+        divider8 = findViewById(R.id.divider8);
 
         updateSpinner();
 
     }
+
+    //save button listener methods
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -75,6 +84,8 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
         return true;
     }
 
+    //update activity methods
+
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -88,6 +99,7 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
     }
 
 
+    // addCategory button listener method
     @Override
     public void onClick(View v) {
 
@@ -146,13 +158,13 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
                 return;
             } else {
                 //add to db
-               ContentValues contentValues = new ContentValues();
-               contentValues.put(DBhelper.KEY_CATEGORY, exerciseCategory);
-               contentValues.put(DBhelper.KEY_NAME, exerciseName);
-               contentValues.put(DBhelper.KEY_TYPE, exerciseType);
-               contentValues.put(DBhelper.KEY_UNITS, exrciseUnits);
-               dBhelper.getWritableDatabase().insert(DBhelper.TABLE_EXERISES_NAME, null, contentValues);
-               finish();
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(DBhelper.KEY_CATEGORY, exerciseCategory);
+                contentValues.put(DBhelper.KEY_NAME, exerciseName);
+                contentValues.put(DBhelper.KEY_TYPE, exerciseType);
+                contentValues.put(DBhelper.KEY_UNITS, exrciseUnits);
+                dBhelper.getWritableDatabase().insert(DBhelper.TABLE_EXERISES_NAME, null, contentValues);
+                finish();
             }
 
 
@@ -162,9 +174,36 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
     }
 
 
+    //spiner's methods
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String itemValue = typeSpinner.getSelectedItem().toString();
+        if (itemValue.equals(getString(R.string.sp_reps)) ||
+                itemValue.equals(getString(R.string.sp_time))) {
+            amountTextView.setText("");
+            amountTextView.setVisibility(View.INVISIBLE);
+            divider7.setVisibility(View.INVISIBLE);
+            divider8.setVisibility(View.INVISIBLE);
+            editUnits.setVisibility(View.INVISIBLE);
+        }
+        if (itemValue.equals(getString(R.string.sp_please_select)) ||
+         itemValue.equals(getString(R.string.sp_dist_time)) ||
+        itemValue.equals(getString(R.string.sp_weight_reps))){
+            amountTextView.setVisibility(View.VISIBLE);
+            divider7.setVisibility(View.VISIBLE);
+            divider8.setVisibility(View.VISIBLE);
+            editUnits.setVisibility(View.VISIBLE);
+
+        }
 
 
+    }
 
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }
 
 

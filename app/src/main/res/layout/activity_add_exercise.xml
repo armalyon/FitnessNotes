@@ -157,15 +157,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/amountTextView" />
 
-    <View
-        android:id="@+id/divider8"
-        android:layout_width="0dp"
-        android:layout_height="3dp"
-        android:layout_marginStart="8dp"
-        android:background="@color/colorActionBar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editUnits" />
-
     <EditText
         android:id="@+id/editUnits"
         android:layout_width="match_parent"
@@ -178,5 +169,14 @@
         android:maxLength="10"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider7" />
+
+    <View
+        android:id="@+id/divider8"
+        android:layout_width="0dp"
+        android:layout_height="3dp"
+        android:layout_marginStart="8dp"
+        android:background="@color/colorActionBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editUnits" />
 
 </android.support.constraint.ConstraintLayout>
