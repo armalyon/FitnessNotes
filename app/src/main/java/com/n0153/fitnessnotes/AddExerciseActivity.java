@@ -144,7 +144,9 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
 
         //check if all fields are filled
         if (exerciseName.equals("") || exerciseCategory.equals(getString(R.string.sp_please_select)) ||
-                exerciseType.equals(getString(R.string.sp_please_select)) || exrciseUnits.equals("")) {
+                exerciseType.equals(getString(R.string.sp_please_select)) ||
+                (exrciseUnits.equals("")) & (exerciseType.equals(getString(R.string.sp_weight_reps)) ||
+                        exerciseType.equals(getString(R.string.sp_dist_time)))) {
             Toast.makeText(this, getString(R.string.toast_please_fill_fields), Toast.LENGTH_SHORT).show();
         } else {
             //Check if an exercise name exists
@@ -188,8 +190,8 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
             editUnits.setVisibility(View.INVISIBLE);
         }
         if (itemValue.equals(getString(R.string.sp_please_select)) ||
-         itemValue.equals(getString(R.string.sp_dist_time)) ||
-        itemValue.equals(getString(R.string.sp_weight_reps))){
+                itemValue.equals(getString(R.string.sp_dist_time)) ||
+                itemValue.equals(getString(R.string.sp_weight_reps))) {
             amountTextView.setVisibility(View.VISIBLE);
             divider7.setVisibility(View.VISIBLE);
             divider8.setVisibility(View.VISIBLE);
