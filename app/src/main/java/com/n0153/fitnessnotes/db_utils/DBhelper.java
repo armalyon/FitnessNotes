@@ -58,7 +58,7 @@ public class DBhelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE " + TABLE_SETS_NAME + " (" + KEY_DATE + TYPE_INTEGER +
                 KEY_NAME + TYPE_TEXT_COMMA + KEY_WEIGHT_DIST + TYPE_REAL_COMMA +
-                KEY_REPS_TIME + TYPE_REAL_COMMA + KEY_NOTES + TYPE_TEXT + " )");
+                KEY_REPS_TIME + TYPE_TEXT_COMMA + KEY_NOTES + TYPE_TEXT + " )");
 
         db.execSQL("CREATE TABLE " + TABLE_CATEGORIES_NAME + " (" + KEY_ID + " integer primary key autoincrement, " +
                 KEY_CATEGORIES + TYPE_TEXT + ")");
@@ -143,7 +143,7 @@ public class DBhelper extends SQLiteOpenHelper {
     }
 
 
-    public void saveSet(String name, float weighOrDist, float repsOrTime, String notes){
+    public void saveSet(String name, float weighOrDist, String repsOrTime, String notes){
         long dateMills = new Date().getTime();
 
 

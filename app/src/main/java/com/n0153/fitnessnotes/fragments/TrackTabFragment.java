@@ -206,20 +206,19 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
         String name = ((NewSetActivity) getActivity()).getLabel();
 
         String weightOrDistString = unitsAmountEditText.getText().toString();
-        String repsOrTimeString = amountEditText.getText().toString();
+        String repsOrTime = amountEditText.getText().toString();
         String notes = notesEditText.getText().toString();
-        float weightOrDist = 0, repsOrTime = 0;
+        float weightOrDist = 0;
 
         //validations for weight/reps and dist/time
         if (type.equals(getString(R.string.sp_dist_time)) || type.equals(getString(R.string.sp_weight_reps))) {
             if (weightOrDistString.equals("") || weightOrDistString.equals("0") ||
-                    repsOrTimeString.equals("") || repsOrTimeString.equals("0")) {
+                    repsOrTime.equals("") || repsOrTime.equals("0")) {
 
                 Toast.makeText(getContext(), getString(R.string.toast_please_enter_valid_values),
                         Toast.LENGTH_SHORT).show();
             } else {
                 weightOrDist = Float.parseFloat(weightOrDistString);
-                repsOrTime = Float.parseFloat(repsOrTimeString);
                 dBhelper.saveSet(name, weightOrDist, repsOrTime, notes);
                 Log.d(LOG_TAG, " new set added to DB");
             }
@@ -227,11 +226,11 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
 
         // validations for reps/time
         if (type.equals(getString(R.string.sp_time)) || type.equals(getString(R.string.sp_reps))) {
-            if (repsOrTimeString.equals("") || repsOrTimeString.equals("0")) {
+            if (repsOrTime.equals("") || repsOrTime.equals("0")) {
                 Toast.makeText(getContext(), getString(R.string.toast_please_enter_valid_values),
                         Toast.LENGTH_SHORT).show();
             } else {
-                repsOrTime = Float.parseFloat(repsOrTimeString);
+
                 dBhelper.saveSet(name, weightOrDist, repsOrTime, notes);
                 Log.d(LOG_TAG, " new set added to DB");
             }

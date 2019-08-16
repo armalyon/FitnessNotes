@@ -1,5 +1,6 @@
 package com.n0153.fitnessnotes;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -7,9 +8,12 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -37,7 +41,7 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
     AddCategoryFragment dialogAddCategory;
     TextView amountTextView;
     EditText editName, editUnits;
-    View divider7, divider8;
+    View divider1, divider2, divider3, divider4, divider5, divider6, divider7, divider8;
 
     String exerciseName, exerciseCategory, exerciseType, exrciseUnits;
 
@@ -63,9 +67,15 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
         amountTextView = findViewById(R.id.amountTextView);
         divider7 = findViewById(R.id.divider7);
         divider8 = findViewById(R.id.divider8);
+        divider1 = findViewById(R.id.divider1);
+        divider2 = findViewById(R.id.divider2);
+        divider3 = findViewById(R.id.divider3);
+        divider4 = findViewById(R.id.divider4);
+        divider5 = findViewById(R.id.divider5);
+        divider6 = findViewById(R.id.divider6);
 
         updateSpinner();
-
+        setDividersSize();
     }
 
     //save button listener methods
@@ -206,6 +216,54 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+    //set dividers width corresponding to screen size
+    private void setDividersSize() {
+
+        Display display = getWindowManager().getDefaultDisplay();
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        display.getMetrics(outMetrics);
+
+        float dpWidth = outMetrics.widthPixels;
+
+
+        int widthhToset = (int) (dpWidth - 2 * (getResources().getDimension(R.dimen.divider_margin)));
+        ViewGroup.LayoutParams params = divider1.getLayoutParams();
+
+        params.width = widthhToset;
+        divider1.setLayoutParams(params);
+
+        params = divider2.getLayoutParams();
+        params.width = widthhToset;
+        divider2.setLayoutParams(params);
+
+
+        params = divider3.getLayoutParams();
+        params.width = widthhToset;
+        divider3.setLayoutParams(params);
+
+        params = divider4.getLayoutParams();
+        params.width = widthhToset;
+        divider4.setLayoutParams(params);
+
+        params = divider5.getLayoutParams();
+        params.width = widthhToset;
+        divider5.setLayoutParams(params);
+
+        params = divider6.getLayoutParams();
+        params.width = widthhToset;
+        divider6.setLayoutParams(params);
+
+        params = divider7.getLayoutParams();
+        params.width = widthhToset;
+        divider7.setLayoutParams(params);
+
+        params = divider8.getLayoutParams();
+        params.width = widthhToset;
+        divider8.setLayoutParams(params);
+
+    }
+
 }
 
 
