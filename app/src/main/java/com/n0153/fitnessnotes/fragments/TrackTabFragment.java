@@ -31,7 +31,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
     EditText unitsAmountEditText, amountEditText, notesEditText;
     Button saveBtn, clearBtn;
     View divider11, divider12, divider13, divider14;
-    LinearLayout setButtonsLayout;
+    LinearLayout setButtonsLayout, unitsAmountLayout;
 
     private final String LOG_TAG = "Track Tab";
 
@@ -71,6 +71,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
         divider14 = v.findViewById(R.id.divider14);
 
         setButtonsLayout = v.findViewById(R.id.setButtonslatout);
+        unitsAmountLayout = v.findViewById(R.id.unitsAmountLayout);
 
 
         saveBtn.setOnClickListener(this);
@@ -150,6 +151,8 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
                 float repsOrTime = Float.parseFloat(amountEditText.getText().toString());
                 String notes = notesEditText.getText().toString();
                 String name = ((NewSetActivity) getActivity()).getLabel();
+
+
                 dBhelper.saveSet(name, weightOrDist, repsOrTime, notes);
                 Log.d(LOG_TAG, " new set added to DB");
 
@@ -162,4 +165,13 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
         }
 
     }
+
+        private void rearangeElements(){
+        divider11.setVisibility(View.INVISIBLE);
+        divider12.setVisibility(View.INVISIBLE);
+        unitsAmountLayout.setVisibility(View.INVISIBLE);
+
+        }
+
+
 }

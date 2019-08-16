@@ -36,6 +36,8 @@
     <string name="tab_track">Track</string>
     <string name="tab_history">History</string>
 
+    <string name="hint_units">example: kg, lb for weight, km, mi for distance</string>
+
 
 
 
