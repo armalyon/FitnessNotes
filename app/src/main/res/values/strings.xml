@@ -12,7 +12,10 @@
     <string name="field_name" translatable="false">Name:</string>
     <string name="field_category" translatable="false">Category:</string>
     <string name="field_type" translatable="false">Type:</string>
-    <string name="field_units" translatable="false">Mesurment units:</string>
+    <string name="field_units" translatable="false">Reps/Dist:</string>
+    <string name="field_hh" translatable="false">hh</string>
+    <string name="field_mm" translatable="false">mm</string>
+    <string name="field_ss" translatable="false">ss</string>
 
     <string name="item_reps" translatable="false">Reps:</string>
     <string name="item_time" translatable="false">Time:</string>
