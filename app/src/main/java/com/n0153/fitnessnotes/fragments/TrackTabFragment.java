@@ -31,7 +31,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
 
     private DBhelper dBhelper;
     TextView unitsTextView, amountTextView;
-    EditText unitsAmountEditText, amountEditText, notesEditText;
+    EditText unitsAmountEditText, amountEditText, notesEditText, hoursEditText, minutesEditText, secondsEditText;
     Button saveBtn, clearBtn;
     View divider11, divider12, divider13, divider14, divider15, divider16;
     LinearLayout setButtonsLayout, unitsAmountLayout, amountLayout, timeFieldsLayout;
@@ -71,6 +71,9 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
         amountEditText = v.findViewById(R.id.amountEditText);
         unitsAmountEditText = v.findViewById(R.id.unitsAmountEditText);
         notesEditText = v.findViewById(R.id.notesEditText);
+        hoursEditText = v.findViewById(R.id.editTextHH);
+        minutesEditText = v.findViewById(R.id.editTextMM);
+        secondsEditText = v.findViewById(R.id.editTextSS);
 
         saveBtn = v.findViewById(R.id.buttonSaveSet);
         clearBtn = v.findViewById(R.id.buttonClearSet);
@@ -210,9 +213,17 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
         String type = dBhelper.getExeriseType(exercise);
 
         String weightOrDistString = unitsAmountEditText.getText().toString();
-        String repsOrTime = amountEditText.getText().toString();
+
         String notes = notesEditText.getText().toString();
         float weightOrDist = 0;
+        String repsOrTime = "";
+
+        if (type.equals(getString(R.string.sp_time))|| type.equals(getString(R.string.sp_dist_time))){
+            String hh = hoursEditText.getText().toString();
+            String mm = minutesEditText.getText().toString();
+            String ss = secondsEditText.getText().toString();
+            repsOrTime = hh + ":" + mm + ":" + ss;
+        } else {repsOrTime = amountEditText.getText().toString();}
 
         //validations for weight/reps and dist/time
         if (type.equals(getString(R.string.sp_dist_time)) || type.equals(getString(R.string.sp_weight_reps))) {
