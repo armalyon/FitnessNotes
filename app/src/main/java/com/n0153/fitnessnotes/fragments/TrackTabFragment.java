@@ -174,6 +174,9 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
                 unitsAmountEditText.setText("");
                 amountEditText.setText("");
                 notesEditText.setText("");
+                hoursEditText.setText("");
+                minutesEditText.setText("");
+                secondsEditText.setText("");
                 break;
             case (R.id.buttonSaveSet):
                 saveSet();
