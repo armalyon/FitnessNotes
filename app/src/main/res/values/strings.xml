@@ -33,6 +33,9 @@
     <string name="toast_ex_name_already_exist">Exercise already exists</string>
     <string name="toast_please_enter_valid_values">Please enter valid values</string>
 
+    <string name="snackbar_set_saved">Set is saved</string>
+
+
     <string name="sp_please_select">- Please select -</string>
     <string name="sp_weight_reps">Weight and Reps</string>
     <string name="sp_dist_time">Distance and Time</string>

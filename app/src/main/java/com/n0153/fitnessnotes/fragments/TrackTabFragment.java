@@ -7,15 +7,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -223,6 +226,14 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
             String mm = minutesEditText.getText().toString();
             String ss = secondsEditText.getText().toString();
             repsOrTime = hh + ":" + mm + ":" + ss;
+
+            if (repsOrTime.equals("::") || repsOrTime.equals("::0")){
+                Toast.makeText(getContext(), getString(R.string.toast_please_enter_valid_values),
+                        Toast.LENGTH_SHORT).show();
+                return;
+                            }
+
+
         } else {repsOrTime = amountEditText.getText().toString();}
 
         //validations for weight/reps and dist/time
@@ -235,6 +246,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
             } else {
                 weightOrDist = Float.parseFloat(weightOrDistString);
                 dBhelper.saveSet(exercise, weightOrDist, repsOrTime, notes);
+                showSnackbar();
                 Log.d(LOG_TAG, " new set added to DB");
             }
         }
@@ -247,6 +259,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
             } else {
 
                 dBhelper.saveSet(exercise, weightOrDist, repsOrTime, notes);
+                showSnackbar();
                 Log.d(LOG_TAG, " new set added to DB");
             }
 
@@ -276,6 +289,16 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
 
         }
 
+    }
+
+    private void showSnackbar (){
+        Snackbar snackbar = Snackbar.make(parentLayout, getString(R.string.snackbar_set_saved), Snackbar.LENGTH_SHORT);
+        View view = snackbar.getView();
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
+        params.gravity = Gravity.TOP;
+        view.setLayoutParams(params);
+        view.setBackgroundColor(getResources().getColor(R.color.colorActionBar));
+        snackbar.show();
     }
 
 }
