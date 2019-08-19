@@ -5,4 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CategoriesActivity"
-    />
+    >
+
+    <ListView
+        android:id="@+id/historyList"
+        android:layout_width="418dp"
+        android:layout_height="600dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>

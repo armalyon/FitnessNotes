@@ -5,4 +5,6 @@
     <dimen name="divider_margin">16dp</dimen>
     <dimen name="new_set_margin_top">64dp</dimen>
     <dimen name="header_small_size">18sp</dimen>
+    <dimen name="header_cards_size">24sp</dimen>
+    <dimen name="card_corner_radius">40dp</dimen>
 </resources>
