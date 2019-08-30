@@ -172,10 +172,10 @@ public class DBhelper extends SQLiteOpenHelper {
         return type;
     }
 
-    public List<SetOptionsData> getSetOptionsList(String exerciseName){
+    public ArrayList<SetOptionsData> getSetOptionsList(String exerciseName){
         Cursor cursor = db.query(TABLE_SETS_NAME, new String[]{KEY_DATE, KEY_WEIGHT_DIST, KEY_REPS_TIME},
               KEY_NAME + " = ?", new String[]{exerciseName}, null, null, null);
-        List<SetOptionsData> list = new ArrayList<>();
+        ArrayList<SetOptionsData> list = new ArrayList<>();
 
         if (cursor.moveToFirst()){
             do {
