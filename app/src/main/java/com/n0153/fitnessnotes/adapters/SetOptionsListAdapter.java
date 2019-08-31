@@ -1,7 +1,10 @@
 package com.n0153.fitnessnotes.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +54,7 @@ public class SetOptionsListAdapter extends BaseAdapter {
         if (view == null) {
             view = layoutInflater.inflate(R.layout.history_listraw_layout, parent, false);
         }
+
        SetOptionsData setOptionsData  = getItem(position);
         String date = setOptionsData.getDate().toString();
 
@@ -60,6 +64,8 @@ public class SetOptionsListAdapter extends BaseAdapter {
 
         return view;
     }
+
+
 
 
 }

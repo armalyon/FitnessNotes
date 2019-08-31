@@ -7,4 +7,5 @@
     <dimen name="header_small_size">18sp</dimen>
     <dimen name="header_cards_size">24sp</dimen>
     <dimen name="card_corner_radius">40dp</dimen>
+    <dimen name="card_left_margin">5dp</dimen>
 </resources>
