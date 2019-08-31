@@ -6,13 +6,14 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
+        android:id="@+id/historyCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
         app:cardBackgroundColor="@color/colorCards"
         app:cardCornerRadius="@dimen/card_corner_radius"
-        app:cardElevation="5dp"
+        app:cardElevation="15dp"
         app:cardPreventCornerOverlap="true">
 
         <LinearLayout
@@ -37,17 +38,18 @@
 
                 android:background="@color/colorActionBar" />
 
-            <ListView
-                android:id="@+id/cardListView"
+            <TextView
+                android:id="@+id/textView5"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/header_cards_size" />
+                android:layout_height="wrap_content"
+                android:text="TextView" />
 
             <View
                 android:id="@+id/divider22"
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
 
+                android:layout_marginBottom="@dimen/card_corner_radius"
                 android:background="@color/colorActionBar" />
 
         </LinearLayout>

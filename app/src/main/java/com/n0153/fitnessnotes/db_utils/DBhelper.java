@@ -143,7 +143,7 @@ public class DBhelper extends SQLiteOpenHelper {
     }
 
 
-    public void saveSet(String name, float weighOrDist, String repsOrTime, String notes){
+    public void saveSet(String name, float weighOrDist, String repsOrTime, String notes) {
         long dateMills = new Date().getTime();
 
 
@@ -158,7 +158,7 @@ public class DBhelper extends SQLiteOpenHelper {
 
     }
 
-    public String getExeriseType(String exerciseName){
+    public String getExeriseType(String exerciseName) {
 
         Cursor cursor = db.query(TABLE_EXERISES_NAME, new String[]{KEY_TYPE}, KEY_NAME + " = ?",
                 new String[]{exerciseName}, null, null, null);
@@ -172,21 +172,26 @@ public class DBhelper extends SQLiteOpenHelper {
         return type;
     }
 
-    public ArrayList<SetOptionsData> getSetOptionsList(String exerciseName){
-        Cursor cursor = db.query(TABLE_SETS_NAME, new String[]{KEY_DATE, KEY_WEIGHT_DIST, KEY_REPS_TIME},
-              KEY_NAME + " = ?", new String[]{exerciseName}, null, null, null);
+    public ArrayList<SetOptionsData> getSetOptionsList(String exerciseName) {
+        Cursor cursor = db.query(TABLE_SETS_NAME, new String[]{KEY_DATE, KEY_WEIGHT_DIST, KEY_REPS_TIME, KEY_NOTES},
+                KEY_NAME + " = ?", new String[]{exerciseName}, null, null, null);
+
         ArrayList<SetOptionsData> list = new ArrayList<>();
 
-        if (cursor.moveToFirst()){
+
+        if (cursor.moveToFirst()) {
             do {
+
                 Date date = new Date(cursor.getLong(cursor.getColumnIndex(KEY_DATE)));
                 String weightOrDist = cursor.getString(cursor.getColumnIndex(KEY_WEIGHT_DIST));
                 String repsOrTime = cursor.getString(cursor.getColumnIndex(KEY_REPS_TIME));
-                list.add(new SetOptionsData(date, repsOrTime, weightOrDist));
-
-            }while (cursor.moveToLast());
+                String note = cursor.getString(cursor.getColumnIndex(KEY_NOTES));
+                list.add(new SetOptionsData(date, repsOrTime, weightOrDist, note));
+            } while (cursor.moveToNext());
 
         }
+
+        Log.d(LOG_TAG, " setOpionsList  size = " + list.size());
         cursor.close();
         return list;
     }

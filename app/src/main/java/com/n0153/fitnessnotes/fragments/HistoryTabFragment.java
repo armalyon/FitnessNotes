@@ -39,6 +39,7 @@ public class HistoryTabFragment extends Fragment {
         name = ((NewSetActivity) getActivity()).getLabel();
         type = dBhelper.getExeriseType(name);
 
+
         Log.d(LOG_TAG, "onCreate Finished");
     }
 
@@ -52,8 +53,7 @@ public class HistoryTabFragment extends Fragment {
         mainListView = v.findViewById(R.id.historyList);
 
         updateMainlist();
-
-        Log.d(LOG_TAG,"onCreateView finished");
+        Log.d(LOG_TAG, "onCreateView finished");
 
         return v;
 
@@ -61,9 +61,10 @@ public class HistoryTabFragment extends Fragment {
 
 
     private void updateMainlist() {
+
         ArrayList<SetOptionsData> setOptionsList = dBhelper.getSetOptionsList(name);
 
-        SetOptionsListAdapter adapter = new SetOptionsListAdapter(getContext(), R.id.historyCard, setOptionsList);
+        SetOptionsListAdapter adapter = new SetOptionsListAdapter(getContext(), setOptionsList);
         mainListView.setAdapter(adapter);
 
 
