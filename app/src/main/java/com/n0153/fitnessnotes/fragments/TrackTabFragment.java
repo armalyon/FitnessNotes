@@ -40,6 +40,12 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
     LinearLayout setButtonsLayout, unitsAmountLayout, amountLayout, timeFieldsLayout;
     String exercise;
     ConstraintLayout parentLayout;
+    HistoryTabFragment historyTabFragment;
+
+
+    public void setHistoryTabFragment(HistoryTabFragment historyTabFragment) {
+        this.historyTabFragment = historyTabFragment;
+    }
 
     private final String LOG_TAG = "Track Tab";
 
@@ -177,9 +183,10 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
                 hoursEditText.setText("");
                 minutesEditText.setText("");
                 secondsEditText.setText("");
-                break;
+                        break;
             case (R.id.buttonSaveSet):
                 saveSet();
+                historyTabFragment.updateMainlist();
                 break;
         }
 

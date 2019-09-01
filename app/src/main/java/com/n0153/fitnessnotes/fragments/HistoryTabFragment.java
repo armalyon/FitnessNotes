@@ -59,7 +59,7 @@ public class HistoryTabFragment extends Fragment {
     }
 
 
-    private void updateMainlist() {
+    protected void updateMainlist() {
 
         ArrayList<SetOptionsData> setOptionsList = dBhelper.getSetOptionsList(name);
 

@@ -44,8 +44,14 @@ public class NewSetActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
-        adapter.addFragment(new TrackTabFragment(), getString(R.string.tab_track));
-        adapter.addFragment(new HistoryTabFragment(), getString(R.string.tab_history));
+        TrackTabFragment trackTabFragment = new TrackTabFragment();
+        HistoryTabFragment historyTabFragment = new HistoryTabFragment();
+
+        //this needed for access to updateMainlist()
+        trackTabFragment.setHistoryTabFragment(historyTabFragment);
+
+        adapter.addFragment(trackTabFragment, getString(R.string.tab_track));
+        adapter.addFragment(historyTabFragment, getString(R.string.tab_history));
         viewPager.setAdapter(adapter);
     }
 
