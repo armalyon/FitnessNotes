@@ -17,10 +17,9 @@ public class NewSetActivity extends AppCompatActivity {
 
     private final String LOG_TAG = "New Set Activity";
 
-    private SectionsPageAdapter sectionsPageAdapter;
-
     private ViewPager viewPager;
     String label;
+
 
 
     @Override
@@ -53,4 +52,6 @@ public class NewSetActivity extends AppCompatActivity {
     public String getLabel() {
         return label;
     }
+
+
 }

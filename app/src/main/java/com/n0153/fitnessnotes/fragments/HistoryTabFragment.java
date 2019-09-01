@@ -27,7 +27,6 @@ public class HistoryTabFragment extends Fragment {
     private String name;
     private String type;
     private ListView mainListView;
-    private List<SetOptionsData> list;
     private String LOG_TAG = "History tab";
 
     @Override
@@ -67,9 +66,7 @@ public class HistoryTabFragment extends Fragment {
         SetOptionsListAdapter adapter = new SetOptionsListAdapter(getContext(), setOptionsList, type);
         mainListView.setAdapter(adapter);
 
-
     }
-
 
 }
 

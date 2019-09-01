@@ -183,6 +183,7 @@ public class DBhelper extends SQLiteOpenHelper {
 
         cursor1.moveToFirst();
         String units = cursor1.getString(cursor1.getColumnIndex(KEY_UNITS));
+        cursor1.close();
 
         if (cursor.moveToFirst()) {
             do {
