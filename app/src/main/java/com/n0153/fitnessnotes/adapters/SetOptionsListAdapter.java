@@ -1,12 +1,12 @@
 package com.n0153.fitnessnotes.adapters;
 
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.n0153.fitnessnotes.R;
@@ -58,7 +58,7 @@ public class SetOptionsListAdapter extends BaseAdapter {
         String dateString = getItem(position);
         ((TextView) view.findViewById(R.id.textViewDate)).setText(dateString);
 
-        ListView setsListView = view.findViewById(R.id.setsListView);
+        RecyclerView setsListView = view.findViewById(R.id.setsListView);
 
         setSetsListView(setsListView, dateString);
 
@@ -73,7 +73,7 @@ public class SetOptionsListAdapter extends BaseAdapter {
         SimpleDateFormat dateFormat = new SimpleDateFormat(datePattern);
         int n = setsList.size();
         for (int i = 0; i < n; i++) {
-           String date = dateFormat.format(setsList.get(i).getDate());
+            String date = dateFormat.format(setsList.get(i).getDate());
             datesSet.add(date);
         }
         dates.addAll(datesSet);
@@ -81,30 +81,30 @@ public class SetOptionsListAdapter extends BaseAdapter {
         return dates;
     }
 
-    private void setSetsListView (ListView listView, String date){
+    private void setSetsListView(RecyclerView recyclerView, String date) {
         ArrayList<String> setsInADayList = new ArrayList<>();
         SimpleDateFormat dateFormat = new SimpleDateFormat(datePattern);
         int n = setsList.size();
 
-        for (int i = 0; i < n ; i++) {
+        for (int i = 0; i < n; i++) {
             String dateFormSets = dateFormat.format(setsList.get(i).getDate());
-            if (date.equals(dateFormSets)){
+            if (date.equals(dateFormSets)) {
                 //TEMP TO TEST
                 String stringItem = "Weight/Dist: " + setsList.get(i).getWeightOrDist() +
-                " Reps/Time: " + setsList.get(i).getRepsOrTime() + "\n" +
+                        " Reps/Time: " + setsList.get(i).getRepsOrTime() + "\n" +
                         " Note: " + setsList.get(i).getNote();
                 setsInADayList.add(stringItem);
             }
 
-            ArrayAdapter adapter = new ArrayAdapter(context, R.layout.listraw_layout, R.id.textView2, setsInADayList );
-            listView.setAdapter(adapter);
 
         }
+        LinearLayoutManager llm = new LinearLayoutManager(context);
+        recyclerView.setLayoutManager(llm);
 
+        CardRecyclerAdapter adapter = new CardRecyclerAdapter(context, setsInADayList);
+        recyclerView.setAdapter(adapter);
 
     }
-
-
 
 
 }

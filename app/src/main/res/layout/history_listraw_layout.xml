@@ -16,7 +16,8 @@
         app:cardBackgroundColor="@color/colorCards"
         app:cardCornerRadius="@dimen/card_corner_radius"
         app:cardElevation="15dp"
-        app:cardPreventCornerOverlap="true">
+        app:cardPreventCornerOverlap="true"
+        android:minHeight="50dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,7 +41,7 @@
 
                 android:background="@color/colorActionBar" />
 
-            <ListView
+            <android.support.v7.widget.RecyclerView
                 android:id="@+id/setsListView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
