@@ -24,12 +24,14 @@ public class SetOptionsListAdapter extends BaseAdapter {
     private ArrayList<SetOptionsData> setsList;
     private ArrayList<String> datesList;
     private LayoutInflater layoutInflater;
+    private String type;
 
 
-    public SetOptionsListAdapter(Context context, ArrayList<SetOptionsData> setsList) {
+    public SetOptionsListAdapter(Context context, ArrayList<SetOptionsData> setsList, String type) {
         this.context = context;
         this.setsList = setsList;
         datesList = getDatesList();
+        this.type =type;
         layoutInflater = LayoutInflater.from(context);
     }
 
@@ -89,13 +91,10 @@ public class SetOptionsListAdapter extends BaseAdapter {
         for (int i = 0; i < n; i++) {
             String dateFormSets = dateFormat.format(setsList.get(i).getDate());
             if (date.equals(dateFormSets)) {
-                //TEMP TO TEST
-                String stringItem = "Weight/Dist: " + setsList.get(i).getWeightOrDist() +
-                        " Reps/Time: " + setsList.get(i).getRepsOrTime() + "\n" +
-                        " Note: " + setsList.get(i).getNote();
+
+                String stringItem = getSetString(i, setsList.get(i));
                 setsInADayList.add(stringItem);
             }
-
 
         }
         LinearLayoutManager llm = new LinearLayoutManager(context);
@@ -104,6 +103,24 @@ public class SetOptionsListAdapter extends BaseAdapter {
         CardRecyclerAdapter adapter = new CardRecyclerAdapter(context, setsInADayList);
         recyclerView.setAdapter(adapter);
 
+    }
+
+
+    private String getSetString(int position, SetOptionsData setOptionsData){
+        String result = position + ". ";
+        if (type.equals(context.getString(R.string.sp_weight_reps))){
+            result =  setOptionsData.getWeightDistUnits() +": "+ setOptionsData.getWeightOrDist() +
+                      " " + context.getString(R.string.reps) + setOptionsData.getRepsOrTime();
+            if (!setOptionsData.getNote().equals("")){
+                result+= "\n" + setOptionsData.getNote();
+            }
+
+        }
+
+
+
+
+        return result;
     }
 
 

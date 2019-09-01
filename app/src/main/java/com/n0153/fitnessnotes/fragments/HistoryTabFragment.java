@@ -64,7 +64,7 @@ public class HistoryTabFragment extends Fragment {
 
         ArrayList<SetOptionsData> setOptionsList = dBhelper.getSetOptionsList(name);
 
-        SetOptionsListAdapter adapter = new SetOptionsListAdapter(getContext(), setOptionsList);
+        SetOptionsListAdapter adapter = new SetOptionsListAdapter(getContext(), setOptionsList, type);
         mainListView.setAdapter(adapter);
 
 

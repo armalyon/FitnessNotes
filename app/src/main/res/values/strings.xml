@@ -49,6 +49,13 @@
     <string name="hint_units">e.g. kg, lb for weight, km, mi for distance</string>
 
 
+    <string name="weight">Weight:</string>
+    <string name="reps">Reps:</string>
+    <string name="note">Note:</string>
+
+
+
+
 
 
 </resources>

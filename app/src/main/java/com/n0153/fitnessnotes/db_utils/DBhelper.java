@@ -175,9 +175,14 @@ public class DBhelper extends SQLiteOpenHelper {
     public ArrayList<SetOptionsData> getSetOptionsList(String exerciseName) {
         Cursor cursor = db.query(TABLE_SETS_NAME, new String[]{KEY_DATE, KEY_WEIGHT_DIST, KEY_REPS_TIME, KEY_NOTES},
                 KEY_NAME + " = ?", new String[]{exerciseName}, null, null, null);
+        Cursor cursor1 = db.query(TABLE_EXERISES_NAME, new String[]{KEY_UNITS}, KEY_NAME + " = ?",
+                new String[]{exerciseName}, null, null, null);
 
         ArrayList<SetOptionsData> list = new ArrayList<>();
 
+
+        cursor1.moveToFirst();
+        String units = cursor1.getString(cursor1.getColumnIndex(KEY_UNITS));
 
         if (cursor.moveToFirst()) {
             do {
@@ -186,7 +191,7 @@ public class DBhelper extends SQLiteOpenHelper {
                 String weightOrDist = cursor.getString(cursor.getColumnIndex(KEY_WEIGHT_DIST));
                 String repsOrTime = cursor.getString(cursor.getColumnIndex(KEY_REPS_TIME));
                 String note = cursor.getString(cursor.getColumnIndex(KEY_NOTES));
-                list.add(new SetOptionsData(date, repsOrTime, weightOrDist, note));
+                list.add(new SetOptionsData(date, repsOrTime, weightOrDist, note, units));
             } while (cursor.moveToNext());
 
         }
