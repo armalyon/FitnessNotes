@@ -31,7 +31,7 @@ public class SetOptionsListAdapter extends BaseAdapter {
         this.context = context;
         this.setsList = setsList;
         datesList = getDatesList();
-        this.type =type;
+        this.type = type;
         layoutInflater = LayoutInflater.from(context);
     }
 
@@ -91,8 +91,9 @@ public class SetOptionsListAdapter extends BaseAdapter {
         for (int i = 0; i < n; i++) {
             String dateFormSets = dateFormat.format(setsList.get(i).getDate());
             if (date.equals(dateFormSets)) {
+                int pos = setsInADayList.size() + 1;
 
-                String stringItem = getSetString(i, setsList.get(i));
+                String stringItem = getSetString(pos, setsList.get(i));
                 setsInADayList.add(stringItem);
             }
 
@@ -106,19 +107,34 @@ public class SetOptionsListAdapter extends BaseAdapter {
     }
 
 
-    private String getSetString(int position, SetOptionsData setOptionsData){
+    // set text of the set in history card dependant of type
+    private String getSetString(int position, SetOptionsData setOptionsData) {
         String result = position + ". ";
-        if (type.equals(context.getString(R.string.sp_weight_reps))){
-            result =  setOptionsData.getWeightDistUnits() +": "+ setOptionsData.getWeightOrDist() +
-                      " " + context.getString(R.string.reps) + setOptionsData.getRepsOrTime();
-            if (!setOptionsData.getNote().equals("")){
-                result+= "\n" + setOptionsData.getNote();
-            }
+        String repsTime = "";
 
+        if (type.equals(context.getString(R.string.sp_weight_reps)) || type.equals(context.getString(R.string.sp_reps)))
+            repsTime = context.getString(R.string.reps);
+
+        if (type.equals(context.getString(R.string.sp_dist_time)) || type.equals(context.getString(R.string.sp_time)))
+            repsTime = context.getString(R.string.time);
+
+
+        //if type is weight and reps or dist and time
+        if (type.equals(context.getString(R.string.sp_weight_reps)) || type.equals(context.getString(R.string.sp_dist_time))) {
+            result += setOptionsData.getWeightDistUnits() + ": " + setOptionsData.getWeightOrDist() +
+                    " " + repsTime+ " " + setOptionsData.getRepsOrTime();
+            if (!setOptionsData.getNote().equals("")) {
+                result += "\n\t\t\t\t" + setOptionsData.getNote();
+            }
         }
 
-
-
+        //if type time or reps
+        if (type.equals(context.getString(R.string.sp_reps)) || type.equals(context.getString(R.string.sp_time))) {
+            result += repsTime + " " + setOptionsData.getRepsOrTime();
+            if (!setOptionsData.getNote().equals("")) {
+                result += "\n\t\t\t\t" + setOptionsData.getNote();
+            }
+        }
 
         return result;
     }
