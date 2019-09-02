@@ -233,13 +233,15 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
 
         if (type.equals(getString(R.string.sp_time))|| type.equals(getString(R.string.sp_dist_time))){
             String hh = hoursEditText.getText().toString();
-            if (hh.equals("")) hh = "0";
+            if (hh.equals("")|| hh.equals("0")) hh = "00";
             String mm = minutesEditText.getText().toString();
-            if (mm.equals("")) mm = "0";
+            if (mm.equals("") || mm.equals("0")) mm = "00";
             String ss = secondsEditText.getText().toString();
-            repsOrTime = hh + ":" + mm + ":" + ss;
+            if (ss.equals("") || ss.equals("0")) ss = "00";
 
-            if (repsOrTime.equals("0:0:") || repsOrTime.equals("0:0:0")){
+                repsOrTime = hh + ":" + mm + ":" + ss;
+
+            if (repsOrTime.equals("00:00:00")){
                 Toast.makeText(getContext(), getString(R.string.toast_please_enter_valid_values),
                         Toast.LENGTH_SHORT).show();
                 return;
