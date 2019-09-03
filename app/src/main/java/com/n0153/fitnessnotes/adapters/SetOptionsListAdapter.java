@@ -12,8 +12,11 @@ import android.widget.TextView;
 import com.n0153.fitnessnotes.R;
 import com.n0153.fitnessnotes.db_utils.SetOptionsData;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,14 +28,17 @@ public class SetOptionsListAdapter extends BaseAdapter {
     private ArrayList<String> datesList;
     private LayoutInflater layoutInflater;
     private String type;
+    private SimpleDateFormat dateFormat;
 
 
     public SetOptionsListAdapter(Context context, ArrayList<SetOptionsData> setsList, String type) {
+        dateFormat = new SimpleDateFormat(datePattern);
         this.context = context;
         this.setsList = setsList;
         datesList = getDatesList();
         this.type = type;
         layoutInflater = LayoutInflater.from(context);
+
     }
 
     @Override
@@ -50,6 +56,7 @@ public class SetOptionsListAdapter extends BaseAdapter {
         return position;
     }
 
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
@@ -62,7 +69,7 @@ public class SetOptionsListAdapter extends BaseAdapter {
 
         RecyclerView setsListView = view.findViewById(R.id.setsListView);
 
-        setSetsListView(setsListView, dateString);
+        setSetsRecyclerView(setsListView, dateString);
 
         return view;
     }
@@ -72,7 +79,6 @@ public class SetOptionsListAdapter extends BaseAdapter {
     private ArrayList<String> getDatesList() {
         ArrayList<String> dates = new ArrayList<>();
         Set<String> datesSet = new HashSet<>();
-        SimpleDateFormat dateFormat = new SimpleDateFormat(datePattern);
         int n = setsList.size();
         for (int i = 0; i < n; i++) {
             String date = dateFormat.format(setsList.get(i).getDate());
@@ -80,12 +86,27 @@ public class SetOptionsListAdapter extends BaseAdapter {
         }
         dates.addAll(datesSet);
 
+        Collections.sort(dates, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                try {
+                    dateFormat.parse(o1).compareTo(dateFormat.parse(o2));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                return 0;
+            }
+        });
+
+
         return dates;
     }
 
-    private void setSetsListView(RecyclerView recyclerView, String date) {
+
+
+    //method which set RecyclerView for each card
+    private void setSetsRecyclerView(RecyclerView recyclerView, String date) {
         ArrayList<String> setsInADayList = new ArrayList<>();
-        SimpleDateFormat dateFormat = new SimpleDateFormat(datePattern);
         int n = setsList.size();
 
         for (int i = 0; i < n; i++) {

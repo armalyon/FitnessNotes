@@ -210,8 +210,8 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
             params.topToTop = ConstraintLayout.LayoutParams.PARENT_ID;
             params.topMargin = (int) getResources().getDimension(R.dimen.new_set_margin_top);
 
-            if (type.equals(timeType)) amountTextView.setText(timeType);
-            if (type.equals(repsType)) amountTextView.setText(repsType);
+            if (type.equals(timeType)) amountTextView.setText(getString(R.string.item_time));
+            if (type.equals(repsType)) amountTextView.setText(getString(R.string.item_reps));
 
 
         }

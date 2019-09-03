@@ -8,4 +8,5 @@
     <dimen name="header_cards_size">24sp</dimen>
     <dimen name="card_corner_radius">40dp</dimen>
     <dimen name="card_left_margin">5dp</dimen>
+    <dimen name="edit_text_set_margin">3dp</dimen>
 </resources>
