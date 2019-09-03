@@ -24,6 +24,7 @@ public class SetOptionsListAdapter extends BaseAdapter {
 
     private Context context;
     private String datePattern = "YYYY-MM-dd";
+    private String timePattern = "HH:mm";
     private ArrayList<SetOptionsData> setsList;
     private ArrayList<String> datesList;
     private LayoutInflater layoutInflater;
@@ -79,9 +80,11 @@ public class SetOptionsListAdapter extends BaseAdapter {
     private ArrayList<String> getDatesList() {
         ArrayList<String> dates = new ArrayList<>();
         Set<String> datesSet = new HashSet<>();
+
         int n = setsList.size();
         for (int i = 0; i < n; i++) {
             String date = dateFormat.format(setsList.get(i).getDate());
+
             datesSet.add(date);
         }
         dates.addAll(datesSet);
@@ -132,6 +135,8 @@ public class SetOptionsListAdapter extends BaseAdapter {
     private String getSetString(int position, SetOptionsData setOptionsData) {
         String result = position + ". ";
         String repsTime = "";
+        SimpleDateFormat timeFormet = new SimpleDateFormat(timePattern);
+        String time = timeFormet.format(setOptionsData.getDate());
 
         if (type.equals(context.getString(R.string.sp_weight_reps)) || type.equals(context.getString(R.string.sp_reps)))
             repsTime = context.getString(R.string.reps);
@@ -142,7 +147,7 @@ public class SetOptionsListAdapter extends BaseAdapter {
 
         //if type is weight and reps or dist and time
         if (type.equals(context.getString(R.string.sp_weight_reps)) || type.equals(context.getString(R.string.sp_dist_time))) {
-            result += setOptionsData.getWeightDistUnits() + ": " + setOptionsData.getWeightOrDist() +
+            result += time + " " + setOptionsData.getWeightDistUnits() + ": " + setOptionsData.getWeightOrDist() +
                     " " + repsTime+ " " + setOptionsData.getRepsOrTime();
             if (!setOptionsData.getNote().equals("")) {
                 result += "\n\t\t\t\t" + setOptionsData.getNote();
@@ -151,7 +156,7 @@ public class SetOptionsListAdapter extends BaseAdapter {
 
         //if type time or reps
         if (type.equals(context.getString(R.string.sp_reps)) || type.equals(context.getString(R.string.sp_time))) {
-            result += repsTime + " " + setOptionsData.getRepsOrTime();
+            result += time + " " + repsTime + " " + setOptionsData.getRepsOrTime();
             if (!setOptionsData.getNote().equals("")) {
                 result += "\n\t\t\t\t" + setOptionsData.getNote();
             }
