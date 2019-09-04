@@ -89,11 +89,13 @@ public class SetOptionsListAdapter extends BaseAdapter {
         }
         dates.addAll(datesSet);
 
+        //sort cards by date
+
         Collections.sort(dates, new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {
                 try {
-                    dateFormat.parse(o1).compareTo(dateFormat.parse(o2));
+                    dateFormat.parse(o2).compareTo(dateFormat.parse(o1));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
