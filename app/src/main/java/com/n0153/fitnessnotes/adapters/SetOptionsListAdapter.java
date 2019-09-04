@@ -24,7 +24,7 @@ public class SetOptionsListAdapter extends BaseAdapter {
 
     private Context context;
     private String datePattern = "YYYY-MM-dd";
-    private String timePattern = "HH:mm";
+    private String timePattern = "HH:mm:ss";
     private ArrayList<SetOptionsData> setsList;
     private ArrayList<String> datesList;
     private LayoutInflater layoutInflater;

@@ -134,11 +134,10 @@ public class DBhelper extends SQLiteOpenHelper {
 
         cursor.moveToFirst();
 
-        if (cursor != null) {
             type = cursor.getString(cursor.getColumnIndex(KEY_TYPE));
             units = cursor.getString(cursor.getColumnIndex(KEY_UNITS));
 
-        }
+        cursor.close();
         return new ExOptionsData(type, units);
     }
 
