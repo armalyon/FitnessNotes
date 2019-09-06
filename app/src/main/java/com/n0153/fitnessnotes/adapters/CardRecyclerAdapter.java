@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.n0153.fitnessnotes.R;
 
@@ -17,11 +18,19 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
     private LayoutInflater inflater;
     private Context context;
     private ArrayList<String> textList;
+    private static OnSetItemClickListener clickListener;
+    private ItemClickListener itemClickListener;
+
+
+    public ItemClickListener getItemClickListener() {
+        return itemClickListener;
+    }
 
     public CardRecyclerAdapter(Context context, ArrayList<String> textList) {
         inflater = LayoutInflater.from(context);
         this.context = context;
         this.textList = textList;
+        itemClickListener = new ItemClickListener();
     }
 
     @NonNull
@@ -43,14 +52,42 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
         return textList.size();
     }
 
-    class CardViewHolder extends RecyclerView.ViewHolder {
+    class CardViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
         TextView setInfo;
 
         public CardViewHolder(@NonNull View itemView) {
             super(itemView);
             setInfo = itemView.findViewById(R.id.textView2);
+            itemView.setLongClickable(true);
+            itemView.setOnLongClickListener(this);
+        }
 
+
+        @Override
+        public boolean onLongClick(View v) {
+            clickListener.onItemLongClick(getAdapterPosition(), v);
+
+            return false;
         }
     }
+    public void setOnItemClickListener(OnSetItemClickListener clickListener) {
+        CardRecyclerAdapter.clickListener = clickListener;
+    }
+
+
+    public interface OnSetItemClickListener {
+        void onItemLongClick(int position, View v);
+    }
+
+     class ItemClickListener implements OnSetItemClickListener{
+
+
+        @Override
+        public void onItemLongClick(int position, View v) {
+           TextView textView = v.findViewById(R.id.textView2);
+           Toast.makeText(context, textView.getText().toString(), Toast.LENGTH_LONG).show();
+        }
+    }
+
 
 }

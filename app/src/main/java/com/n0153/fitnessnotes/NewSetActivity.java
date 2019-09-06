@@ -47,7 +47,7 @@ public class NewSetActivity extends AppCompatActivity {
         TrackTabFragment trackTabFragment = new TrackTabFragment();
         HistoryTabFragment historyTabFragment = new HistoryTabFragment();
 
-        //this needed for access to updateMainlist()
+        //this needed for access to updateMainList()
         trackTabFragment.setHistoryTabFragment(historyTabFragment);
 
         adapter.addFragment(trackTabFragment, getString(R.string.tab_track));

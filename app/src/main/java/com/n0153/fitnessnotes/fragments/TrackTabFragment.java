@@ -1,9 +1,7 @@
 package com.n0153.fitnessnotes.fragments;
 
 import android.app.Activity;
-import android.content.Context;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
@@ -23,7 +21,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.n0153.fitnessnotes.ActivityExercises;
 import com.n0153.fitnessnotes.NewSetActivity;
 import com.n0153.fitnessnotes.R;
 import com.n0153.fitnessnotes.db_utils.DBhelper;
@@ -186,7 +183,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
                         break;
             case (R.id.buttonSaveSet):
                 saveSet();
-                historyTabFragment.updateMainlist();
+                historyTabFragment.updateMainList();
                 break;
         }
 

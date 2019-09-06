@@ -23,7 +23,7 @@ import java.util.Set;
 public class SetOptionsListAdapter extends BaseAdapter {
 
     private Context context;
-    private String datePattern = "YYYY-MM-dd";
+    private String datePattern = "EEE, YYYY-MM-dd";
     private String timePattern = "HH:mm:ss";
     private ArrayList<SetOptionsData> setsList;
     private ArrayList<String> datesList;
@@ -128,7 +128,9 @@ public class SetOptionsListAdapter extends BaseAdapter {
         recyclerView.setLayoutManager(llm);
 
         CardRecyclerAdapter adapter = new CardRecyclerAdapter(context, setsInADayList);
+        adapter.setOnItemClickListener(adapter.getItemClickListener());
         recyclerView.setAdapter(adapter);
+
 
     }
 
