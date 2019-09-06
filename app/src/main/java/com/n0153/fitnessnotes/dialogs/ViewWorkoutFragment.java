@@ -20,6 +20,17 @@ public class ViewWorkoutFragment extends DialogFragment implements View.OnClickL
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.buttonViewWorkout :
+
+                //add code
+
+                break;
+            case  R.id.buttonCancelHistory :
+              dismiss();
+            break;
+        }
+
 
     }
 }
