@@ -23,7 +23,9 @@
 
     <string name="item_cancel">Cancel</string>
     <string name="item_save" translatable="false">Save</string>
+    <string name="item_view_workout" translatable="false">View Workout</string>
     <string name="item_clear" translatable="false">Clear</string>
+
     <string name="title_add_category_dialog" translatable="false">Add Category:</string>
     <string name="toast_new_category">New category: </string>
     <string name="toast_created">created</string>
