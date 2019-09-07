@@ -3,13 +3,12 @@ package com.n0153.fitnessnotes;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.n0153.fitnessnotes.db_utils.DBhelper;
+import com.n0153.fitnessnotes.db_utils.models.DBhelper;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 

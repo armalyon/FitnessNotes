@@ -14,6 +14,12 @@
         android:text="hello world"
         android:textSize="@dimen/categ_list_text_size" />
 
+    <TextView
+        android:id="@+id/textViewSetDate"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:text="TextView" />
+
     <View
         android:id="@+id/dividerThin1"
         android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-package com.n0153.fitnessnotes.db_utils;
+package com.n0153.fitnessnotes.db_utils.models;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import com.n0153.fitnessnotes.db_utils.SetOptionsData;
 
 import java.util.ArrayList;
 import java.util.Date;

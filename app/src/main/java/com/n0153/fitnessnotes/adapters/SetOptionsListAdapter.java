@@ -12,11 +12,11 @@ import android.widget.TextView;
 import com.n0153.fitnessnotes.R;
 import com.n0153.fitnessnotes.db_utils.SetOptionsData;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,7 +26,7 @@ public class SetOptionsListAdapter extends BaseAdapter {
     private String datePattern = "EEE, YYYY-MM-dd";
     private String timePattern = "HH:mm:ss";
     private ArrayList<SetOptionsData> setsList;
-    private ArrayList<String> datesList;
+    private ArrayList<Date> datesList;
     private LayoutInflater layoutInflater;
     private String type;
     private SimpleDateFormat dateFormat;
@@ -48,7 +48,7 @@ public class SetOptionsListAdapter extends BaseAdapter {
     }
 
     @Override
-    public String getItem(int position) {
+    public Date getItem(int position) {
         return datesList.get(position);
     }
 
@@ -65,7 +65,7 @@ public class SetOptionsListAdapter extends BaseAdapter {
             view = layoutInflater.inflate(R.layout.history_listraw_layout, parent, false);
         }
 
-        String dateString = getItem(position);
+        String dateString = dateFormat.format(getItem(position));
         ((TextView) view.findViewById(R.id.textViewDate)).setText(dateString);
 
         RecyclerView setsListView = view.findViewById(R.id.setsListView);
@@ -77,29 +77,27 @@ public class SetOptionsListAdapter extends BaseAdapter {
 
 
     //create list with unique dates
-    private ArrayList<String> getDatesList() {
-        ArrayList<String> dates = new ArrayList<>();
+    private ArrayList<Date> getDatesList() {
+        ArrayList<Date> dates = new ArrayList<>();
         Set<String> datesSet = new HashSet<>();
 
         int n = setsList.size();
         for (int i = 0; i < n; i++) {
             String date = dateFormat.format(setsList.get(i).getDate());
+            boolean isAdded = false;
+            isAdded = datesSet.add(date);
+            if (isAdded) dates.add(setsList.get(i).getDate());
 
-            datesSet.add(date);
         }
-        dates.addAll(datesSet);
+
 
         //sort cards by date
 
-        Collections.sort(dates, new Comparator<String>() {
+        Collections.sort(dates, new Comparator<Date>() {
             @Override
-            public int compare(String o1, String o2) {
-                try {
-                    dateFormat.parse(o2).compareTo(dateFormat.parse(o1));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                return 0;
+            public int compare(Date o1, Date o2) {
+
+                return o2.compareTo(o1);
             }
         });
 

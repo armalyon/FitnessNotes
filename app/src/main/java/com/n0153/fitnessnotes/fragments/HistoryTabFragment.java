@@ -11,7 +11,7 @@ import android.widget.ListView;
 import com.n0153.fitnessnotes.NewSetActivity;
 import com.n0153.fitnessnotes.R;
 import com.n0153.fitnessnotes.adapters.SetOptionsListAdapter;
-import com.n0153.fitnessnotes.db_utils.DBhelper;
+import com.n0153.fitnessnotes.db_utils.models.DBhelper;
 import com.n0153.fitnessnotes.db_utils.SetOptionsData;
 
 import java.util.ArrayList;

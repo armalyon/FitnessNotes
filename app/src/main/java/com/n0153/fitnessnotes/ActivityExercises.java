@@ -1,21 +1,15 @@
 package com.n0153.fitnessnotes;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TableRow;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.n0153.fitnessnotes.db_utils.DBhelper;
+import com.n0153.fitnessnotes.db_utils.models.DBhelper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ActivityExercises extends AppCompatActivity implements AdapterView.OnItemClickListener {

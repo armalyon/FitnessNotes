@@ -23,8 +23,8 @@ import android.widget.Toast;
 
 import com.n0153.fitnessnotes.NewSetActivity;
 import com.n0153.fitnessnotes.R;
-import com.n0153.fitnessnotes.db_utils.DBhelper;
-import com.n0153.fitnessnotes.db_utils.ExOptionsData;
+import com.n0153.fitnessnotes.db_utils.models.DBhelper;
+import com.n0153.fitnessnotes.db_utils.models.ExOptionsData;
 
 
 public class TrackTabFragment extends Fragment implements View.OnClickListener {
