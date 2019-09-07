@@ -85,7 +85,6 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
         @Override
         public void onItemLongClick(int position, View v) {
            TextView textView = v.findViewById(R.id.textViewSet);
-           v.setBackgroundColor(context.getResources().getColor(R.color.colorTabs));
            Toast.makeText(context, textView.getText().toString(), Toast.LENGTH_LONG).show();
         }
 
