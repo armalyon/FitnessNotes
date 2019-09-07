@@ -36,7 +36,7 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
     @NonNull
     @Override
     public CardViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = inflater.inflate(R.layout.listraw_layout, viewGroup, false);
+        View view = inflater.inflate(R.layout.history_card_listraw, viewGroup, false);
         return new CardViewHolder(view);
 
     }
@@ -57,7 +57,7 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
 
         public CardViewHolder(@NonNull View itemView) {
             super(itemView);
-            setInfo = itemView.findViewById(R.id.textView2);
+            setInfo = itemView.findViewById(R.id.textViewSet);
             itemView.setLongClickable(true);
             itemView.setOnLongClickListener(this);
         }
@@ -84,9 +84,13 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
 
         @Override
         public void onItemLongClick(int position, View v) {
-           TextView textView = v.findViewById(R.id.textView2);
+           TextView textView = v.findViewById(R.id.textViewSet);
+           v.setBackgroundColor(context.getResources().getColor(R.color.colorTabs));
            Toast.makeText(context, textView.getText().toString(), Toast.LENGTH_LONG).show();
         }
+
+
+
     }
 
 
