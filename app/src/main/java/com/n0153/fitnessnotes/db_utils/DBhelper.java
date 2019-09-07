@@ -7,8 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.n0153.fitnessnotes.db_utils.models.ExOptionsData;
-import com.n0153.fitnessnotes.db_utils.models.SetOptionsData;
+import com.n0153.fitnessnotes.db_utils.models.ExOptionsDataModel;
+import com.n0153.fitnessnotes.db_utils.models.SetOptionsDataModel;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -125,7 +125,7 @@ public class DBhelper extends SQLiteOpenHelper {
         return exercisesList;
     }
 
-    public ExOptionsData getExOptionsData(String exercise) {
+    public ExOptionsDataModel getExOptionsData(String exercise) {
 
         String[] columns = new String[]{KEY_TYPE, KEY_UNITS};
 
@@ -141,7 +141,7 @@ public class DBhelper extends SQLiteOpenHelper {
             units = cursor.getString(cursor.getColumnIndex(KEY_UNITS));
 
         cursor.close();
-        return new ExOptionsData(type, units);
+        return new ExOptionsDataModel(type, units);
     }
 
 
@@ -174,13 +174,13 @@ public class DBhelper extends SQLiteOpenHelper {
         return type;
     }
 
-    public ArrayList<SetOptionsData> getSetOptionsList(String exerciseName) {
+    public ArrayList<SetOptionsDataModel> getSetOptionsList(String exerciseName) {
         Cursor cursor = db.query(TABLE_SETS_NAME, new String[]{KEY_DATE, KEY_WEIGHT_DIST, KEY_REPS_TIME, KEY_NOTES},
                 KEY_NAME + " = ?", new String[]{exerciseName}, null, null, null);
         Cursor cursor1 = db.query(TABLE_EXERISES_NAME, new String[]{KEY_UNITS}, KEY_NAME + " = ?",
                 new String[]{exerciseName}, null, null, null);
 
-        ArrayList<SetOptionsData> list = new ArrayList<>();
+        ArrayList<SetOptionsDataModel> list = new ArrayList<>();
 
 
         cursor1.moveToFirst();
@@ -194,7 +194,7 @@ public class DBhelper extends SQLiteOpenHelper {
                 String weightOrDist = cursor.getString(cursor.getColumnIndex(KEY_WEIGHT_DIST));
                 String repsOrTime = cursor.getString(cursor.getColumnIndex(KEY_REPS_TIME));
                 String note = cursor.getString(cursor.getColumnIndex(KEY_NOTES));
-                list.add(new SetOptionsData(date, repsOrTime, weightOrDist, note, units));
+                list.add(new SetOptionsDataModel(date, repsOrTime, weightOrDist, note, units));
             } while (cursor.moveToNext());
 
         }

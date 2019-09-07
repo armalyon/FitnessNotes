@@ -1,11 +1,11 @@
 package com.n0153.fitnessnotes.db_utils.models;
 
-public class ExOptionsData {
+public class ExOptionsDataModel {
 
     private String units;
     private String type;
 
-    public ExOptionsData(String type, String units) {
+    public ExOptionsDataModel(String type, String units) {
         this.units = units;
         this.type = type;
     }

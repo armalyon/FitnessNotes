@@ -10,8 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.n0153.fitnessnotes.R;
-import com.n0153.fitnessnotes.db_utils.models.SetData;
-import com.n0153.fitnessnotes.db_utils.models.SetOptionsData;
+import com.n0153.fitnessnotes.db_utils.models.SetDataModel;
+import com.n0153.fitnessnotes.db_utils.models.SetOptionsDataModel;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,14 +26,14 @@ public class SetOptionsListAdapter extends BaseAdapter {
     private Context context;
     private String datePattern = "EEE, YYYY-MM-dd";
     private String timePattern = "HH:mm:ss";
-    private ArrayList<SetOptionsData> setsList;
+    private ArrayList<SetOptionsDataModel> setsList;
     private ArrayList<Date> datesList;
     private LayoutInflater layoutInflater;
     private String type;
     private SimpleDateFormat dateFormat;
 
 
-    public SetOptionsListAdapter(Context context, ArrayList<SetOptionsData> setsList, String type) {
+    public SetOptionsListAdapter(Context context, ArrayList<SetOptionsDataModel> setsList, String type) {
         dateFormat = new SimpleDateFormat(datePattern);
         this.context = context;
         this.setsList = setsList;
@@ -110,7 +110,9 @@ public class SetOptionsListAdapter extends BaseAdapter {
 
     //method which set RecyclerView for each card
     private void setSetsRecyclerView(RecyclerView recyclerView, String stringDate) {
-        ArrayList<SetData> setsInADayList = new ArrayList<>();
+
+        //arraylist to transfer text and date for each set
+        ArrayList<SetDataModel> setsInADayList = new ArrayList<>();
         int n = setsList.size();
 
         for (int i = 0; i < n; i++) {
@@ -120,7 +122,7 @@ public class SetOptionsListAdapter extends BaseAdapter {
                 int pos = setsInADayList.size() + 1;
 
                 String stringItem = getSetString(pos, setsList.get(i));
-                setsInADayList.add(new SetData(stringItem, date));
+                setsInADayList.add(new SetDataModel(stringItem, date));
             }
 
         }
@@ -136,7 +138,7 @@ public class SetOptionsListAdapter extends BaseAdapter {
 
 
     // set text of the set in history card dependant of type
-    private String getSetString(int position, SetOptionsData setOptionsData) {
+    private String getSetString(int position, SetOptionsDataModel setOptionsData) {
         String result = position + ". ";
         String repsTime = "";
         SimpleDateFormat timeFormet = new SimpleDateFormat(timePattern);

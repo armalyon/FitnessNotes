@@ -24,7 +24,7 @@ import android.widget.Toast;
 import com.n0153.fitnessnotes.NewSetActivity;
 import com.n0153.fitnessnotes.R;
 import com.n0153.fitnessnotes.db_utils.DBhelper;
-import com.n0153.fitnessnotes.db_utils.models.ExOptionsData;
+import com.n0153.fitnessnotes.db_utils.models.ExOptionsDataModel;
 
 
 public class TrackTabFragment extends Fragment implements View.OnClickListener {
@@ -113,7 +113,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
     private void setTextFields() {
 
         Log.d(LOG_TAG, exercise);
-        ExOptionsData exOptionsData = dBhelper.getExOptionsData(exercise);
+        ExOptionsDataModel exOptionsData = dBhelper.getExOptionsData(exercise);
         unitsTextView.setText(exOptionsData.getUnits() + ": ");
         String type = exOptionsData.getType();
 

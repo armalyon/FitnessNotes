@@ -10,7 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.n0153.fitnessnotes.R;
-import com.n0153.fitnessnotes.db_utils.models.SetData;
+import com.n0153.fitnessnotes.db_utils.models.SetDataModel;
 
 import java.util.ArrayList;
 
@@ -18,7 +18,7 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
 
     private LayoutInflater inflater;
     private Context context;
-    private ArrayList<SetData> setsList;
+    private ArrayList<SetDataModel> setsList;
     private static OnSetItemClickListener clickListener;
     private ItemClickListener itemClickListener;
 
@@ -27,7 +27,7 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
         return itemClickListener;
     }
 
-    public CardRecyclerAdapter(Context context, ArrayList<SetData> setsList) {
+    public CardRecyclerAdapter(Context context, ArrayList<SetDataModel> setsList) {
         inflater = LayoutInflater.from(context);
         this.context = context;
         this.setsList = setsList;
@@ -61,6 +61,8 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
         public CardViewHolder(@NonNull View itemView) {
             super(itemView);
             setInfo = itemView.findViewById(R.id.textViewSet);
+
+            //hidden field to save date of each set
             dateInfo = itemView.findViewById(R.id.textViewSetDate);
             itemView.setLongClickable(true);
             itemView.setOnLongClickListener(this);

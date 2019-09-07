@@ -2,7 +2,7 @@ package com.n0153.fitnessnotes.db_utils.models;
 
 import java.util.Date;
 
-public class SetOptionsData {
+public class SetOptionsDataModel {
 
     private Date date;
     private String repsOrTime;
@@ -10,7 +10,7 @@ public class SetOptionsData {
     private String note;
     private String weightDistUnits;
 
-    public SetOptionsData(Date date, String repsOrTime, String weightOrDist, String note, String weightDistUnits) {
+    public SetOptionsDataModel(Date date, String repsOrTime, String weightOrDist, String note, String weightDistUnits) {
         this.date = date;
         this.repsOrTime = repsOrTime;
         this.weightOrDist = weightOrDist;
