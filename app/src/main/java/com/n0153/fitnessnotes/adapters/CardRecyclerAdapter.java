@@ -1,16 +1,19 @@
 package com.n0153.fitnessnotes.adapters;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
+
+import com.n0153.fitnessnotes.NewSetActivity;
 import com.n0153.fitnessnotes.R;
 import com.n0153.fitnessnotes.db_utils.models.SetDataModel;
+import com.n0153.fitnessnotes.dialogs.ModifySetFragment;
 
 import java.util.ArrayList;
 
@@ -21,6 +24,9 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
     private ArrayList<SetDataModel> setsList;
     private static OnSetItemClickListener clickListener;
     private ItemClickListener itemClickListener;
+    private ModifySetFragment modifySetFragment;
+    public final static String KEY_LONG_DATE = "long_key";
+    private final String MODIFY_DIALOG_TAG = "Modify dialog started";
 
 
     public ItemClickListener getItemClickListener() {
@@ -76,6 +82,7 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
             return false;
         }
     }
+
     public void setOnItemClickListener(OnSetItemClickListener clickListener) {
         CardRecyclerAdapter.clickListener = clickListener;
     }
@@ -85,15 +92,23 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
         void onItemLongClick(int position, View v);
     }
 
-     class ItemClickListener implements OnSetItemClickListener{
+    class ItemClickListener implements OnSetItemClickListener {
 
 
         @Override
         public void onItemLongClick(int position, View v) {
-           TextView textView = v.findViewById(R.id.textViewSetDate);
-           Toast.makeText(context, textView.getText().toString(), Toast.LENGTH_LONG).show();
-        }
+            TextView textView = v.findViewById(R.id.textViewSetDate);
+            long dateLong = Long.parseLong(textView.getText().toString());
 
+            // Create dialog to modify set and send date into it via Bundle
+            modifySetFragment = new ModifySetFragment();
+            Bundle args = new Bundle();
+            args.putLong(KEY_LONG_DATE, dateLong);
+
+            modifySetFragment.setArguments(args);
+            modifySetFragment.show(((NewSetActivity)context).getSupportFragmentManager(), MODIFY_DIALOG_TAG );
+
+        }
 
 
     }
