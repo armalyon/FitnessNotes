@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.n0153.fitnessnotes.AddExerciseActivity;
 import com.n0153.fitnessnotes.R;
-import com.n0153.fitnessnotes.db_utils.models.DBhelper;
+import com.n0153.fitnessnotes.db_utils.DBhelper;
 
 import java.util.ArrayList;
 import java.util.List;

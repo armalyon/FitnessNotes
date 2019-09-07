@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.n0153.fitnessnotes.db_utils.models.DBhelper;
+import com.n0153.fitnessnotes.db_utils.DBhelper;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 

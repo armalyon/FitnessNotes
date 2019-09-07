@@ -8,7 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.n0153.fitnessnotes.db_utils.models.DBhelper;
+import com.n0153.fitnessnotes.db_utils.DBhelper;
 
 import java.util.List;
 

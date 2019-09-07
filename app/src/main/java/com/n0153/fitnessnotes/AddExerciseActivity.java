@@ -18,7 +18,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.n0153.fitnessnotes.db_utils.models.DBhelper;
+import com.n0153.fitnessnotes.db_utils.DBhelper;
 import com.n0153.fitnessnotes.dialogs.AddCategoryFragment;
 
 import java.util.ArrayList;

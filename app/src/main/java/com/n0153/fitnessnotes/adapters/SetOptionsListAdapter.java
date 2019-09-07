@@ -10,7 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.n0153.fitnessnotes.R;
-import com.n0153.fitnessnotes.db_utils.SetOptionsData;
+import com.n0153.fitnessnotes.db_utils.models.SetData;
+import com.n0153.fitnessnotes.db_utils.models.SetOptionsData;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -108,17 +109,18 @@ public class SetOptionsListAdapter extends BaseAdapter {
 
 
     //method which set RecyclerView for each card
-    private void setSetsRecyclerView(RecyclerView recyclerView, String date) {
-        ArrayList<String> setsInADayList = new ArrayList<>();
+    private void setSetsRecyclerView(RecyclerView recyclerView, String stringDate) {
+        ArrayList<SetData> setsInADayList = new ArrayList<>();
         int n = setsList.size();
 
         for (int i = 0; i < n; i++) {
-            String dateFormSets = dateFormat.format(setsList.get(i).getDate());
-            if (date.equals(dateFormSets)) {
+            Date date = setsList.get(i).getDate();
+            String dateFormSets = dateFormat.format(date);
+            if (stringDate.equals(dateFormSets)) {
                 int pos = setsInADayList.size() + 1;
 
                 String stringItem = getSetString(pos, setsList.get(i));
-                setsInADayList.add(stringItem);
+                setsInADayList.add(new SetData(stringItem, date));
             }
 
         }

@@ -1,4 +1,4 @@
-package com.n0153.fitnessnotes.db_utils;
+package com.n0153.fitnessnotes.db_utils.models;
 
 import java.util.Date;
 

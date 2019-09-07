@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.n0153.fitnessnotes.R;
+import com.n0153.fitnessnotes.db_utils.models.SetData;
 
 import java.util.ArrayList;
 
@@ -17,7 +18,7 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
 
     private LayoutInflater inflater;
     private Context context;
-    private ArrayList<String> textList;
+    private ArrayList<SetData> setsList;
     private static OnSetItemClickListener clickListener;
     private ItemClickListener itemClickListener;
 
@@ -26,10 +27,10 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
         return itemClickListener;
     }
 
-    public CardRecyclerAdapter(Context context, ArrayList<String> textList) {
+    public CardRecyclerAdapter(Context context, ArrayList<SetData> setsList) {
         inflater = LayoutInflater.from(context);
         this.context = context;
-        this.textList = textList;
+        this.setsList = setsList;
         itemClickListener = new ItemClickListener();
     }
 
@@ -43,21 +44,24 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull CardViewHolder cardViewHolder, int i) {
-        cardViewHolder.setInfo.setText(textList.get(i));
+        cardViewHolder.setInfo.setText(setsList.get(i).getSetText());
+        cardViewHolder.dateInfo.setText(String.valueOf(setsList.get(i).getDate().getTime()));
 
     }
 
     @Override
     public int getItemCount() {
-        return textList.size();
+        return setsList.size();
     }
 
     class CardViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
         TextView setInfo;
+        TextView dateInfo;
 
         public CardViewHolder(@NonNull View itemView) {
             super(itemView);
             setInfo = itemView.findViewById(R.id.textViewSet);
+            dateInfo = itemView.findViewById(R.id.textViewSetDate);
             itemView.setLongClickable(true);
             itemView.setOnLongClickListener(this);
         }
@@ -84,7 +88,7 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
 
         @Override
         public void onItemLongClick(int position, View v) {
-           TextView textView = v.findViewById(R.id.textViewSet);
+           TextView textView = v.findViewById(R.id.textViewSetDate);
            Toast.makeText(context, textView.getText().toString(), Toast.LENGTH_LONG).show();
         }
 
