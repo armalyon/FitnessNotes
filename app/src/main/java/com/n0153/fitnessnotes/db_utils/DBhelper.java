@@ -137,8 +137,8 @@ public class DBhelper extends SQLiteOpenHelper {
 
         cursor.moveToFirst();
 
-            type = cursor.getString(cursor.getColumnIndex(KEY_TYPE));
-            units = cursor.getString(cursor.getColumnIndex(KEY_UNITS));
+        type = cursor.getString(cursor.getColumnIndex(KEY_TYPE));
+        units = cursor.getString(cursor.getColumnIndex(KEY_UNITS));
 
         cursor.close();
         return new ExOptionsDataModel(type, units);
@@ -202,6 +202,11 @@ public class DBhelper extends SQLiteOpenHelper {
         Log.d(LOG_TAG, " setOpionsList  size = " + list.size());
         cursor.close();
         return list;
+    }
+
+    public void deleteSetByDate(long date) {
+        db.delete(TABLE_SETS_NAME, KEY_DATE + " = " + date, null);
+
     }
 
 

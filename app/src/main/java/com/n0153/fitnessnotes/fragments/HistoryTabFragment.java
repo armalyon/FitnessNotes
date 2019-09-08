@@ -25,7 +25,8 @@ public class HistoryTabFragment extends Fragment {
     private ListView mainListView;
 
     private String LOG_TAG = "History tab";
-    private String dialogViewWorkoutTag = "start dialog view workout";
+
+    private static HistoryTabFragment instance = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,7 +36,7 @@ public class HistoryTabFragment extends Fragment {
         dBhelper = new DBhelper(getContext());
         name = ((NewSetActivity) getActivity()).getLabel();
         type = dBhelper.getExeriseType(name);
-
+        instance = this;
 
         Log.d(LOG_TAG, "onCreate Finished");
     }
@@ -57,17 +58,18 @@ public class HistoryTabFragment extends Fragment {
     }
 
 
-    protected void updateMainList() {
+    public void updateMainList() {
 
         ArrayList<SetOptionsDataModel> setOptionsList = dBhelper.getSetOptionsList(name);
 
         SetOptionsListAdapter adapter = new SetOptionsListAdapter(getContext(), setOptionsList, type);
         mainListView.setAdapter(adapter);
 
-
     }
 
-
+    public static HistoryTabFragment getInstance() {
+        return instance;
+    }
 }
 
 
