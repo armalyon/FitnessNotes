@@ -3,9 +3,9 @@
     <string name="action_settings" translatable="false">Settings</string>
     <string name="title_workouts" translatable="false">Workouts</string>
     <string name="title_activity_exercises" translatable="false">Exercises</string>
+    <string name="title_add_category_dialog" translatable="false">Add Category:</string>
+    <string name="title_update_set" translatable="false">Update set</string>
 
-    <string name="table_exercises" translatable="false">EXERCISES</string>
-    <string name="table_sets" translatable="false">SETS</string>
     <string name="title_categories" translatable="false">Categories</string>
     <string name="title_add_ex" translatable="false">Add Exercise</string>
 
@@ -27,8 +27,10 @@
     <string name="item_clear" translatable="false">Clear</string>
     <string name="item_delete_set" translatable="false">Delete set</string>
     <string name="item_update_set" translatable="false">Update set</string>
+    <string name="item_update" translatable="false">Update</string>
 
-    <string name="title_add_category_dialog" translatable="false">Add Category:</string>
+
+
     <string name="toast_new_category">New category: </string>
     <string name="toast_created">created</string>
     <string name="toast_please_enter_category" translatable="false">Please enter category name</string>
@@ -57,6 +59,9 @@
     <string name="reps">Reps:</string>
     <string name="note">Note:</string>
     <string name="time">Time:</string>
+
+    <string name="table_exercises" translatable="false">EXERCISES</string>
+    <string name="table_sets" translatable="false">SETS</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -6,12 +6,17 @@
     android:orientation="vertical"
     >
 
+    <Button
+        android:id="@+id/buttonViewWorkout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_style"
+        android:text="@string/item_view_workout" />
 
     <Button
         android:id="@+id/buttonModifyUpdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
         android:background="@drawable/button_style"
         android:text="@string/item_update_set"
         />

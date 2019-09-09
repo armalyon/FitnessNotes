@@ -31,14 +31,16 @@ public class SetOptionsListAdapter extends BaseAdapter {
     private LayoutInflater layoutInflater;
     private String type;
     private SimpleDateFormat dateFormat;
+    private String exercise;
 
 
-    public SetOptionsListAdapter(Context context, ArrayList<SetOptionsDataModel> setsList, String type) {
+    public SetOptionsListAdapter(Context context, ArrayList<SetOptionsDataModel> setsList, String type, String exercise) {
         dateFormat = new SimpleDateFormat(datePattern);
         this.context = context;
         this.setsList = setsList;
         datesList = getDatesList();
         this.type = type;
+        this.exercise = exercise;
         layoutInflater = LayoutInflater.from(context);
 
     }
@@ -129,7 +131,7 @@ public class SetOptionsListAdapter extends BaseAdapter {
         LinearLayoutManager llm = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(llm);
 
-        CardRecyclerAdapter adapter = new CardRecyclerAdapter(context, setsInADayList);
+        CardRecyclerAdapter adapter = new CardRecyclerAdapter(context, setsInADayList, exercise);
         adapter.setOnItemClickListener(adapter.getItemClickListener());
         recyclerView.setAdapter(adapter);
 

@@ -62,7 +62,7 @@ public class HistoryTabFragment extends Fragment {
 
         ArrayList<SetOptionsDataModel> setOptionsList = dBhelper.getSetOptionsList(name);
 
-        SetOptionsListAdapter adapter = new SetOptionsListAdapter(getContext(), setOptionsList, type);
+        SetOptionsListAdapter adapter = new SetOptionsListAdapter(getContext(), setOptionsList, type, name);
         mainListView.setAdapter(adapter);
 
     }
