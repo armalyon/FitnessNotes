@@ -323,7 +323,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
         if (!dBhelper.isSetSetListEmpty(exercise)){
          if (dBhelper.isLastSetWasToday(exercise)){
 
-
+// implementation needed
 
 
 
