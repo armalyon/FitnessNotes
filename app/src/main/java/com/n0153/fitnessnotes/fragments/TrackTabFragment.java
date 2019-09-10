@@ -231,10 +231,13 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
         if (type.equals(getString(R.string.sp_time))|| type.equals(getString(R.string.sp_dist_time))){
             String hh = hoursEditText.getText().toString();
             if (hh.equals("")|| hh.equals("0")) hh = "00";
+            if (hh.length()<2) hh = "0" + hh;
             String mm = minutesEditText.getText().toString();
             if (mm.equals("") || mm.equals("0")) mm = "00";
+            if (mm.length()<2) mm = "0" + mm;
             String ss = secondsEditText.getText().toString();
             if (ss.equals("") || ss.equals("0")) ss = "00";
+            if (ss.length()<2) ss = "0" + ss;
 
                 repsOrTime = hh + ":" + mm + ":" + ss;
 
