@@ -45,12 +45,17 @@ public class UpdateSetActivity extends AppCompatActivity implements View.OnClick
         exercise = intent.getStringExtra(ModifySetFragment.EXERCISE_KEY);
 
         dBhelper = new DBhelper(this);
+        ;
 
         parentLayout = findViewById(R.id.saveSetConstraintLayout);
+
+
         unitsTextView = findViewById(R.id.unitsTextView);
         amountTextView = findViewById(R.id.amountTextView);
 
         amountLayout = findViewById(R.id.amountLayout);
+
+        parentLayout = findViewById(R.id.saveSetConstraintLayout);
 
         amountEditText = findViewById(R.id.amountEditText);
         unitsAmountEditText = findViewById(R.id.unitsAmountEditText);
