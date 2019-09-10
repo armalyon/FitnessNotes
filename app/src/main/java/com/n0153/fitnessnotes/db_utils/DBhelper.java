@@ -10,7 +10,10 @@ import android.util.Log;
 import com.n0153.fitnessnotes.db_utils.models.ExOptionsDataModel;
 import com.n0153.fitnessnotes.db_utils.models.SetOptionsDataModel;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -25,12 +28,12 @@ public class DBhelper extends SQLiteOpenHelper {
     public static final String KEY_TYPE = "type";
     public static final String KEY_UNITS = "units";
     public static final String KEY_DATE = "date";
-    public static final String KEY_POS_IN_A_DATE = "position_date";
     public static final String KEY_WEIGHT_DIST = "weight_dist";
     public static final String KEY_REPS_TIME = "reps_time";
     public static final String KEY_NOTES = "notes";
     public static final String KEY_CATEGORIES = "categories";
 
+    public static final String DATE_FORMAT = "YYYY-MM-dd";
 
     public static final String TYPE_TEXT_COMMA = " text, ";
     public static final String TYPE_TEXT = " text ";
@@ -182,7 +185,6 @@ public class DBhelper extends SQLiteOpenHelper {
 
         ArrayList<SetOptionsDataModel> list = new ArrayList<>();
 
-
         cursor1.moveToFirst();
         String units = cursor1.getString(cursor1.getColumnIndex(KEY_UNITS));
         cursor1.close();
@@ -209,5 +211,24 @@ public class DBhelper extends SQLiteOpenHelper {
 
     }
 
+    public boolean isLastSetWasToday(String exercise) {
+
+        Date todayDate = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+
+        ArrayList<SetOptionsDataModel> setsList = getSetOptionsList(exercise);
+        Collections.sort(setsList, new Comparator<SetOptionsDataModel>() {
+            @Override
+            public int compare(SetOptionsDataModel o1, SetOptionsDataModel o2) {
+                return o2.getDate().compareTo(o1.getDate());
+            }
+        });
+        return sdf.format(todayDate).equals(sdf.format(setsList.get(0)));
+    }
+
+    public boolean isSetSetListEmpty(String exercise) {
+        Cursor cursor = db.query(TABLE_SETS_NAME, new String[]{exercise}, null, null, null, null, null);
+        return cursor.getCount() == 0;
+    }
 
 }

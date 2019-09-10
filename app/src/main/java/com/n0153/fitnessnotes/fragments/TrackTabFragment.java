@@ -35,7 +35,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
     Button saveBtn, clearBtn;
     View divider11, divider12, divider13, divider14, divider15, divider16;
     LinearLayout setButtonsLayout, unitsAmountLayout, amountLayout, timeFieldsLayout;
-    String exercise;
+    String exercise, type;
     ConstraintLayout parentLayout;
     HistoryTabFragment historyTabFragment;
 
@@ -56,6 +56,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dBhelper = new DBhelper(getContext());
+        type = dBhelper.getExeriseType(exercise);
 
 
     }
@@ -104,6 +105,8 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
         rearangeElements();
         rearangeTimeFields();
 
+        setFieldsValuesOnStart();
+
         return v;
 
 
@@ -115,7 +118,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
         Log.d(LOG_TAG, exercise);
         ExOptionsDataModel exOptionsData = dBhelper.getExOptionsData(exercise);
         unitsTextView.setText(exOptionsData.getUnits() + ": ");
-        String type = exOptionsData.getType();
+        type = exOptionsData.getType();
 
         String amountOf = null;
 
@@ -313,6 +316,20 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
         view.setLayoutParams(params);
         view.setBackgroundColor(getResources().getColor(R.color.colorActionBar));
         snackbar.show();
+    }
+
+
+    private void setFieldsValuesOnStart(){
+        if (!dBhelper.isSetSetListEmpty(exercise)){
+         if (dBhelper.isLastSetWasToday(exercise)){
+
+
+
+
+
+         }
+
+        }
     }
 
 }
