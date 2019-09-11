@@ -25,6 +25,13 @@ import com.n0153.fitnessnotes.NewSetActivity;
 import com.n0153.fitnessnotes.R;
 import com.n0153.fitnessnotes.db_utils.DBhelper;
 import com.n0153.fitnessnotes.db_utils.models.ExOptionsDataModel;
+import com.n0153.fitnessnotes.db_utils.models.SetOptionsDataModel;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 
 
 public class TrackTabFragment extends Fragment implements View.OnClickListener {
@@ -38,7 +45,9 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
     String exercise, type;
     ConstraintLayout parentLayout;
     HistoryTabFragment historyTabFragment;
+    ArrayList<SetOptionsDataModel> setsList;
 
+    public static final String DATE_FORMAT = "YYYY-MM-dd";
 
     public void setHistoryTabFragment(HistoryTabFragment historyTabFragment) {
         this.historyTabFragment = historyTabFragment;
@@ -56,8 +65,12 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dBhelper = new DBhelper(getContext());
+        exercise = ((NewSetActivity) getActivity()).getLabel();
         type = dBhelper.getExeriseType(exercise);
+        setsList = dBhelper.getSetOptionsList(exercise);
 
+        //sorting by date from the newest
+        sortSetsListNewestFirst();
 
     }
 
@@ -66,7 +79,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_track_tab, container, false);
 
-        exercise = ((NewSetActivity) getActivity()).getLabel();
+
 
         Log.d(LOG_TAG, "onCreateView, exercise: " + exercise);
         parentLayout = v.findViewById(R.id.saveSetConstraintLayout);
@@ -183,7 +196,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
                 hoursEditText.setText("");
                 minutesEditText.setText("");
                 secondsEditText.setText("");
-                        break;
+                break;
             case (R.id.buttonSaveSet):
                 saveSet();
                 historyTabFragment.updateMainList();
@@ -231,27 +244,29 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
         float weightOrDist = 0;
         String repsOrTime = "";
 
-        if (type.equals(getString(R.string.sp_time))|| type.equals(getString(R.string.sp_dist_time))){
+        if (type.equals(getString(R.string.sp_time)) || type.equals(getString(R.string.sp_dist_time))) {
             String hh = hoursEditText.getText().toString();
-            if (hh.equals("")|| hh.equals("0")) hh = "00";
-            if (hh.length()<2) hh = "0" + hh;
+            if (hh.equals("") || hh.equals("0")) hh = "00";
+            if (hh.length() < 2) hh = "0" + hh;
             String mm = minutesEditText.getText().toString();
             if (mm.equals("") || mm.equals("0")) mm = "00";
-            if (mm.length()<2) mm = "0" + mm;
+            if (mm.length() < 2) mm = "0" + mm;
             String ss = secondsEditText.getText().toString();
             if (ss.equals("") || ss.equals("0")) ss = "00";
-            if (ss.length()<2) ss = "0" + ss;
+            if (ss.length() < 2) ss = "0" + ss;
 
-                repsOrTime = hh + ":" + mm + ":" + ss;
+            repsOrTime = hh + ":" + mm + ":" + ss;
 
-            if (repsOrTime.equals("00:00:00")){
+            if (repsOrTime.equals("00:00:00")) {
                 Toast.makeText(getContext(), getString(R.string.toast_please_enter_valid_values),
                         Toast.LENGTH_SHORT).show();
                 return;
-                            }
+            }
 
 
-        } else {repsOrTime = amountEditText.getText().toString();}
+        } else {
+            repsOrTime = amountEditText.getText().toString();
+        }
 
         //validations for weight/reps and dist/time
         if (type.equals(getString(R.string.sp_dist_time)) || type.equals(getString(R.string.sp_weight_reps))) {
@@ -291,13 +306,13 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
     }
 
     //set visible time input fields and invisible units field
-    private void rearangeTimeFields(){
+    private void rearangeTimeFields() {
         String type = dBhelper.getExeriseType(exercise);
-        if (type.equals(getString(R.string.sp_time))|| type.equals(getString(R.string.sp_dist_time))){
+        if (type.equals(getString(R.string.sp_time)) || type.equals(getString(R.string.sp_dist_time))) {
 
             ConstraintSet constraintSet = new ConstraintSet();
             constraintSet.clone(parentLayout);
-            constraintSet.connect(R.id.layoutTimeFields , ConstraintSet.TOP, R.id.divider13, ConstraintSet.BOTTOM );
+            constraintSet.connect(R.id.layoutTimeFields, ConstraintSet.TOP, R.id.divider13, ConstraintSet.BOTTOM);
 
             constraintSet.applyTo(parentLayout);
             amountLayout.setVisibility(View.INVISIBLE);
@@ -308,7 +323,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    private void showSnackbar (){
+    private void showSnackbar() {
         Snackbar snackbar = Snackbar.make(parentLayout, getString(R.string.snackbar_set_saved), Snackbar.LENGTH_SHORT);
         View view = snackbar.getView();
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
@@ -319,17 +334,70 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
     }
 
 
-    private void setFieldsValuesOnStart(){
-        if (!dBhelper.isSetSetListEmpty(exercise)){
-         if (dBhelper.isLastSetWasToday(exercise)){
+    private void setFieldsValuesOnStart() {
+        if (!dBhelper.isSetSetListEmpty(exercise)) {
+
+            //to set the first values from the last training
+            if (!isLastSetWasToday()) {
+
+                SetOptionsDataModel firstSetOfLastDate = getFirstSetOfLastDate();
+                Log.d(LOG_TAG, firstSetOfLastDate.toString());
+
 
 // implementation needed
 
 
-
-         }
+            }
 
         }
     }
+
+    private boolean isLastSetWasToday() {
+
+        Date todayDate = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+
+        //setsList is sorted in onCreate method!!!!
+
+        return sdf.format(todayDate).equals(sdf.format(setsList.get(0).getDate()));
+    }
+
+
+    private SetOptionsDataModel getFirstSetOfLastDate() {
+        Date dateToday = new Date();
+        Date dateOfLastSet = null;
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+        //setsList is sorted in onCreate method!!!!
+        int n = setsList.size();
+        for (int i = 0; i < n; i++) {
+            Date date = setsList.get(i).getDate();
+            if (!sdf.format(date).equals(sdf.format(dateToday))) {
+                dateOfLastSet = date;
+                break;
+            }
+        }
+
+        ArrayList<SetOptionsDataModel> lastDateSets = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            if (sdf.format(dateOfLastSet).equals(sdf.format(setsList.get(i).getDate()))) {
+                lastDateSets.add(setsList.get(i));
+            }
+
+        }
+//return the the last element of the list
+        return lastDateSets.get(lastDateSets.size() - 1);
+    }
+
+    private void sortSetsListNewestFirst() {
+        Collections.sort(setsList, new Comparator<SetOptionsDataModel>() {
+            @Override
+            public int compare(SetOptionsDataModel o1, SetOptionsDataModel o2) {
+                return o2.getDate().compareTo(o1.getDate());
+            }
+        });
+
+
+    }
+
 
 }

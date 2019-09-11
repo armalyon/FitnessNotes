@@ -33,8 +33,6 @@ public class DBhelper extends SQLiteOpenHelper {
     public static final String KEY_NOTES = "notes";
     public static final String KEY_CATEGORIES = "categories";
 
-    public static final String DATE_FORMAT = "YYYY-MM-dd";
-
     public static final String TYPE_TEXT_COMMA = " text, ";
     public static final String TYPE_TEXT = " text ";
     public static final String TYPE_INTEGER = " integer, ";
@@ -211,24 +209,12 @@ public class DBhelper extends SQLiteOpenHelper {
 
     }
 
-    public boolean isLastSetWasToday(String exercise) {
-
-        Date todayDate = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
-
-        ArrayList<SetOptionsDataModel> setsList = getSetOptionsList(exercise);
-        Collections.sort(setsList, new Comparator<SetOptionsDataModel>() {
-            @Override
-            public int compare(SetOptionsDataModel o1, SetOptionsDataModel o2) {
-                return o2.getDate().compareTo(o1.getDate());
-            }
-        });
-        return sdf.format(todayDate).equals(sdf.format(setsList.get(0)));
-    }
 
     public boolean isSetSetListEmpty(String exercise) {
-        Cursor cursor = db.query(TABLE_SETS_NAME, new String[]{exercise}, null, null, null, null, null);
-        return cursor.getCount() == 0;
+        Cursor cursor = db.query(TABLE_SETS_NAME, new String[]{KEY_NAME}, KEY_NAME + " = ?", new String[]{exercise}, null, null, null);
+        boolean result = cursor.getCount() == 0;
+        cursor.close();
+        return result;
     }
 
 }

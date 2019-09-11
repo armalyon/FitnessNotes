@@ -37,4 +37,15 @@ public class SetOptionsDataModel {
     public String getWeightDistUnits() {
         return weightDistUnits;
     }
+
+    @Override
+    public String toString() {
+        return "SetOptionsDataModel{" +
+                "date=" + date +
+                ", repsOrTime='" + repsOrTime + '\'' +
+                ", weightOrDist='" + weightOrDist + '\'' +
+                ", note='" + note + '\'' +
+                ", weightDistUnits='" + weightDistUnits + '\'' +
+                '}';
+    }
 }
