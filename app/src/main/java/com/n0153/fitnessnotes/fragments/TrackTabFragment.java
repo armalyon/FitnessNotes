@@ -80,7 +80,6 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
         View v = inflater.inflate(R.layout.fragment_track_tab, container, false);
 
 
-
         Log.d(LOG_TAG, "onCreateView, exercise: " + exercise);
         parentLayout = v.findViewById(R.id.saveSetConstraintLayout);
         unitsTextView = v.findViewById(R.id.unitsTextView);
@@ -341,10 +340,10 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
             if (!isLastSetWasToday()) {
 
                 SetOptionsDataModel firstSetOfLastDate = getFirstSetOfLastDate();
-                Log.d(LOG_TAG, firstSetOfLastDate.toString());
+                //Set fields valuse for all types of exercises
+                setFieldsValues(firstSetOfLastDate);
 
-
-// implementation needed
+                // implementation needed
 
 
             }
@@ -396,6 +395,23 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
             }
         });
 
+
+    }
+
+    private void setFieldsValues(SetOptionsDataModel set) {
+        unitsAmountEditText.setText(set.getWeightOrDist());
+        if ((type.equals(getString(R.string.sp_weight_reps)) || type.equals(getString(R.string.sp_reps)))) {
+            amountEditText.setText(set.getRepsOrTime());
+        }
+
+        if ((type.equals(getString(R.string.sp_time))) || type.equals(getString(R.string.sp_dist_time))) {
+            String quantity = set.getRepsOrTime();
+
+            hoursEditText.setText(quantity.substring(0,2));
+            minutesEditText.setText(quantity.substring(3,5));
+            secondsEditText.setText(quantity.substring(6));
+
+        }
 
     }
 

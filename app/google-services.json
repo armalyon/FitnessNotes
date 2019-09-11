@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "54347855211",
+    "firebase_url": "https://fitness-notes.firebaseio.com",
+    "project_id": "fitness-notes",
+    "storage_bucket": "fitness-notes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:54347855211:android:aeaedeca860a486d12882e",
+        "android_client_info": {
+          "package_name": "com.n0153.fitnessnotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "54347855211-8dsg3mpc8an4umaqdpcend8u2dnrco1c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCE5GILBhZ2W0DzvlME7RikXtX7fZu1Fz4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "54347855211-8dsg3mpc8an4umaqdpcend8u2dnrco1c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
