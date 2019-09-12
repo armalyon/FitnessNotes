@@ -254,7 +254,7 @@ public class UpdateSetActivity extends AppCompatActivity implements View.OnClick
         String weightOrDistString = unitsAmountEditText.getText().toString();
 
         String notes = notesEditText.getText().toString();
-        float weightOrDist = 0;
+
         String repsOrTime = "";
 
         if (type.equals(getString(R.string.sp_time)) || type.equals(getString(R.string.sp_dist_time))) {
@@ -322,7 +322,7 @@ public class UpdateSetActivity extends AppCompatActivity implements View.OnClick
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
         params.gravity = Gravity.TOP;
         view.setLayoutParams(params);
-        view.setBackgroundColor(getResources().getColor(R.color.colorActionBar));
+        view.setBackgroundColor(getResources().getColor(R.color.colorUpdateButton));
         snackbar.show();
     }
 
