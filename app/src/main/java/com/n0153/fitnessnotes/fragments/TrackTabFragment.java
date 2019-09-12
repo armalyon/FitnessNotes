@@ -343,10 +343,9 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
                 //Set fields valuse for all types of exercises
                 setFieldsValues(firstSetOfLastDate);
 
-                // implementation needed
-
-
             }
+            else setFieldsValues(setsList.get(0));
+
 
         }
     }
@@ -381,7 +380,6 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
             if (sdf.format(dateOfLastSet).equals(sdf.format(setsList.get(i).getDate()))) {
                 lastDateSets.add(setsList.get(i));
             }
-
         }
 //return the the last element of the list
         return lastDateSets.get(lastDateSets.size() - 1);
@@ -406,11 +404,9 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
 
         if ((type.equals(getString(R.string.sp_time))) || type.equals(getString(R.string.sp_dist_time))) {
             String quantity = set.getRepsOrTime();
-
             hoursEditText.setText(quantity.substring(0,2));
             minutesEditText.setText(quantity.substring(3,5));
             secondsEditText.setText(quantity.substring(6));
-
         }
 
     }
