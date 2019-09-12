@@ -207,7 +207,20 @@ public class UpdateSetActivity extends AppCompatActivity implements View.OnClick
     private void setFieldsValues(){
         SetOptionsDataModel set = dBhelper.getSetByDate(dateLong);
 
-        set.toString();
+        String type = dBhelper.getExeriseType(exercise);
+
+        unitsAmountEditText.setText(set.getWeightOrDist());
+        if ((type.equals(getString(R.string.sp_weight_reps)) || type.equals(getString(R.string.sp_reps)))) {
+            amountEditText.setText(set.getRepsOrTime());
+        }
+
+        if ((type.equals(getString(R.string.sp_time))) || type.equals(getString(R.string.sp_dist_time))) {
+            String quantity = set.getRepsOrTime();
+            hoursEditText.setText(quantity.substring(0,2));
+            minutesEditText.setText(quantity.substring(3,5));
+            secondsEditText.setText(quantity.substring(6));
+        }
+
     }
 
 
