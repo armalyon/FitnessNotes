@@ -6,24 +6,30 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.n0153.fitnessnotes.db_utils.DBhelper;
 import com.n0153.fitnessnotes.db_utils.models.ExOptionsDataModel;
 import com.n0153.fitnessnotes.db_utils.models.SetOptionsDataModel;
 import com.n0153.fitnessnotes.dialogs.ModifySetFragment;
 import com.n0153.fitnessnotes.fragments.HistoryTabFragment;
+
+import java.util.Date;
 
 public class UpdateSetActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -33,7 +39,7 @@ public class UpdateSetActivity extends AppCompatActivity implements View.OnClick
     Button updateBtn, clearBtn;
     View divider11, divider12, divider13, divider14, divider15, divider16;
     LinearLayout setButtonsLayout, unitsAmountLayout, amountLayout, timeFieldsLayout;
-    String exercise;
+    String exercise, type;
     ConstraintLayout parentLayout;
     long dateLong;
     private final String LOG_TAG = "Update set Activity";
@@ -45,13 +51,13 @@ public class UpdateSetActivity extends AppCompatActivity implements View.OnClick
         Intent intent = getIntent();
 
         exercise = intent.getStringExtra(ModifySetFragment.EXERCISE_KEY);
-        dateLong = intent.getLongExtra(ModifySetFragment.EXERCISE_DATE_LONG,0);
+        dateLong = intent.getLongExtra(ModifySetFragment.EXERCISE_DATE_LONG, 0);
 
         dBhelper = new DBhelper(this);
 
+        type = dBhelper.getExeriseType(exercise);
 
         parentLayout = findViewById(R.id.saveSetConstraintLayout);
-
 
         unitsTextView = findViewById(R.id.unitsTextView);
         amountTextView = findViewById(R.id.amountTextView);
@@ -83,7 +89,7 @@ public class UpdateSetActivity extends AppCompatActivity implements View.OnClick
 
         updateBtn.setOnClickListener(this);
 
-      updateBtn.getBackground().setColorFilter(getResources().getColor(R.color.colorUpdateButton), PorterDuff.Mode.SRC);
+        updateBtn.getBackground().setColorFilter(getResources().getColor(R.color.colorUpdateButton), PorterDuff.Mode.SRC);
 
         updateBtn.setText(R.string.item_update);
 
@@ -97,8 +103,6 @@ public class UpdateSetActivity extends AppCompatActivity implements View.OnClick
 
         setFieldsValues();
     }
-
-
 
 
     private void setDividersSize() {
@@ -149,7 +153,6 @@ public class UpdateSetActivity extends AppCompatActivity implements View.OnClick
         Log.d(LOG_TAG, exercise);
         ExOptionsDataModel exOptionsData = dBhelper.getExOptionsData(exercise);
         unitsTextView.setText(exOptionsData.getUnits() + ": ");
-        String type = exOptionsData.getType();
 
         String amountOf = null;
 
@@ -187,13 +190,13 @@ public class UpdateSetActivity extends AppCompatActivity implements View.OnClick
     }
 
     //set visible time input fields and invisible units field
-    private void rearangeTimeFields(){
+    private void rearangeTimeFields() {
         String type = dBhelper.getExeriseType(exercise);
-        if (type.equals(getString(R.string.sp_time))|| type.equals(getString(R.string.sp_dist_time))){
+        if (type.equals(getString(R.string.sp_time)) || type.equals(getString(R.string.sp_dist_time))) {
 
             ConstraintSet constraintSet = new ConstraintSet();
             constraintSet.clone(parentLayout);
-            constraintSet.connect(R.id.layoutTimeFields , ConstraintSet.TOP, R.id.divider13, ConstraintSet.BOTTOM );
+            constraintSet.connect(R.id.layoutTimeFields, ConstraintSet.TOP, R.id.divider13, ConstraintSet.BOTTOM);
 
             constraintSet.applyTo(parentLayout);
             amountLayout.setVisibility(View.INVISIBLE);
@@ -204,7 +207,9 @@ public class UpdateSetActivity extends AppCompatActivity implements View.OnClick
 
     }
 
-    private void setFieldsValues(){
+
+    //get fields values from previous set
+    private void setFieldsValues() {
         SetOptionsDataModel set = dBhelper.getSetByDate(dateLong);
 
         String type = dBhelper.getExeriseType(exercise);
@@ -216,20 +221,110 @@ public class UpdateSetActivity extends AppCompatActivity implements View.OnClick
 
         if ((type.equals(getString(R.string.sp_time))) || type.equals(getString(R.string.sp_dist_time))) {
             String quantity = set.getRepsOrTime();
-            hoursEditText.setText(quantity.substring(0,2));
-            minutesEditText.setText(quantity.substring(3,5));
+            hoursEditText.setText(quantity.substring(0, 2));
+            minutesEditText.setText(quantity.substring(3, 5));
             secondsEditText.setText(quantity.substring(6));
+        }
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.buttonSaveSet:
+                updateSet();
+                break;
+
+            case R.id.buttonClearSet:
+                unitsAmountEditText.setText("");
+                amountEditText.setText("");
+                notesEditText.setText("");
+                hoursEditText.setText("");
+                minutesEditText.setText("");
+                secondsEditText.setText("");
+                break;
+
         }
 
     }
 
 
+    private void updateSet() {
 
-    @Override
-    public void onClick(View v) {
+        String weightOrDistString = unitsAmountEditText.getText().toString();
+
+        String notes = notesEditText.getText().toString();
+        float weightOrDist = 0;
+        String repsOrTime = "";
+
+        if (type.equals(getString(R.string.sp_time)) || type.equals(getString(R.string.sp_dist_time))) {
+            String hh = hoursEditText.getText().toString();
+            if (hh.equals("") || hh.equals("0")) hh = "00";
+            if (hh.length() < 2) hh = "0" + hh;
+            String mm = minutesEditText.getText().toString();
+            if (mm.equals("") || mm.equals("0")) mm = "00";
+            if (mm.length() < 2) mm = "0" + mm;
+            String ss = secondsEditText.getText().toString();
+            if (ss.equals("") || ss.equals("0")) ss = "00";
+            if (ss.length() < 2) ss = "0" + ss;
+
+            repsOrTime = hh + ":" + mm + ":" + ss;
+
+            if (repsOrTime.equals("00:00:00")) {
+                Toast.makeText(this, getString(R.string.toast_please_enter_valid_values),
+                        Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+
+        } else {
+            repsOrTime = amountEditText.getText().toString();
+        }
+
+        //validations for weight/reps and dist/time
+        if (type.equals(getString(R.string.sp_dist_time)) || type.equals(getString(R.string.sp_weight_reps))) {
+            if (weightOrDistString.equals("") || weightOrDistString.equals("0") ||
+                    repsOrTime.equals("") || repsOrTime.equals("0")) {
+
+                Toast.makeText(this, getString(R.string.toast_please_enter_valid_values),
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                dBhelper.updateSet(dateLong, weightOrDistString, repsOrTime, notes);
+                showSnackbar();
+                HistoryTabFragment.getInstance().updateMainList();
+                finish();
+                Log.d(LOG_TAG, " new set updated");
+            }
+        }
+
+        // validations for reps/time
+        if (type.equals(getString(R.string.sp_time)) || type.equals(getString(R.string.sp_reps))) {
+            if (repsOrTime.equals("") || repsOrTime.equals("0")) {
+                Toast.makeText(this, getString(R.string.toast_please_enter_valid_values),
+                        Toast.LENGTH_SHORT).show();
+            } else {
+
+                dBhelper.updateSet(dateLong, weightOrDistString, repsOrTime, notes);
+                showSnackbar();
+                HistoryTabFragment.getInstance().updateMainList();
+                finish();
+                Log.d(LOG_TAG, "  set updated to DB");
+            }
+
+        }
+
 
     }
 
+    private void showSnackbar() {
+        Snackbar snackbar = Snackbar.make(parentLayout, getString(R.string.snackbar_set_updated), Snackbar.LENGTH_SHORT);
+        View view = snackbar.getView();
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
+        params.gravity = Gravity.TOP;
+        view.setLayoutParams(params);
+        view.setBackgroundColor(getResources().getColor(R.color.colorActionBar));
+        snackbar.show();
+    }
 
 
 }

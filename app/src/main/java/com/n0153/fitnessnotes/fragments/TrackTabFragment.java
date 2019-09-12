@@ -208,7 +208,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
 
         //method to hide unnecessary views (dividers and text) if type requires only one value
 
-        String type = dBhelper.getExeriseType(exercise);
+       // String type = dBhelper.getExeriseType(exercise);
         String timeType = getString(R.string.sp_time);
         String repsType = getString(R.string.sp_reps);
 
@@ -235,7 +235,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
 
     private void saveSet() {
 
-        String type = dBhelper.getExeriseType(exercise);
+       // String type = dBhelper.getExeriseType(exercise);
 
         String weightOrDistString = unitsAmountEditText.getText().toString();
 
@@ -294,14 +294,9 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
                 Log.d(LOG_TAG, " new set added to DB");
             }
 
-
         }
 
-        Cursor c = dBhelper.getWritableDatabase().query(DBhelper.TABLE_SETS_NAME, null, null,
-                null, null, null, null);
 
-        Log.d(LOG_TAG, "Set table rows: " + c.getCount());
-        c.close();
     }
 
     //set visible time input fields and invisible units field

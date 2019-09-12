@@ -238,4 +238,13 @@ public class DBhelper extends SQLiteOpenHelper {
         return new SetOptionsDataModel(date,repsOrTime,weightOrDist,note, null);
     }
 
+
+    public void updateSet(long dateLong, String weightOrDist, String repsOrTime, String note ){
+        ContentValues cv = new ContentValues();
+        cv.put(KEY_REPS_TIME, repsOrTime);
+        cv.put(KEY_WEIGHT_DIST, weightOrDist);
+        cv.put(KEY_NOTES, note);
+        db.update(TABLE_SETS_NAME, cv, KEY_DATE + " = ?", new String[]{String.valueOf(dateLong)});
+    }
+
 }
