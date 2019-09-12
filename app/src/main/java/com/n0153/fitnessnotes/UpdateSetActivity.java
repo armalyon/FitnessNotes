@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.n0153.fitnessnotes.db_utils.DBhelper;
 import com.n0153.fitnessnotes.db_utils.models.ExOptionsDataModel;
+import com.n0153.fitnessnotes.db_utils.models.SetOptionsDataModel;
 import com.n0153.fitnessnotes.dialogs.ModifySetFragment;
 import com.n0153.fitnessnotes.fragments.HistoryTabFragment;
 
@@ -34,6 +35,7 @@ public class UpdateSetActivity extends AppCompatActivity implements View.OnClick
     LinearLayout setButtonsLayout, unitsAmountLayout, amountLayout, timeFieldsLayout;
     String exercise;
     ConstraintLayout parentLayout;
+    long dateLong;
     private final String LOG_TAG = "Update set Activity";
 
     @Override
@@ -43,9 +45,10 @@ public class UpdateSetActivity extends AppCompatActivity implements View.OnClick
         Intent intent = getIntent();
 
         exercise = intent.getStringExtra(ModifySetFragment.EXERCISE_KEY);
+        dateLong = intent.getLongExtra(ModifySetFragment.EXERCISE_DATE_LONG,0);
 
         dBhelper = new DBhelper(this);
-        ;
+
 
         parentLayout = findViewById(R.id.saveSetConstraintLayout);
 
@@ -91,6 +94,8 @@ public class UpdateSetActivity extends AppCompatActivity implements View.OnClick
 
         rearangeElements();
         rearangeTimeFields();
+
+        setFieldsValues();
     }
 
 
@@ -197,6 +202,12 @@ public class UpdateSetActivity extends AppCompatActivity implements View.OnClick
 
         }
 
+    }
+
+    private void setFieldsValues(){
+        SetOptionsDataModel set = dBhelper.getSetByDate(dateLong);
+
+        set.toString();
     }
 
 

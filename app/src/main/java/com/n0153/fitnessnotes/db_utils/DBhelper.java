@@ -175,7 +175,7 @@ public class DBhelper extends SQLiteOpenHelper {
         return type;
     }
 
-    public ArrayList<SetOptionsDataModel> getSetOptionsList(String exerciseName) {
+    public ArrayList<SetOptionsDataModel> getSetOptionsSortedList(String exerciseName) {
         Cursor cursor = db.query(TABLE_SETS_NAME, new String[]{KEY_DATE, KEY_WEIGHT_DIST, KEY_REPS_TIME, KEY_NOTES},
                 KEY_NAME + " = ?", new String[]{exerciseName}, null, null, null);
         Cursor cursor1 = db.query(TABLE_EXERISES_NAME, new String[]{KEY_UNITS}, KEY_NAME + " = ?",
@@ -200,7 +200,16 @@ public class DBhelper extends SQLiteOpenHelper {
         }
 
         Log.d(LOG_TAG, " setOpionsList  size = " + list.size());
+
         cursor.close();
+
+        //sort by date newes irst
+        Collections.sort(list, new Comparator<SetOptionsDataModel>() {
+            @Override
+            public int compare(SetOptionsDataModel o1, SetOptionsDataModel o2) {
+                return o2.getDate().compareTo(o1.getDate());
+            }
+        });
         return list;
     }
 
@@ -215,6 +224,18 @@ public class DBhelper extends SQLiteOpenHelper {
         boolean result = cursor.getCount() == 0;
         cursor.close();
         return result;
+    }
+
+    public SetOptionsDataModel getSetByDate(long dateLong){
+        Cursor cursor = db.query(TABLE_SETS_NAME, new String[]{KEY_DATE, KEY_WEIGHT_DIST, KEY_REPS_TIME, KEY_NOTES},
+        KEY_DATE + " = ?", new String[] {String.valueOf(dateLong)}, null, null, null);
+        cursor.moveToFirst();
+        Date date = new Date(cursor.getLong(cursor.getColumnIndex(KEY_DATE)));
+        String weightOrDist = cursor.getString(cursor.getColumnIndex(KEY_WEIGHT_DIST));
+        String repsOrTime = cursor.getString(cursor.getColumnIndex(KEY_REPS_TIME));
+        String note = cursor.getString(cursor.getColumnIndex(KEY_NOTES));
+
+        return new SetOptionsDataModel(date,repsOrTime,weightOrDist,note, null);
     }
 
 }

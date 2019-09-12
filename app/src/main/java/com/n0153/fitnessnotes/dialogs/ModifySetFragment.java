@@ -25,6 +25,8 @@ public class ModifySetFragment extends DialogFragment implements View.OnClickLis
 
     private String exercise;
     public static final String EXERCISE_KEY = "exercise";
+    public static final String EXERCISE_DATE_LONG = "date long";
+
 
     //date of set for search in DB
     private long longdate;
@@ -66,6 +68,7 @@ public class ModifySetFragment extends DialogFragment implements View.OnClickLis
             case R.id.buttonModifyUpdate:
                 Intent intent = new Intent(getContext(), UpdateSetActivity.class);
                 intent.putExtra(EXERCISE_KEY, exercise);
+                intent.putExtra(EXERCISE_DATE_LONG, longdate);
                 startActivity(intent);
 
 

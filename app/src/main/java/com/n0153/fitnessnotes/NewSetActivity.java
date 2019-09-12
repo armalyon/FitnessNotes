@@ -3,7 +3,6 @@ package com.n0153.fitnessnotes;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,7 +29,7 @@ public class NewSetActivity extends AppCompatActivity {
         Log.d(LOG_TAG, "onCreate started");
 
         Intent intent = getIntent();
-        label = intent.getStringExtra(ActivityExercises.EXERCISE_EXTRA);
+        label = intent.getStringExtra(ExercisesActivity.EXERCISE_EXTRA);
         setTitle(label);
 
         viewPager = findViewById(R.id.container);

@@ -67,10 +67,10 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
         dBhelper = new DBhelper(getContext());
         exercise = ((NewSetActivity) getActivity()).getLabel();
         type = dBhelper.getExeriseType(exercise);
-        setsList = dBhelper.getSetOptionsList(exercise);
 
-        //sorting by date from the newest
-        sortSetsListNewestFirst();
+        //the list is sorted by date, newest first
+        setsList = dBhelper.getSetOptionsSortedList(exercise);
+
 
     }
 
@@ -385,16 +385,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
         return lastDateSets.get(lastDateSets.size() - 1);
     }
 
-    private void sortSetsListNewestFirst() {
-        Collections.sort(setsList, new Comparator<SetOptionsDataModel>() {
-            @Override
-            public int compare(SetOptionsDataModel o1, SetOptionsDataModel o2) {
-                return o2.getDate().compareTo(o1.getDate());
-            }
-        });
 
-
-    }
 
     private void setFieldsValues(SetOptionsDataModel set) {
         unitsAmountEditText.setText(set.getWeightOrDist());

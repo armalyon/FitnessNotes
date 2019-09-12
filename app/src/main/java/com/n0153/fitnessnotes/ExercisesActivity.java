@@ -12,7 +12,7 @@ import com.n0153.fitnessnotes.db_utils.DBhelper;
 
 import java.util.List;
 
-public class ActivityExercises extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class ExercisesActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     public final static String EXERCISE_EXTRA = "Exercise";
 

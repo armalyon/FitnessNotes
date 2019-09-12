@@ -85,7 +85,7 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String selectedCategory  =  (String)parent.getItemAtPosition(position);
-        Intent intent = new Intent(this, ActivityExercises.class);
+        Intent intent = new Intent(this, ExercisesActivity.class);
         intent.putExtra(CATEGORY_EXTRA, selectedCategory);
         startActivity(intent);
 
