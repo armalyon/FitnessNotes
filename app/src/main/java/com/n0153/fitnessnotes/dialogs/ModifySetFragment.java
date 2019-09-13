@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import com.n0153.fitnessnotes.R;
 import com.n0153.fitnessnotes.UpdateSetActivity;
+import com.n0153.fitnessnotes.ViewWorkoutActivity;
 import com.n0153.fitnessnotes.adapters.CardRecyclerAdapter;
 import com.n0153.fitnessnotes.db_utils.DBhelper;
 import com.n0153.fitnessnotes.fragments.HistoryTabFragment;
@@ -23,9 +24,11 @@ public class ModifySetFragment extends DialogFragment implements View.OnClickLis
     private DBhelper dBhelper;
 
 
+
     private String exercise;
     public static final String EXERCISE_KEY = "exercise";
-    public static final String EXERCISE_DATE_LONG = "date long";
+    public static final String EXERCISE_DATE_LONG_KEY1 = "date long 1";
+    public static final String EXERCISE_DATE_LONG_KEY2 = "date long 2";
 
 
     //date of set for search in DB
@@ -68,12 +71,15 @@ public class ModifySetFragment extends DialogFragment implements View.OnClickLis
             case R.id.buttonModifyUpdate:
                 Intent intent = new Intent(getContext(), UpdateSetActivity.class);
                 intent.putExtra(EXERCISE_KEY, exercise);
-                intent.putExtra(EXERCISE_DATE_LONG, longdate);
+                intent.putExtra(EXERCISE_DATE_LONG_KEY1, longdate);
                 startActivity(intent);
-
-
                 dismiss();
                 break;
+            case R.id.buttonViewWorkout:
+                Intent intent1 = new Intent(getContext(), ViewWorkoutActivity.class);
+                intent1.putExtra(EXERCISE_DATE_LONG_KEY2, longdate);
+                startActivity(intent1);
+
         }
 
 

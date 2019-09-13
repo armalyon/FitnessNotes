@@ -1,13 +1,10 @@
 package com.n0153.fitnessnotes;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -29,8 +26,6 @@ import com.n0153.fitnessnotes.db_utils.models.SetOptionsDataModel;
 import com.n0153.fitnessnotes.dialogs.ModifySetFragment;
 import com.n0153.fitnessnotes.fragments.HistoryTabFragment;
 
-import java.util.Date;
-
 public class UpdateSetActivity extends AppCompatActivity implements View.OnClickListener {
 
     private DBhelper dBhelper;
@@ -51,7 +46,7 @@ public class UpdateSetActivity extends AppCompatActivity implements View.OnClick
         Intent intent = getIntent();
 
         exercise = intent.getStringExtra(ModifySetFragment.EXERCISE_KEY);
-        dateLong = intent.getLongExtra(ModifySetFragment.EXERCISE_DATE_LONG, 0);
+        dateLong = intent.getLongExtra(ModifySetFragment.EXERCISE_DATE_LONG_KEY1, 0);
 
         dBhelper = new DBhelper(this);
 

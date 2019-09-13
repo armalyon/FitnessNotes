@@ -30,7 +30,6 @@
     <string name="item_update" translatable="false">Update</string>
 
 
-
     <string name="toast_new_category">New category: </string>
     <string name="toast_created">created</string>
     <string name="toast_please_enter_category" translatable="false">Please enter category name</string>

@@ -32,15 +32,15 @@
             android:name=".ExercisesActivity"
             android:label="@string/title_activity_exercises"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".UpdateSetActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_update_set"/>
-
+            android:label="@string/title_update_set"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".NewSetActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".ViewWorkoutActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
