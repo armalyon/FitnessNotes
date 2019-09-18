@@ -1,58 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/historyCard"
+        android:id="@+id/woCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/card_left_margin"
         android:layout_marginTop="15dp"
         android:layout_marginRight="@dimen/card_left_margin"
         android:layout_marginBottom="15dp"
+        android:longClickable="true"
+        android:minHeight="50dp"
         app:cardBackgroundColor="@color/colorCards"
         app:cardCornerRadius="@dimen/card_corner_radius"
         app:cardElevation="15dp"
-        app:cardPreventCornerOverlap="true"
-        android:minHeight="50dp"
-        android:longClickable="true">
-
+        app:cardPreventCornerOverlap="true">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/divider_margin"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textViewDate"
+                android:id="@+id/woExerciseName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/card_corner_radius"
-                android:layout_marginRight="@dimen/card_corner_radius"
-                android:text="Date"
+                android:gravity="center"
+                android:text="Exersice name goes here"
+                android:textAlignment="gravity"
                 android:textSize="@dimen/header_cards_size" />
 
             <View
-                android:id="@+id/divider21"
+                android:id="@+id/divider51"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/card_divider_height"
+
                 android:background="@color/colorActionBar" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/setsListView"
+                android:id="@+id/woCardRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent">
+
+            </android.support.v7.widget.RecyclerView>
 
             <View
-                android:id="@+id/divider22"
-                android:layout_width="match_parent"
+                android:id="@+id/divider52"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/card_divider_height"
-                android:layout_marginBottom="@dimen/card_corner_radius"
+
                 android:background="@color/colorActionBar" />
+
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
