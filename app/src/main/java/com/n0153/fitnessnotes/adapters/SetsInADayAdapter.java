@@ -59,6 +59,7 @@ public class SetsInADayAdapter extends BaseAdapter {
                     else {
                         exercisesList.add(cardList);
                         cardList = new ArrayList<>();
+                        cardList.add(setsList.get(i));
                     }
                 }
             }
