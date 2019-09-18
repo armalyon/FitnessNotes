@@ -194,7 +194,7 @@ public class DBhelper extends SQLiteOpenHelper {
                 String weightOrDist = cursor.getString(cursor.getColumnIndex(KEY_WEIGHT_DIST));
                 String repsOrTime = cursor.getString(cursor.getColumnIndex(KEY_REPS_TIME));
                 String note = cursor.getString(cursor.getColumnIndex(KEY_NOTES));
-                list.add(new SetOptionsDataModel(date, repsOrTime, weightOrDist, note, units));
+                list.add(new SetOptionsDataModel(null, date, repsOrTime, weightOrDist, note, units));
             } while (cursor.moveToNext());
 
         }
@@ -235,7 +235,7 @@ public class DBhelper extends SQLiteOpenHelper {
         String repsOrTime = cursor.getString(cursor.getColumnIndex(KEY_REPS_TIME));
         String note = cursor.getString(cursor.getColumnIndex(KEY_NOTES));
 
-        return new SetOptionsDataModel(date, repsOrTime, weightOrDist, note, null);
+        return new SetOptionsDataModel(null, date, repsOrTime, weightOrDist, note, null);
     }
 
 
@@ -252,18 +252,19 @@ public class DBhelper extends SQLiteOpenHelper {
     //get sets for particular day
     public ArrayList<SetOptionsDataModel> getSetsByDay(long day) {
         long endOfDay = day + 86400000;
-        Cursor cursor = db.query(TABLE_SETS_NAME, new String[]{KEY_DATE, KEY_WEIGHT_DIST, KEY_REPS_TIME, KEY_NOTES, KEY_UNITS}, KEY_DATE + " >= ?" + " AND " + KEY_DATE + " < ?",
+        Cursor cursor = db.query(TABLE_SETS_NAME, new String[]{KEY_NAME, KEY_DATE, KEY_WEIGHT_DIST, KEY_REPS_TIME, KEY_NOTES, KEY_UNITS}, KEY_DATE + " >= ?" + " AND " + KEY_DATE + " < ?",
                 new String[]{String.valueOf(day), String.valueOf(endOfDay)}, null, null, null);
         ArrayList<SetOptionsDataModel> list = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
             do {
+                String name = cursor.getString(cursor.getColumnIndex(KEY_NAME));
                 Date date = new Date(cursor.getLong(cursor.getColumnIndex(KEY_DATE)));
                 String weightOrDist = cursor.getString(cursor.getColumnIndex(KEY_WEIGHT_DIST));
                 String repsOrTime = cursor.getString(cursor.getColumnIndex(KEY_REPS_TIME));
                 String note = cursor.getString(cursor.getColumnIndex(KEY_NOTES));
                 String units = cursor.getString(cursor.getColumnIndex(KEY_UNITS));
-                list.add(new SetOptionsDataModel(date, repsOrTime, weightOrDist, note, units));
+                list.add(new SetOptionsDataModel(name, date, repsOrTime, weightOrDist, note, units));
             } while (cursor.moveToNext());
 
         }

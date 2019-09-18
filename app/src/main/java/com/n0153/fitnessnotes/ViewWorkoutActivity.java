@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.n0153.fitnessnotes.dialogs.ModifySetFragment;
-import com.n0153.fitnessnotes.fragments.WorkoutFragment;
+
 
 
 
