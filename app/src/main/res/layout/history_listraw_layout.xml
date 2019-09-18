@@ -33,7 +33,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/card_corner_radius"
                 android:layout_marginRight="@dimen/card_corner_radius"
-                android:text="Date"
+                android:text="Date/ExName"
+                android:textAlignment="center"
                 android:textSize="@dimen/header_cards_size" />
 
             <View

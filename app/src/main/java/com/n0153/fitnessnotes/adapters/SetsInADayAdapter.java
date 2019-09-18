@@ -1,10 +1,13 @@
 package com.n0153.fitnessnotes.adapters;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
+import com.n0153.fitnessnotes.R;
 import com.n0153.fitnessnotes.db_utils.models.SetOptionsDataModel;
 
 import java.util.ArrayList;
@@ -14,11 +17,13 @@ public class SetsInADayAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<SetOptionsDataModel> setsList;
     private ArrayList<ArrayList<SetOptionsDataModel>> exerciseSetsList;
+    private LayoutInflater layoutInflater;
 
     public SetsInADayAdapter(Context context, ArrayList<SetOptionsDataModel> setsList) {
         this.context = context;
         this.setsList = setsList;
         exerciseSetsList = getExerciseSetsList();
+        layoutInflater = LayoutInflater.from(context);
     }
 
     @Override
@@ -38,7 +43,14 @@ public class SetsInADayAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+        View view = convertView;
+        if (view == null) {
+            view = layoutInflater.inflate(R.layout.history_listraw_layout, parent, false);
+        }
+        String exerciseName = exerciseSetsList.get(position).get(0).getName();
+        ((TextView) view.findViewById(R.id.textViewDate)).setText(exerciseName);
+
+        return view;
     }
 
 

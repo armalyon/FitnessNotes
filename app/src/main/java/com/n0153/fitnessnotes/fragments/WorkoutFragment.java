@@ -4,14 +4,15 @@ package com.n0153.fitnessnotes.fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.n0153.fitnessnotes.R;
 import com.n0153.fitnessnotes.ViewWorkoutActivity;
+import com.n0153.fitnessnotes.adapters.SetsInADayAdapter;
 import com.n0153.fitnessnotes.db_utils.DBhelper;
 import com.n0153.fitnessnotes.db_utils.models.SetOptionsDataModel;
 
@@ -27,6 +28,7 @@ public class WorkoutFragment extends Fragment {
 
     TextView headerTextView;
     DBhelper dBhelper;
+    ListView mainListView;
     String LOG_TAG = "Workout Fragment";
 
 
@@ -52,6 +54,7 @@ public class WorkoutFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_workout, container, false);
 
         headerTextView = v.findViewById(R.id.woFragmentHeader);
+        mainListView = v.findViewById(R.id.woFragmentListview);
 
         return v;
     }
@@ -73,6 +76,7 @@ public class WorkoutFragment extends Fragment {
 
     private void updateMainListView(){
         ArrayList<SetOptionsDataModel> setsInADaylist = dBhelper.getSetsByDay(dateLong);
-
+        SetsInADayAdapter adapter = new SetsInADayAdapter(getContext(), setsInADaylist);
+        mainListView.setAdapter(adapter);
     }
 }
