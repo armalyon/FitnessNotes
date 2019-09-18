@@ -8,6 +8,7 @@
 
     <string name="title_categories" translatable="false">Categories</string>
     <string name="title_add_ex" translatable="false">Add Exercise</string>
+    <string name="title_workout" translatable="false">Workout</string>
 
     <string name="field_name" translatable="false">Name:</string>
     <string name="field_category" translatable="false">Category:</string>
