@@ -10,6 +10,7 @@ import android.util.Log;
 import com.n0153.fitnessnotes.db_utils.models.ExOptionsDataModel;
 import com.n0153.fitnessnotes.db_utils.models.SetOptionsDataModel;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -250,24 +251,37 @@ public class DBhelper extends SQLiteOpenHelper {
 
 
     //get sets for particular day
-    public ArrayList<SetOptionsDataModel> getSetsByDay(long day) {
+    public ArrayList<SetOptionsDataModel> getSetsByDay(long date) {
+        Date dateThis = new Date(date);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = sdf.format(dateThis);
+        long day = 0;
+        try {
+            day = sdf.parse(dateString).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         long endOfDay = day + 86400000;
-        Cursor cursor = db.query(TABLE_SETS_NAME, new String[]{KEY_NAME, KEY_DATE, KEY_WEIGHT_DIST, KEY_REPS_TIME, KEY_NOTES, KEY_UNITS}, KEY_DATE + " >= ?" + " AND " + KEY_DATE + " < ?",
+        Cursor cursor = db.query(TABLE_SETS_NAME, new String[]{KEY_NAME, KEY_DATE, KEY_WEIGHT_DIST, KEY_REPS_TIME, KEY_NOTES}, KEY_DATE + " >= ?" + " AND " + KEY_DATE + " < ?",
                 new String[]{String.valueOf(day), String.valueOf(endOfDay)}, null, null, null);
         ArrayList<SetOptionsDataModel> list = new ArrayList<>();
+
+        Log.d(LOG_TAG, "setsByDay size: " + cursor.getCount());
 
         if (cursor.moveToFirst()) {
             do {
                 String name = cursor.getString(cursor.getColumnIndex(KEY_NAME));
-                Date date = new Date(cursor.getLong(cursor.getColumnIndex(KEY_DATE)));
+                Date dateOutput = new Date(cursor.getLong(cursor.getColumnIndex(KEY_DATE)));
                 String weightOrDist = cursor.getString(cursor.getColumnIndex(KEY_WEIGHT_DIST));
                 String repsOrTime = cursor.getString(cursor.getColumnIndex(KEY_REPS_TIME));
                 String note = cursor.getString(cursor.getColumnIndex(KEY_NOTES));
-                String units = cursor.getString(cursor.getColumnIndex(KEY_UNITS));
-                list.add(new SetOptionsDataModel(name, date, repsOrTime, weightOrDist, note, units));
+               // String units = cursor.getString(cursor.getColumnIndex(KEY_UNITS));
+                list.add(new SetOptionsDataModel(name, dateOutput, repsOrTime, weightOrDist, note, null));
             } while (cursor.moveToNext());
 
         }
+
 
         //sort list by date newes first
         Collections.sort(list, new Comparator<SetOptionsDataModel>() {
@@ -277,7 +291,7 @@ public class DBhelper extends SQLiteOpenHelper {
             }
         });
 
-
+        cursor.close();
         return list;
     }
 

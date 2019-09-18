@@ -16,8 +16,7 @@ import com.n0153.fitnessnotes.db_utils.models.SetDataModel;
 import com.n0153.fitnessnotes.dialogs.ModifySetFragment;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+
 
 public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapter.CardViewHolder> {
 

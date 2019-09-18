@@ -24,7 +24,6 @@ public class ModifySetFragment extends DialogFragment implements View.OnClickLis
     private DBhelper dBhelper;
 
 
-
     private String exercise;
     public static final String EXERCISE_KEY = "exercise";
     public static final String EXERCISE_DATE_LONG_KEY1 = "date long 1";
@@ -33,7 +32,6 @@ public class ModifySetFragment extends DialogFragment implements View.OnClickLis
 
     //date of set for search in DB
     private long longdate;
-
 
 
     @Override
@@ -79,7 +77,7 @@ public class ModifySetFragment extends DialogFragment implements View.OnClickLis
                 Intent intent1 = new Intent(getContext(), ViewWorkoutActivity.class);
                 intent1.putExtra(EXERCISE_DATE_LONG_KEY2, longdate);
                 startActivity(intent1);
-
+                dismiss();
         }
 
 
