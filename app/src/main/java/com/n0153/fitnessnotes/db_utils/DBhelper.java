@@ -179,14 +179,10 @@ public class DBhelper extends SQLiteOpenHelper {
     public ArrayList<SetOptionsDataModel> getSetOptionsSortedList(String exerciseName) {
         Cursor cursor = db.query(TABLE_SETS_NAME, new String[]{KEY_DATE, KEY_WEIGHT_DIST, KEY_REPS_TIME, KEY_NOTES},
                 KEY_NAME + " = ?", new String[]{exerciseName}, null, null, null);
-        Cursor cursor1 = db.query(TABLE_EXERISES_NAME, new String[]{KEY_UNITS}, KEY_NAME + " = ?",
-                new String[]{exerciseName}, null, null, null);
 
         ArrayList<SetOptionsDataModel> list = new ArrayList<>();
 
-        cursor1.moveToFirst();
-        String units = cursor1.getString(cursor1.getColumnIndex(KEY_UNITS));
-        cursor1.close();
+        String units = getExerciseUnits(exerciseName);
 
         if (cursor.moveToFirst()) {
             do {
@@ -276,12 +272,11 @@ public class DBhelper extends SQLiteOpenHelper {
                 String weightOrDist = cursor.getString(cursor.getColumnIndex(KEY_WEIGHT_DIST));
                 String repsOrTime = cursor.getString(cursor.getColumnIndex(KEY_REPS_TIME));
                 String note = cursor.getString(cursor.getColumnIndex(KEY_NOTES));
-               // String units = cursor.getString(cursor.getColumnIndex(KEY_UNITS));
-                list.add(new SetOptionsDataModel(name, dateOutput, repsOrTime, weightOrDist, note, null));
+                String units = getExerciseUnits(name);
+                list.add(new SetOptionsDataModel(name, dateOutput, repsOrTime, weightOrDist, note, units));
             } while (cursor.moveToNext());
 
         }
-
 
         //sort list by date newes first
         Collections.sort(list, new Comparator<SetOptionsDataModel>() {
@@ -293,6 +288,17 @@ public class DBhelper extends SQLiteOpenHelper {
 
         cursor.close();
         return list;
+    }
+
+    private String getExerciseUnits(String exerciseName){
+        Cursor cursor = db.query(TABLE_EXERISES_NAME, new String[]{KEY_UNITS}, KEY_NAME + " = ?",
+                new String[]{exerciseName}, null, null, null);
+
+        cursor.moveToFirst();
+        String units = cursor.getString(cursor.getColumnIndex(KEY_UNITS));
+        cursor.close();
+        return units;
+
     }
 
 }
