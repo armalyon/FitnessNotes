@@ -26,7 +26,6 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
     private static OnSetItemClickListener clickListener;
     private ItemClickListener itemClickListener;
     private ModifySetFragment modifySetFragment;
-    private String exercise;
 
     public final static String KEY_LONG_DATE = "long_key";
     public final static String KEY_EXERCISE = "exercise_key";
@@ -38,11 +37,10 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
         return itemClickListener;
     }
 
-    public CardRecyclerAdapter(Context context, ArrayList<SetDataModel> setsList, String exercise) {
+    public CardRecyclerAdapter(Context context, ArrayList<SetDataModel> setsList) {
         inflater = LayoutInflater.from(context);
         this.context = context;
         this.setsList = setsList;
-        this.exercise = exercise;
         itemClickListener = new ItemClickListener();
 
     }
@@ -109,6 +107,7 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
 
             // Create dialog to modify set and send date into it via Bundle
             modifySetFragment = new ModifySetFragment();
+            String exercise = setsList.get(position).getExerciseName();
             Bundle args = new Bundle();
             args.putLong(KEY_LONG_DATE, dateLong);
             args.putString(KEY_EXERCISE, exercise);

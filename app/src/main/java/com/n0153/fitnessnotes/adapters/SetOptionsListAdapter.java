@@ -24,8 +24,8 @@ import java.util.Set;
 public class SetOptionsListAdapter extends BaseAdapter {
 
     private Context context;
-    private String datePattern = "EEE, YYYY-MM-dd";
-    private String timePattern = "HH:mm:ss";
+    public static final String DATE_PATTERN = "EEE, YYYY-MM-dd";
+    public static final String TIME_PATTERN = "HH:mm:ss";
     private ArrayList<SetOptionsDataModel> setsList;
     private ArrayList<Date> datesList;
     private LayoutInflater layoutInflater;
@@ -35,7 +35,7 @@ public class SetOptionsListAdapter extends BaseAdapter {
 
 
     public SetOptionsListAdapter(Context context, ArrayList<SetOptionsDataModel> setsList, String type, String exercise) {
-        dateFormat = new SimpleDateFormat(datePattern);
+        dateFormat = new SimpleDateFormat(DATE_PATTERN);
         this.context = context;
         this.setsList = setsList;
         datesList = getDatesList();
@@ -124,14 +124,14 @@ public class SetOptionsListAdapter extends BaseAdapter {
                 int pos = setsInADayList.size() + 1;
 
                 String stringItem = getSetString(pos, setsList.get(i));
-                setsInADayList.add(new SetDataModel(stringItem, date));
+                setsInADayList.add(new SetDataModel(exercise, stringItem, date));
             }
 
         }
         LinearLayoutManager llm = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(llm);
 
-        CardRecyclerAdapter adapter = new CardRecyclerAdapter(context, setsInADayList, exercise);
+        CardRecyclerAdapter adapter = new CardRecyclerAdapter(context, setsInADayList);
         adapter.setOnItemClickListener(adapter.getItemClickListener());
         recyclerView.setAdapter(adapter);
 
@@ -143,7 +143,7 @@ public class SetOptionsListAdapter extends BaseAdapter {
     private String getSetString(int position, SetOptionsDataModel setOptionsData) {
         String result = position + ". ";
         String repsTime = "";
-        SimpleDateFormat timeFormet = new SimpleDateFormat(timePattern);
+        SimpleDateFormat timeFormet = new SimpleDateFormat(TIME_PATTERN);
         String time = timeFormet.format(setOptionsData.getDate());
 
         if (type.equals(context.getString(R.string.sp_weight_reps)) || type.equals(context.getString(R.string.sp_reps)))

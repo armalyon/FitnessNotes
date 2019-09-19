@@ -10,15 +10,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/card_left_margin"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="@dimen/card_left_margin"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="5dp"
+        android:longClickable="true"
+        android:minHeight="50dp"
         app:cardBackgroundColor="@color/colorCards"
         app:cardCornerRadius="@dimen/card_corner_radius"
         app:cardElevation="15dp"
-        app:cardPreventCornerOverlap="true"
-        android:minHeight="50dp"
-        android:longClickable="true">
+        app:cardPreventCornerOverlap="true">
 
 
         <LinearLayout
@@ -51,8 +51,8 @@
             <View
                 android:id="@+id/divider22"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/card_divider_height"
-                android:layout_marginBottom="@dimen/card_corner_radius"
+                android:layout_height="@dimen/card_lower_divider_height"
+                android:layout_marginBottom="15dp"
                 android:background="@color/colorActionBar" />
 
         </LinearLayout>

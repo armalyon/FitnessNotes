@@ -6,10 +6,12 @@ public class SetDataModel {
 
     private String setText;
     private Date date;
+    private String exerciseName;
 
-    public SetDataModel(String setText, Date date) {
+    public SetDataModel(String exerciseName, String setText, Date date) {
         this.setText = setText;
         this.date = date;
+        this.exerciseName = exerciseName;
     }
 
     public String getSetText() {
@@ -18,5 +20,9 @@ public class SetDataModel {
 
     public Date getDate() {
         return date;
+    }
+
+    public String getExerciseName() {
+        return exerciseName;
     }
 }
