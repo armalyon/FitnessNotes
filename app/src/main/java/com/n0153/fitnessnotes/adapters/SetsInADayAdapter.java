@@ -1,6 +1,7 @@
 package com.n0153.fitnessnotes.adapters;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,19 +50,22 @@ public class SetsInADayAdapter extends BaseAdapter {
         }
         String exerciseName = exerciseSetsList.get(position).get(0).getName();
         ((TextView) view.findViewById(R.id.textViewDate)).setText(exerciseName);
+        RecyclerView recyclerView = view.findViewById(R.id.setsListView);
+
+        setRecyclerView();
 
         return view;
     }
 
 
-//method to get list of sets for particular exercise
+//method to get list of sets for particular exercises
 
     private ArrayList<ArrayList<SetOptionsDataModel>> getExerciseSetsList() {
         ArrayList<ArrayList<SetOptionsDataModel>> exercisesList = new ArrayList<>();
         int n = setsList.size();
         if (n > 0) {
             //list for each exercise card
-            if (n==1){exercisesList.add(setsList);}
+            if (n<=1){exercisesList.add(setsList);}
             else {
                 ArrayList<SetOptionsDataModel> cardList = new ArrayList<>();
                 cardList.add(setsList.get(0));
@@ -79,6 +83,11 @@ public class SetsInADayAdapter extends BaseAdapter {
 
 
         return exercisesList;
+    }
+
+    private void setRecyclerView(){
+
+
     }
 
 }
