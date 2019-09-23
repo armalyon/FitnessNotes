@@ -3,6 +3,7 @@ package com.n0153.fitnessnotes.adapters;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ public class SetsInADayAdapter extends BaseAdapter {
     private ArrayList<SetOptionsDataModel> setsList;
     private ArrayList<ArrayList<SetOptionsDataModel>> exerciseSetsList;
     private LayoutInflater layoutInflater;
+    private final String LOG_TAG = "Sets in a day adapter";
 
     public SetsInADayAdapter(Context context, ArrayList<SetOptionsDataModel> setsList) {
         this.context = context;
@@ -67,22 +69,29 @@ public class SetsInADayAdapter extends BaseAdapter {
     private ArrayList<ArrayList<SetOptionsDataModel>> getExerciseSetsList() {
         ArrayList<ArrayList<SetOptionsDataModel>> exercisesList = new ArrayList<>();
         int n = setsList.size();
+
         if (n > 0) {
-            //list for each exercise card
+            //list for each exercise car
             if (n <= 1) {
+
                 exercisesList.add(setsList);
             } else {
+
                 ArrayList<SetOptionsDataModel> cardList = new ArrayList<>();
                 cardList.add(setsList.get(0));
+
                 for (int i = 1; i < n; i++) {
+
                     if (setsList.get(i).getName().equals(cardList.get(0).getName()))
                         cardList.add(setsList.get(i));
                     else {
+
                         exercisesList.add(cardList);
                         cardList = new ArrayList<>();
                         cardList.add(setsList.get(i));
                     }
                 }
+                exercisesList.add(cardList);
             }
         }
 

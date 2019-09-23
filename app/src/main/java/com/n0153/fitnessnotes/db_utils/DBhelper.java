@@ -291,11 +291,11 @@ public class DBhelper extends SQLiteOpenHelper {
 
         }
 
-        //sort list by date newes first
+        //sort list by date newest first
         Collections.sort(list, new Comparator<SetOptionsDataModel>() {
             @Override
             public int compare(SetOptionsDataModel o1, SetOptionsDataModel o2) {
-                return o2.getDate().compareTo(o1.getDate());
+                return o1.getDate().compareTo(o2.getDate());
             }
         });
 
