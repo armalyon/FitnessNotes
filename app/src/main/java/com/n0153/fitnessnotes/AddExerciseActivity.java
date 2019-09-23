@@ -118,17 +118,7 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
 
     public void updateSpinner() {
 
-        Cursor cursor = dBhelper.getCategories();
-        List<String> categoriesList = new ArrayList<>();
-        categoriesList.add(getString(R.string.sp_please_select));
-        if (cursor.moveToFirst()) {
-            do {
-                int index = cursor.getColumnIndex(DBhelper.KEY_CATEGORIES);
-                categoriesList.add(cursor.getString(index));
-
-            } while (cursor.moveToNext());
-            cursor.close();
-        }
+        List<String> categoriesList = dBhelper.getCategories();
         ArrayAdapter<String> adapter =
                 new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categoriesList);
 

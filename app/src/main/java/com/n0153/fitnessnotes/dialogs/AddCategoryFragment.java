@@ -78,19 +78,8 @@ public class AddCategoryFragment extends DialogFragment implements View.OnClickL
 
         //get categories values
 
-        List<String> categoriesList = new ArrayList<>();
 
-        //get put categories to the list/**/
-        Cursor cursor = dBhelper.getCategories();
-        if (cursor != null) {
-            if (cursor.moveToFirst()) {
-                do {
-                    int categoryIndex = cursor.getColumnIndex(DBhelper.KEY_CATEGORIES);
-                    categoriesList.add(cursor.getString(categoryIndex));
-                } while (cursor.moveToNext());
-            }
-            cursor.close();
-        }
+       ArrayList<String> categoriesList = dBhelper.getCategories();
 
 
         //check if the category was not added before

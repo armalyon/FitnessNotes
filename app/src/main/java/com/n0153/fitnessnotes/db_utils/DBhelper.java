@@ -83,10 +83,23 @@ public class DBhelper extends SQLiteOpenHelper {
 
     }
 
-    public Cursor getCategories() {
+    public ArrayList<String> getCategories() {
 
         String[] column = new String[]{KEY_CATEGORIES};
-        return db.query(TABLE_CATEGORIES_NAME, column, null, null, null, null, null);
+        Cursor cursor = db.query(TABLE_CATEGORIES_NAME, column, null, null, null, null, null);
+        ArrayList<String> categoriesList = new ArrayList<>();
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    int categoryIndex = cursor.getColumnIndex(DBhelper.KEY_CATEGORIES);
+                    categoriesList.add(cursor.getString(categoryIndex));
+                } while (cursor.moveToNext());
+            }
+
+        }
+        cursor.close();
+
+        return categoriesList;
     }
 
 

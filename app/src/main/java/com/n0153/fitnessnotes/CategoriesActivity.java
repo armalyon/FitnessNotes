@@ -63,16 +63,8 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
 
 
     private void updateList() {
-        Cursor cursor = dBhelper.getCategories();
-        List<String> categoriesList = new ArrayList<>();
-        if (cursor.moveToFirst()) {
-            do {
-                int index = cursor.getColumnIndex(DBhelper.KEY_CATEGORIES);
-                categoriesList.add(cursor.getString(index));
 
-            } while (cursor.moveToNext());
-            cursor.close();
-        }
+        List<String> categoriesList = dBhelper.getCategories();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 R.layout.listraw_layout, R.id.textView2, categoriesList);
