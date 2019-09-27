@@ -286,7 +286,7 @@ public class UpdateSetActivity extends AppCompatActivity implements View.OnClick
             } else {
                 dBhelper.updateSet(dateLong, weightOrDistString, repsOrTime, notes);
                 showSnackbar();
-                HistoryTabFragment.getInstance().updateMainList();
+
                 finish();
                 Log.d(LOG_TAG, " new set updated");
             }
@@ -301,7 +301,8 @@ public class UpdateSetActivity extends AppCompatActivity implements View.OnClick
 
                 dBhelper.updateSet(dateLong, weightOrDistString, repsOrTime, notes);
                 showSnackbar();
-                HistoryTabFragment.getInstance().updateMainList();
+
+
                 finish();
                 Log.d(LOG_TAG, "  set updated to DB");
             }

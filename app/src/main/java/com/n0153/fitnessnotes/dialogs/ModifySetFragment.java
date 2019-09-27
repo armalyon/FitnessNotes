@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 
+import com.n0153.fitnessnotes.NewSetActivity;
 import com.n0153.fitnessnotes.R;
 import com.n0153.fitnessnotes.Types.AdapterType;
 import com.n0153.fitnessnotes.UpdateSetActivity;
@@ -17,6 +18,7 @@ import com.n0153.fitnessnotes.ViewWorkoutActivity;
 import com.n0153.fitnessnotes.adapters.CardRecyclerAdapter;
 import com.n0153.fitnessnotes.db_utils.DBhelper;
 import com.n0153.fitnessnotes.fragments.HistoryTabFragment;
+import com.n0153.fitnessnotes.fragments.WorkoutFragment;
 
 
 public class ModifySetFragment extends DialogFragment implements View.OnClickListener {
@@ -68,7 +70,7 @@ public class ModifySetFragment extends DialogFragment implements View.OnClickLis
 
             case R.id.buttonModifyDelete:
                 dBhelper.deleteSetByDate(longdate);
-                HistoryTabFragment.getInstance().updateMainList();
+                updateLists();
                 dismiss();
                 break;
             case R.id.buttonModifyUpdate:
@@ -85,6 +87,14 @@ public class ModifySetFragment extends DialogFragment implements View.OnClickLis
                 dismiss();
         }
 
+
+    }
+
+    private void updateLists(){
+        if (adapterType.equals(AdapterType.SET_OPTIONS_LIST)){
+            ((NewSetActivity)getActivity()).getHistoryTabFragment().updateMainList();
+        }
+        else ((WorkoutFragment)getActivity().getSupportFragmentManager().findFragmentById(R.id.fragmentViewWorkout)).updateMainListView();
 
     }
 }
