@@ -19,7 +19,11 @@ public class NewSetActivity extends AppCompatActivity {
     private ViewPager viewPager;
     String label;
 
+    private HistoryTabFragment historyTabFragment;
 
+    public HistoryTabFragment getHistoryTabFragment() {
+        return historyTabFragment;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +48,7 @@ public class NewSetActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
         TrackTabFragment trackTabFragment = new TrackTabFragment();
-        HistoryTabFragment historyTabFragment = new HistoryTabFragment();
+        historyTabFragment = new HistoryTabFragment();
 
         //this needed for access to updateMainList()
         trackTabFragment.setHistoryTabFragment(historyTabFragment);

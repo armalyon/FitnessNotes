@@ -69,12 +69,16 @@ public class WorkoutFragment extends Fragment {
         Date date = new Date(dateLong);
         headerTextView.setText(sdf.format(date));
 
-
         updateMainListView();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateMainListView();
+    }
 
-    private void updateMainListView(){
+    public void updateMainListView(){
         ArrayList<SetOptionsDataModel> setsInADaylist = dBhelper.getSetsByDay(dateLong);
         SetsInADayAdapter adapter = new SetsInADayAdapter(getContext(), setsInADaylist);
         mainListView.setAdapter(adapter);

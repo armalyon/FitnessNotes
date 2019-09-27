@@ -26,8 +26,6 @@ public class HistoryTabFragment extends Fragment {
 
     private String LOG_TAG = "History tab";
 
-    private static HistoryTabFragment instance = null;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -36,7 +34,6 @@ public class HistoryTabFragment extends Fragment {
         dBhelper = new DBhelper(getContext());
         name = ((NewSetActivity) getActivity()).getLabel();
         type = dBhelper.getExeriseType(name);
-        instance = this;
 
         Log.d(LOG_TAG, "onCreate Finished");
     }
@@ -67,8 +64,10 @@ public class HistoryTabFragment extends Fragment {
 
     }
 
-    public static HistoryTabFragment getInstance() {
-        return instance;
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateMainList();
     }
 }
 

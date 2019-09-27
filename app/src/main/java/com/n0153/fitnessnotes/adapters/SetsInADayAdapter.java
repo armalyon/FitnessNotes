@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.n0153.fitnessnotes.R;
+import com.n0153.fitnessnotes.Types.AdapterType;
 import com.n0153.fitnessnotes.db_utils.DBhelper;
 import com.n0153.fitnessnotes.db_utils.models.SetDataModel;
 import com.n0153.fitnessnotes.db_utils.models.SetOptionsDataModel;
@@ -95,7 +96,6 @@ public class SetsInADayAdapter extends BaseAdapter {
             }
         }
 
-
         return exercisesList;
     }
 
@@ -113,7 +113,8 @@ public class SetsInADayAdapter extends BaseAdapter {
 
         LinearLayoutManager llm = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(llm);
-        CardRecyclerAdapter adapter = new CardRecyclerAdapter(context, recyclerList);
+        CardRecyclerAdapter adapter = new CardRecyclerAdapter(context, recyclerList, AdapterType.SETS_IN_A_DAY);
+        adapter.setOnItemClickListener(adapter.getItemClickListener());
         recyclerView.setAdapter(adapter);
 
 
