@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.n0153.fitnessnotes.NewSetActivity;
 import com.n0153.fitnessnotes.R;
+import com.n0153.fitnessnotes.Types.AdapterType;
+import com.n0153.fitnessnotes.ViewWorkoutActivity;
 import com.n0153.fitnessnotes.db_utils.models.SetDataModel;
 import com.n0153.fitnessnotes.dialogs.ModifySetFragment;
 
@@ -23,27 +25,26 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
     private LayoutInflater inflater;
     private Context context;
     private ArrayList<SetDataModel> setsList;
-    private static OnSetItemClickListener clickListener;
+    private OnSetItemClickListener clickListener;
+
     private ItemClickListener itemClickListener;
-    private ModifySetFragment modifySetFragment;
+    private AdapterType adapterType;
 
     public final static String KEY_LONG_DATE = "long_key";
     public final static String KEY_EXERCISE = "exercise_key";
+    public final static String KEY_CARD_TYPE = "card_key";
 
     private final String MODIFY_DIALOG_TAG = "Modify dialog started";
 
 
-    public ItemClickListener getItemClickListener() {
-        return itemClickListener;
-    }
-
-    public CardRecyclerAdapter(Context context, ArrayList<SetDataModel> setsList) {
+    public CardRecyclerAdapter(Context context, ArrayList<SetDataModel> setsList, AdapterType type) {
         inflater = LayoutInflater.from(context);
         this.context = context;
         this.setsList = setsList;
+        adapterType = type;
         itemClickListener = new ItemClickListener();
-
     }
+
 
     @NonNull
     @Override
@@ -64,6 +65,11 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
     public int getItemCount() {
         return setsList.size();
     }
+
+    public ItemClickListener getItemClickListener() {
+        return itemClickListener;
+    }
+
 
     class CardViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
         TextView setInfo;
@@ -89,7 +95,7 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
     }
 
     public void setOnItemClickListener(OnSetItemClickListener clickListener) {
-        CardRecyclerAdapter.clickListener = clickListener;
+        this.clickListener = clickListener;
     }
 
 
@@ -106,14 +112,25 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
             long dateLong = Long.parseLong(textView.getText().toString());
 
             // Create dialog to modify set and send date into it via Bundle
-            modifySetFragment = new ModifySetFragment();
+            ModifySetFragment modifySetFragment = new ModifySetFragment();
             String exercise = setsList.get(position).getExerciseName();
             Bundle args = new Bundle();
             args.putLong(KEY_LONG_DATE, dateLong);
             args.putString(KEY_EXERCISE, exercise);
+            args.putString(KEY_CARD_TYPE, adapterType.name());
 
             modifySetFragment.setArguments(args);
-            modifySetFragment.show(((NewSetActivity)context).getSupportFragmentManager(), MODIFY_DIALOG_TAG );
+
+            switch (adapterType){
+                case SET_OPTIONS_LIST:
+                    modifySetFragment.show(((NewSetActivity) context).getSupportFragmentManager(), MODIFY_DIALOG_TAG);
+                    break;
+                case SETS_IN_A_DAY:
+                    modifySetFragment.show(((ViewWorkoutActivity) context).getSupportFragmentManager(), MODIFY_DIALOG_TAG);
+                    break;
+
+            }
+
 
         }
 

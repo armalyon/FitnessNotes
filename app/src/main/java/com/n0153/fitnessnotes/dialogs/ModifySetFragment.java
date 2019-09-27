@@ -11,6 +11,7 @@ import android.widget.Button;
 
 
 import com.n0153.fitnessnotes.R;
+import com.n0153.fitnessnotes.Types.AdapterType;
 import com.n0153.fitnessnotes.UpdateSetActivity;
 import com.n0153.fitnessnotes.ViewWorkoutActivity;
 import com.n0153.fitnessnotes.adapters.CardRecyclerAdapter;
@@ -20,7 +21,7 @@ import com.n0153.fitnessnotes.fragments.HistoryTabFragment;
 
 public class ModifySetFragment extends DialogFragment implements View.OnClickListener {
 
-    private Button updateButton, deleteButton, cancelButton, viewWoroutButton;
+    private Button updateButton, deleteButton, cancelButton, viewWorkoutButton;
     private DBhelper dBhelper;
 
 
@@ -29,6 +30,7 @@ public class ModifySetFragment extends DialogFragment implements View.OnClickLis
     public static final String EXERCISE_DATE_LONG_KEY1 = "date long 1";
     public static final String EXERCISE_DATE_LONG_KEY2 = "date long 2";
 
+    private String adapterType;
 
     //date of set for search in DB
     private long longdate;
@@ -43,13 +45,16 @@ public class ModifySetFragment extends DialogFragment implements View.OnClickLis
         deleteButton = v.findViewById(R.id.buttonModifyDelete);
         cancelButton = v.findViewById(R.id.buttonModifyCancel);
         cancelButton = v.findViewById(R.id.buttonModifyCancel);
-        viewWoroutButton = v.findViewById(R.id.buttonViewWorkout);
+        viewWorkoutButton = v.findViewById(R.id.buttonViewWorkout);
         cancelButton.setOnClickListener(this);
         deleteButton.setOnClickListener(this);
         updateButton.setOnClickListener(this);
-        viewWoroutButton.setOnClickListener(this);
+        viewWorkoutButton.setOnClickListener(this);
         longdate = getArguments().getLong(CardRecyclerAdapter.KEY_LONG_DATE);
         exercise = getArguments().getString(CardRecyclerAdapter.KEY_EXERCISE);
+        adapterType = getArguments().getString(CardRecyclerAdapter.KEY_CARD_TYPE);
+
+        if (adapterType.equals(AdapterType.SETS_IN_A_DAY.name())) viewWorkoutButton.setVisibility(View.GONE);
 
         return v;
     }

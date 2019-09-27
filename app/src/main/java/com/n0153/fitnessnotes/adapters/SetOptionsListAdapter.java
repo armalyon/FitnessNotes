@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.n0153.fitnessnotes.R;
+import com.n0153.fitnessnotes.Types.AdapterType;
 import com.n0153.fitnessnotes.db_utils.models.SetDataModel;
 import com.n0153.fitnessnotes.db_utils.models.SetOptionsDataModel;
 
@@ -131,7 +132,7 @@ public class SetOptionsListAdapter extends BaseAdapter {
         LinearLayoutManager llm = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(llm);
 
-        CardRecyclerAdapter adapter = new CardRecyclerAdapter(context, setsInADayList);
+        CardRecyclerAdapter adapter = new CardRecyclerAdapter(context, setsInADayList, AdapterType.SET_OPTIONS_LIST);
         adapter.setOnItemClickListener(adapter.getItemClickListener());
         recyclerView.setAdapter(adapter);
 
