@@ -20,35 +20,37 @@
 
         <ImageButton
             android:id="@+id/leftSlideButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="12dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="@android:color/background_light"
-            app:srcCompat="@android:drawable/ic_media_play" />
+            app:srcCompat="@drawable/lft_slide_button" />
 
         <TextView
             android:id="@+id/mainDateTextView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="will be added here"
+            android:text="Date will be added here"
             android:textAlignment="center"
             android:textSize="@dimen/header_cards_size" />
 
         <ImageButton
             android:id="@+id/rightSlideButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="12dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="@android:color/background_light"
-            app:srcCompat="@android:drawable/ic_media_play" />
+            app:srcCompat="@drawable/rght_slide_button" />
 
     </LinearLayout>
 
     <FrameLayout
         android:id="@+id/mainFragmentContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
     </FrameLayout>
 
