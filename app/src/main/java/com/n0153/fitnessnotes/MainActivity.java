@@ -10,13 +10,17 @@ import android.view.View;
 
 import com.n0153.fitnessnotes.db_utils.DBhelper;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private FloatingActionButton floatingActionButton;
     private final String LOG_TAG_MAIN = "Workouts Log:";
 
-    DBhelper dBhelper;
-    SQLiteDatabase db;
+    final String headerDatePattern = "yyyy, dd MMMM,  E";
+    private SimpleDateFormat dateFormat;
+    String dateString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +29,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         floatingActionButton = findViewById(R.id.addTrainingButton);
         floatingActionButton.setOnClickListener(this);
 
-        dBhelper = new DBhelper(this);
-        db = dBhelper.getWritableDatabase();
+        dateFormat = new SimpleDateFormat(headerDatePattern);
+        Date date = new Date();
+        dateString = dateFormat.format(date);
 
         Log.d(LOG_TAG_MAIN, "OnCreate done");
     }

@@ -9,19 +9,49 @@
     >
 
 
-    <ScrollView
-        android:layout_width="414dp"
-        android:layout_height="728dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent">
+    <LinearLayout
+        android:id="@+id/mainDateLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:id="@+id/scroll_layout"
-            android:layout_width="match_parent"
+        <ImageButton
+            android:id="@+id/leftSlideButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/background_light"
+            app:srcCompat="@android:drawable/ic_media_play" />
 
+        <TextView
+            android:id="@+id/mainDateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="will be added here"
+            android:textAlignment="center"
+            android:textSize="@dimen/header_cards_size" />
+
+        <ImageButton
+            android:id="@+id/rightSlideButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/background_light"
+            app:srcCompat="@android:drawable/ic_media_play" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        tools:layout_editor_absoluteX="40dp">
+
+    </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/addTrainingButton"
