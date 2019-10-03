@@ -11,22 +11,20 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.n0153.fitnessnotes.R;
-import com.n0153.fitnessnotes.ViewWorkoutActivity;
 import com.n0153.fitnessnotes.adapters.SetsInADayAdapter;
 import com.n0153.fitnessnotes.db_utils.DBhelper;
 import com.n0153.fitnessnotes.db_utils.models.SetOptionsDataModel;
 import com.n0153.fitnessnotes.interfaces.DateGettable;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+
 
 
 public class WorkoutFragment extends Fragment {
 
     private long dateLong;
 
-    TextView headerTextView;
+
     DBhelper dBhelper;
     ListView mainListView;
     String LOG_TAG = "Workout Fragment";

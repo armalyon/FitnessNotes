@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
+import com.n0153.fitnessnotes.MainActivity;
 import com.n0153.fitnessnotes.NewSetActivity;
 import com.n0153.fitnessnotes.R;
 import com.n0153.fitnessnotes.Types.AdapterType;
@@ -126,7 +127,15 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
                     modifySetFragment.show(((NewSetActivity) context).getSupportFragmentManager(), MODIFY_DIALOG_TAG);
                     break;
                 case SETS_IN_A_DAY:
-                    modifySetFragment.show(((ViewWorkoutActivity) context).getSupportFragmentManager(), MODIFY_DIALOG_TAG);
+
+                    try {
+                        modifySetFragment.show(((ViewWorkoutActivity) context).getSupportFragmentManager(), MODIFY_DIALOG_TAG);
+                    } catch (java.lang.ClassCastException e) {
+                        modifySetFragment.show(((MainActivity) context).getSupportFragmentManager(), MODIFY_DIALOG_TAG);
+
+                    }
+
+
                     break;
 
             }
