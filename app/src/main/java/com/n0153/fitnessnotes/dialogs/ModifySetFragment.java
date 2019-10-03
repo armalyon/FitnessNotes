@@ -94,7 +94,8 @@ public class ModifySetFragment extends DialogFragment implements View.OnClickLis
         if (adapterType.equals(AdapterType.SET_OPTIONS_LIST)){
             ((NewSetActivity)getActivity()).getHistoryTabFragment().updateMainList();
         }
-        else ((WorkoutFragment)getActivity().getSupportFragmentManager().findFragmentById(R.id.fragmentViewWorkout)).updateMainListView();
+        else
+            ((WorkoutFragment)getActivity().getSupportFragmentManager().findFragmentById(R.id.fragmentViewWorkout)).updateMainListView();
 
     }
 }

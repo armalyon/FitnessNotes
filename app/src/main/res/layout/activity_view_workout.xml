@@ -16,7 +16,7 @@
         android:textSize="@dimen/header_cards_size" />
 
     <fragment
-        android:id="@+id/fragmentViewWorkout"
+        android:id="@+id/fragmentViewWorkoutHistory"
         android:name="com.n0153.fitnessnotes.fragments.WorkoutFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
