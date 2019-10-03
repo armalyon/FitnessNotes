@@ -1,16 +1,19 @@
 package com.n0153.fitnessnotes;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
-import com.n0153.fitnessnotes.db_utils.DBhelper;
+import com.n0153.fitnessnotes.fragments.WorkoutFragment;
 import com.n0153.fitnessnotes.interfaces.DateGettable;
 
 import java.text.SimpleDateFormat;
@@ -21,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FloatingActionButton floatingActionButton;
     private ImageButton leftSlideButton, rightSlideButton;
     private final String LOG_TAG_MAIN = "Workouts Log:";
+    private FrameLayout fragmentContainer;
 
     private TextView header;
 
@@ -37,12 +41,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         floatingActionButton.setOnClickListener(this);
         rightSlideButton = findViewById(R.id.rightSlideButton);
         leftSlideButton = findViewById(R.id.leftSlideButton);
+        rightSlideButton.setOnClickListener(this);
+        leftSlideButton.setOnClickListener(this);
+
         header = findViewById(R.id.mainDateTextView);
+
         dateFormat = new SimpleDateFormat(headerDatePattern);
         Date date = new Date();
         dateLong = date.getTime();
         dateString = dateFormat.format(date);
         header.setText(dateString);
+
+        fragmentContainer = findViewById(R.id.mainFragmentContainer);
 
     }
 
@@ -56,6 +66,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent = new Intent(this, CategoriesActivity.class);
                 startActivity(intent);
                 break;
+            case (R.id.rightSlideButton):
+//for tests, should be changed
+                Log.d(LOG_TAG_MAIN, "OnClick");
+                dateLong-=86400000;
+
+                openFragment();
+                break;
+
+            case (R.id.leftSlideButton):
+
+
+                break;
         }
 
 
@@ -65,4 +87,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public long getLongDate() {
         return dateLong;
     }
+
+    public void openFragment() {
+        WorkoutFragment workoutFragment = new WorkoutFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.exit_from_right, R.anim.exit_from_right);
+        transaction.addToBackStack(null);
+        transaction.add(R.id.mainFragmentContainer, workoutFragment, "WoroutFragment" );
+        transaction.commit();
+
+    }
+
+
 }
