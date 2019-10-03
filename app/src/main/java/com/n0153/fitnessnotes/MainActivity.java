@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 
 import com.n0153.fitnessnotes.db_utils.DBhelper;
 
@@ -16,6 +17,7 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private FloatingActionButton floatingActionButton;
+    private ImageButton leftSlideButton, rightSlideButton;
     private final String LOG_TAG_MAIN = "Workouts Log:";
 
     final String headerDatePattern = "yyyy, dd MMMM,  E";
@@ -28,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         floatingActionButton = findViewById(R.id.addTrainingButton);
         floatingActionButton.setOnClickListener(this);
+        rightSlideButton = findViewById(R.id.rightSlideButton);
+        leftSlideButton = findViewById(R.id.leftSlideButton);
 
         dateFormat = new SimpleDateFormat(headerDatePattern);
         Date date = new Date();

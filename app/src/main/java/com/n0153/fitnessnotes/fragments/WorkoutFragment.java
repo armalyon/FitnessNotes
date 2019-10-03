@@ -15,6 +15,7 @@ import com.n0153.fitnessnotes.ViewWorkoutActivity;
 import com.n0153.fitnessnotes.adapters.SetsInADayAdapter;
 import com.n0153.fitnessnotes.db_utils.DBhelper;
 import com.n0153.fitnessnotes.db_utils.models.SetOptionsDataModel;
+import com.n0153.fitnessnotes.interfaces.DateGettable;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -64,7 +65,7 @@ public class WorkoutFragment extends Fragment {
     public void onStart() {
         super.onStart();
         dBhelper = new DBhelper(getContext());
-        dateLong = ((ViewWorkoutActivity)getActivity()).getDateLong();
+        dateLong = ((DateGettable)getActivity()).getLongDate();
         SimpleDateFormat sdf = new SimpleDateFormat(headerDatePattern);
         Date date = new Date(dateLong);
         headerTextView.setText(sdf.format(date));
@@ -83,4 +84,6 @@ public class WorkoutFragment extends Fragment {
         SetsInADayAdapter adapter = new SetsInADayAdapter(getContext(), setsInADaylist);
         mainListView.setAdapter(adapter);
     }
+
+
 }

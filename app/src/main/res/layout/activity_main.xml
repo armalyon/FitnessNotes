@@ -20,37 +20,39 @@
 
         <ImageButton
             android:id="@+id/leftSlideButton"
-            android:layout_width="12dp"
+            android:layout_width="5dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="@android:color/background_light"
-            app:srcCompat="@drawable/lft_slide_button" />
+            android:background="?android:selectableItemBackground"
+
+            android:src="@drawable/lft_slide_button" />
 
         <TextView
             android:id="@+id/mainDateTextView"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Date will be added here"
+
             android:textAlignment="center"
-            android:textSize="@dimen/header_cards_size" />
+            android:textSize="@dimen/header_cards_size"
+            tools:text="Date will be here" />
 
         <ImageButton
             android:id="@+id/rightSlideButton"
-            android:layout_width="12dp"
+            android:layout_width="5dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="@android:color/background_light"
-            app:srcCompat="@drawable/rght_slide_button" />
+            android:background="?android:selectableItemBackground"
+            android:src="@drawable/rght_slide_button" />
 
     </LinearLayout>
 
     <FrameLayout
         android:id="@+id/mainFragmentContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainDateLayout">
 
     </FrameLayout>
 

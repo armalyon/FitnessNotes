@@ -6,12 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.n0153.fitnessnotes.dialogs.ModifySetFragment;
+import com.n0153.fitnessnotes.interfaces.DateGettable;
 
 
-
-
-
-public class ViewWorkoutActivity extends AppCompatActivity {
+public class ViewWorkoutActivity extends AppCompatActivity implements DateGettable {
     long dateLong;
 
     @Override
@@ -24,6 +22,11 @@ public class ViewWorkoutActivity extends AppCompatActivity {
     }
 
     public long getDateLong() {
+        return dateLong;
+    }
+
+    @Override
+    public long getLongDate() {
         return dateLong;
     }
 }
