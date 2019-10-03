@@ -24,7 +24,6 @@ import java.util.Date;
 
 public class WorkoutFragment extends Fragment {
 
-    final String headerDatePattern = "yyyy, dd MMMM,  E";
     private long dateLong;
 
     TextView headerTextView;
@@ -54,7 +53,6 @@ public class WorkoutFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_workout, container, false);
 
-        headerTextView = v.findViewById(R.id.woFragmentHeader);
         mainListView = v.findViewById(R.id.woFragmentListview);
 
         return v;
@@ -66,9 +64,6 @@ public class WorkoutFragment extends Fragment {
         super.onStart();
         dBhelper = new DBhelper(getContext());
         dateLong = ((DateGettable)getActivity()).getLongDate();
-        SimpleDateFormat sdf = new SimpleDateFormat(headerDatePattern);
-        Date date = new Date(dateLong);
-        headerTextView.setText(sdf.format(date));
 
         updateMainListView();
     }

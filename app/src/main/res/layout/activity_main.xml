@@ -13,6 +13,7 @@
         android:id="@+id/mainDateLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,8 +21,8 @@
 
         <ImageButton
             android:id="@+id/leftSlideButton"
-            android:layout_width="5dp"
-            android:layout_height="match_parent"
+            android:layout_width="8dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="?android:selectableItemBackground"
 
@@ -30,17 +31,17 @@
         <TextView
             android:id="@+id/mainDateTextView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-
+            android:maxLines="1"
             android:textAlignment="center"
             android:textSize="@dimen/header_cards_size"
             tools:text="Date will be here" />
 
         <ImageButton
             android:id="@+id/rightSlideButton"
-            android:layout_width="5dp"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="?android:selectableItemBackground"
             android:src="@drawable/rght_slide_button" />
@@ -51,10 +52,20 @@
         android:id="@+id/mainFragmentContainer"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mainDateLayout">
 
     </FrameLayout>
+
+    <fragment
+        android:id="@+id/fragmentWorkout"
+        android:name="com.n0153.fitnessnotes.fragments.WorkoutFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainDateLayout" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/addTrainingButton"

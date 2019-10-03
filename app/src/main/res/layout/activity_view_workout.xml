@@ -7,6 +7,14 @@
     android:orientation="vertical"
     tools:context=".ViewWorkoutActivity">
 
+    <TextView
+        android:id="@+id/woHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/hello_blank_fragment"
+        android:textAlignment="center"
+        android:textSize="@dimen/header_cards_size" />
+
     <fragment
         android:id="@+id/fragmentViewWorkout"
         android:name="com.n0153.fitnessnotes.fragments.WorkoutFragment"

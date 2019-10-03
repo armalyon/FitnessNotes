@@ -8,21 +8,26 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.n0153.fitnessnotes.db_utils.DBhelper;
+import com.n0153.fitnessnotes.interfaces.DateGettable;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, DateGettable {
 
     private FloatingActionButton floatingActionButton;
     private ImageButton leftSlideButton, rightSlideButton;
     private final String LOG_TAG_MAIN = "Workouts Log:";
 
-    final String headerDatePattern = "yyyy, dd MMMM,  E";
+    private TextView header;
+
+
     private SimpleDateFormat dateFormat;
     String dateString;
+    private long dateLong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +37,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         floatingActionButton.setOnClickListener(this);
         rightSlideButton = findViewById(R.id.rightSlideButton);
         leftSlideButton = findViewById(R.id.leftSlideButton);
-
+        header = findViewById(R.id.mainDateTextView);
         dateFormat = new SimpleDateFormat(headerDatePattern);
         Date date = new Date();
+        dateLong = date.getTime();
         dateString = dateFormat.format(date);
+        header.setText(dateString);
 
-        Log.d(LOG_TAG_MAIN, "OnCreate done");
     }
 
     @Override
@@ -53,5 +59,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
 
+    }
+
+    @Override
+    public long getLongDate() {
+        return dateLong;
     }
 }
