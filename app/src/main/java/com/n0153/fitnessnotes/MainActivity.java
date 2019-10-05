@@ -2,6 +2,7 @@ package com.n0153.fitnessnotes;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -14,11 +15,12 @@ import android.widget.TextView;
 
 import com.n0153.fitnessnotes.fragments.WorkoutFragment;
 import com.n0153.fitnessnotes.interfaces.DateGettable;
+import com.n0153.fitnessnotes.interfaces.WorkoutFragmentGettable;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, DateGettable {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, DateGettable, WorkoutFragmentGettable {
 
     private FloatingActionButton floatingActionButton;
     private ImageButton leftSlideButton, rightSlideButton;
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FrameLayout fragmentContainer;
 
     private TextView header;
+    private WorkoutFragment workoutFragment;
 
 
     private SimpleDateFormat dateFormat;
@@ -50,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dateLong = date.getTime();
         dateString = dateFormat.format(date);
         header.setText(dateString);
+
+        workoutFragment = (WorkoutFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentViewWorkout);
 
         fragmentContainer = findViewById(R.id.mainFragmentContainer);
 
@@ -99,4 +104,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    @Override
+    public WorkoutFragment getWorkoutFragment() {
+        return workoutFragment;
+    }
 }

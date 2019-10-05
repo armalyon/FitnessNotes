@@ -4,6 +4,7 @@ package com.n0153.fitnessnotes.dialogs;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.n0153.fitnessnotes.adapters.CardRecyclerAdapter;
 import com.n0153.fitnessnotes.db_utils.DBhelper;
 import com.n0153.fitnessnotes.fragments.HistoryTabFragment;
 import com.n0153.fitnessnotes.fragments.WorkoutFragment;
+import com.n0153.fitnessnotes.interfaces.WorkoutFragmentGettable;
 
 
 public class ModifySetFragment extends DialogFragment implements View.OnClickListener {
@@ -31,6 +33,7 @@ public class ModifySetFragment extends DialogFragment implements View.OnClickLis
     public static final String EXERCISE_KEY = "exercise";
     public static final String EXERCISE_DATE_LONG_KEY1 = "date long 1";
     public static final String EXERCISE_DATE_LONG_KEY2 = "date long 2";
+    private final String LOG_TAG = "MODIFY FRAGMENT";
 
     private String adapterType;
 
@@ -91,11 +94,12 @@ public class ModifySetFragment extends DialogFragment implements View.OnClickLis
     }
 
     private void updateLists(){
-        if (adapterType.equals(AdapterType.SET_OPTIONS_LIST)){
+
+        Log.d(LOG_TAG, adapterType);
+        if (adapterType.equals(AdapterType.SET_OPTIONS_LIST.name())){
             ((NewSetActivity)getActivity()).getHistoryTabFragment().updateMainList();
         }
         else
-            ((WorkoutFragment)getActivity().getSupportFragmentManager().findFragmentById(R.id.fragmentViewWorkout)).updateMainListView();
-
+            ((WorkoutFragmentGettable)getActivity()).getWorkoutFragment().updateMainListView();
     }
 }
