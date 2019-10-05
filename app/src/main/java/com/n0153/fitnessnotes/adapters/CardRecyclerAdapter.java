@@ -122,20 +122,19 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
 
             modifySetFragment.setArguments(args);
 
-            switch (adapterType){
+            switch (adapterType) {
                 case SET_OPTIONS_LIST:
                     modifySetFragment.show(((NewSetActivity) context).getSupportFragmentManager(), MODIFY_DIALOG_TAG);
                     break;
                 case SETS_IN_A_DAY:
 
-                    try {
+                    if (context.getClass().equals(ViewWorkoutActivity.class)) {
                         modifySetFragment.show(((ViewWorkoutActivity) context).getSupportFragmentManager(), MODIFY_DIALOG_TAG);
-                    } catch (java.lang.ClassCastException e) {
+                    }
+                    if (context.getClass().equals(MainActivity.class)) {
                         modifySetFragment.show(((MainActivity) context).getSupportFragmentManager(), MODIFY_DIALOG_TAG);
 
                     }
-
-
                     break;
 
             }
