@@ -244,6 +244,7 @@ public class DBhelper extends SQLiteOpenHelper {
         String weightOrDist = cursor.getString(cursor.getColumnIndex(KEY_WEIGHT_DIST));
         String repsOrTime = cursor.getString(cursor.getColumnIndex(KEY_REPS_TIME));
         String note = cursor.getString(cursor.getColumnIndex(KEY_NOTES));
+        cursor.close();
 
         return new SetOptionsDataModel(null, date, repsOrTime, weightOrDist, note, null);
     }
