@@ -73,13 +73,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case (R.id.rightSlideButton):
 //for tests, should be changed
                 Log.d(LOG_TAG_MAIN, "OnClick");
-                dateLong-=86400000;
+                dateLong+=86400000;
 
-                openFragment();
+                openRightFragment();
                 break;
 
             case (R.id.leftSlideButton):
-
+                dateLong-=86400000;
+                openLeftFragment();
 
                 break;
         }
@@ -92,13 +93,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return dateLong;
     }
 
-    public void openFragment() {
-        WorkoutFragment workoutFragment = new WorkoutFragment();
+    public void openRightFragment() {
+        workoutFragment = new WorkoutFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.setCustomAnimations(R.anim.exit_from_right, R.anim.exit_from_right);
-        transaction.addToBackStack(null);
-        transaction.add(R.id.mainFragmentContainer, workoutFragment, "WoroutFragment" );
+        transaction.setCustomAnimations(R.anim.slide_to_right, R.anim.exit_from_right, R.anim.slide_to_right, R.anim.exit_from_right);
+
+        transaction.add(R.id.mainFragmentContainer, workoutFragment, "WorkoutFragment" );
+        transaction.commit();
+
+    }
+
+
+    public void openLeftFragment() {
+        workoutFragment = new WorkoutFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.exit_from_right, R.anim.slide_to_right, R.anim.exit_from_right, R.anim.slide_to_right);
+
+       transaction.add(R.id.mainFragmentContainer, workoutFragment, "WorkoutFragment" );
         transaction.commit();
 
     }
