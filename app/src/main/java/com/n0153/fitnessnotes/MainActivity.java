@@ -74,12 +74,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //for tests, should be changed
                 Log.d(LOG_TAG_MAIN, "OnClick");
                 dateLong+=86400000;
+                header.setText(dateFormat.format(new Date(dateLong)));
 
                 openRightFragment();
                 break;
 
             case (R.id.leftSlideButton):
                 dateLong-=86400000;
+                header.setText(dateFormat.format(new Date(dateLong)));
                 openLeftFragment();
 
                 break;
@@ -94,12 +96,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void openRightFragment() {
+
         workoutFragment = new WorkoutFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.anim.slide_to_right, R.anim.exit_from_right, R.anim.slide_to_right, R.anim.exit_from_right);
+        transaction.replace(R.id.mainFragmentContainer, workoutFragment);
 
-        transaction.add(R.id.mainFragmentContainer, workoutFragment, "WorkoutFragment" );
         transaction.commit();
 
     }
@@ -110,8 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.anim.exit_from_right, R.anim.slide_to_right, R.anim.exit_from_right, R.anim.slide_to_right);
-
-       transaction.add(R.id.mainFragmentContainer, workoutFragment, "WorkoutFragment" );
+        transaction.replace(R.id.mainFragmentContainer, workoutFragment);
         transaction.commit();
 
     }
