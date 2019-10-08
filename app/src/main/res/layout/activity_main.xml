@@ -56,12 +56,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mainDateLayout">
 
-        <fragment
-            android:id="@+id/fragmentViewWorkout"
-            android:name="com.n0153.fitnessnotes.fragments.WorkoutFragment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" />
+
     </FrameLayout>
 
     <android.support.design.widget.FloatingActionButton

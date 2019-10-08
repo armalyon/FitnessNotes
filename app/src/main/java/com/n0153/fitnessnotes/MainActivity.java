@@ -53,9 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dateString = dateFormat.format(date);
         header.setText(dateString);
 
-       // workoutFragment = (WorkoutFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentViewWorkout);
-
-      //  fragmentContainer = findViewById(R.id.mainFragmentContainer);
+        openTodayFragment();
 
     }
 
@@ -72,14 +70,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case (R.id.rightSlideButton):
 //for tests, should be changed
                 Log.d(LOG_TAG_MAIN, "OnClick");
-                dateLong+=86400000;
+                dateLong += 86400000;
                 header.setText(dateFormat.format(new Date(dateLong)));
 
                 openRightFragment();
                 break;
 
             case (R.id.leftSlideButton):
-                dateLong-=86400000;
+                dateLong -= 86400000;
                 header.setText(dateFormat.format(new Date(dateLong)));
                 openLeftFragment();
 
@@ -94,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return dateLong;
     }
 
-    public void openRightFragment() {
+    private void openRightFragment() {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -102,18 +100,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         transaction.replace(R.id.mainFragmentContainer, new WorkoutFragment());
         transaction.commit();
 
-
-
-
     }
 
 
-    public void openLeftFragment() {
+    private void openLeftFragment() {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.animator.enter_from_left, R.animator.exit_to_right, R.animator.enter_from_right, R.animator.enter_from_left);
         transaction.replace(R.id.mainFragmentContainer, new WorkoutFragment());
+        transaction.commit();
+
+    }
+
+    private void openTodayFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.add(R.id.mainFragmentContainer, new WorkoutFragment());
         transaction.commit();
 
 
