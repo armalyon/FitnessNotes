@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FloatingActionButton floatingActionButton;
     private ImageButton leftSlideButton, rightSlideButton;
     private final String LOG_TAG_MAIN = "Workouts Log:";
-    private FrameLayout fragmentContainer;
 
     private TextView header;
     private WorkoutFragment workoutFragment;
@@ -94,10 +93,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void openRightFragment() {
 
+        workoutFragment = new WorkoutFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.animator.enter_from_right, R.animator.exit_to_left, R.animator.enter_from_left, R.animator.exit_to_right);
-        transaction.replace(R.id.mainFragmentContainer, new WorkoutFragment());
+        transaction.replace(R.id.mainFragmentContainer, workoutFragment);
         transaction.commit();
 
     }
@@ -105,18 +105,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void openLeftFragment() {
 
+        workoutFragment = new WorkoutFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.animator.enter_from_left, R.animator.exit_to_right, R.animator.enter_from_right, R.animator.enter_from_left);
-        transaction.replace(R.id.mainFragmentContainer, new WorkoutFragment());
+        transaction.replace(R.id.mainFragmentContainer, workoutFragment);
         transaction.commit();
 
     }
 
     private void openTodayFragment() {
+        workoutFragment = new WorkoutFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.add(R.id.mainFragmentContainer, new WorkoutFragment());
+        transaction.add(R.id.mainFragmentContainer, workoutFragment);
         transaction.commit();
 
 
