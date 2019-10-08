@@ -53,9 +53,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dateString = dateFormat.format(date);
         header.setText(dateString);
 
-        workoutFragment = (WorkoutFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentViewWorkout);
+       // workoutFragment = (WorkoutFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentViewWorkout);
 
-        fragmentContainer = findViewById(R.id.mainFragmentContainer);
+      //  fragmentContainer = findViewById(R.id.mainFragmentContainer);
 
     }
 
@@ -96,24 +96,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void openRightFragment() {
 
-        workoutFragment = new WorkoutFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.setCustomAnimations(R.animator.enter_from_right, R.animator.exit_from_right);
-        transaction.replace(R.id.mainFragmentContainer, workoutFragment);
-
+        transaction.setCustomAnimations(R.animator.enter_from_right, R.animator.exit_to_left, R.animator.enter_from_left, R.animator.exit_to_right);
+        transaction.replace(R.id.mainFragmentContainer, new WorkoutFragment());
         transaction.commit();
+
+
+
 
     }
 
 
     public void openLeftFragment() {
-        workoutFragment = new WorkoutFragment();
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.setCustomAnimations(R.animator.enter_from_left, R.animator.exit_from_left);
-        transaction.replace(R.id.mainFragmentContainer, workoutFragment);
+        transaction.setCustomAnimations(R.animator.enter_from_left, R.animator.exit_to_right, R.animator.enter_from_right, R.animator.enter_from_left);
+        transaction.replace(R.id.mainFragmentContainer, new WorkoutFragment());
         transaction.commit();
+
 
     }
 
