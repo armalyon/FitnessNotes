@@ -18,6 +18,7 @@ import com.n0153.fitnessnotes.fragments.WorkoutFragment;
 import com.n0153.fitnessnotes.interfaces.DateGettable;
 import com.n0153.fitnessnotes.interfaces.WorkoutFragmentGettable;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -101,16 +102,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void setNextAvailableDate(int sign) {
         int day = sign * MILS_IN_A_DAY;
 
-        long nextDay = dateLong+ day;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd : HH:mm:ss:SSS");
+
+        long nextDay = 0;
+        try {
+            nextDay = dateFormat.parse(dateFormat.format(new Date(dateLong))).getTime() + day;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
 
         ArrayList<SetOptionsDataModel> list = dBhelper.getSetsByDay(nextDay);;
-
        while (list.size()<=0){
            nextDay+=day;
            list = dBhelper.getSetsByDay(nextDay);
 
        }
-
         dateLong = nextDay;
 
     }
