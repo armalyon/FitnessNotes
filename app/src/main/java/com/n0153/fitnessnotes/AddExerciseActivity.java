@@ -1,10 +1,11 @@
 package com.n0153.fitnessnotes;
 
 import android.content.ContentValues;
-import android.database.Cursor;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,6 +28,7 @@ import java.util.List;
 public class AddExerciseActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private String dialogNewCatTag = "start dialog new category";
+    private final String LOG_TAG = "AddExerciseActivity";
 
     ImageButton addCategoryBtn;
     Spinner categoriesSpinner, typeSpinner;
@@ -36,7 +38,7 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
     EditText editName, editUnits;
     View divider1, divider2, divider3, divider4, divider5, divider6, divider7, divider8;
 
-    String exerciseName, exerciseCategory, exerciseType, exrciseUnits;
+    String exerciseName, exerciseCategory, exerciseType, exerciseUnits, defaultCategory;
 
 
     @Override
@@ -45,6 +47,7 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_add_exercise);
 
         dBhelper = new DBhelper(this);
+
 
         addCategoryBtn = findViewById(R.id.addCategoryButton);
         addCategoryBtn.setOnClickListener(this);
@@ -118,13 +121,30 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
 
     public void updateSpinner() {
 
-        List<String> categoriesList = dBhelper.getCategories();
+        Intent intent = getIntent();
+        defaultCategory = intent.getStringExtra(ExercisesActivity.SELECTED_CATEGORY_EXTRA);
+
+        List<String> categoriesList = new ArrayList<>();
+        if (defaultCategory==null){
+            categoriesList.add(getString(R.string.sp_please_select));
+            categoriesList.addAll(dBhelper.getCategories());
+        } else categoriesList = dBhelper.getCategories();
+
         ArrayAdapter<String> adapter =
                 new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categoriesList);
-
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         categoriesSpinner.setAdapter(adapter);
+        if (defaultCategory!=null){
+
+            int spinnerPosition = adapter.getPosition(defaultCategory);
+            Log.d(LOG_TAG, "spinner position: " + spinnerPosition);
+            categoriesSpinner.setSelection(spinnerPosition);
+        }
+
     }
+
+
 
 
     private void addExerciseToDB() {
@@ -133,12 +153,12 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
         exerciseName = editName.getText().toString();
         exerciseCategory = categoriesSpinner.getSelectedItem().toString();
         exerciseType = typeSpinner.getSelectedItem().toString();
-        exrciseUnits = editUnits.getText().toString();
+        exerciseUnits = editUnits.getText().toString();
 
         //check if all fields are filled
         if (exerciseName.equals("") || exerciseCategory.equals(getString(R.string.sp_please_select)) ||
                 exerciseType.equals(getString(R.string.sp_please_select)) ||
-                (exrciseUnits.equals("")) & (exerciseType.equals(getString(R.string.sp_weight_reps)) ||
+                (exerciseUnits.equals("")) & (exerciseType.equals(getString(R.string.sp_weight_reps)) ||
                         exerciseType.equals(getString(R.string.sp_dist_time)))) {
             Toast.makeText(this, getString(R.string.toast_please_fill_fields), Toast.LENGTH_SHORT).show();
         } else {
@@ -157,7 +177,7 @@ public class AddExerciseActivity extends AppCompatActivity implements View.OnCli
                 contentValues.put(DBhelper.KEY_CATEGORY, exerciseCategory);
                 contentValues.put(DBhelper.KEY_NAME, exerciseName);
                 contentValues.put(DBhelper.KEY_TYPE, exerciseType);
-                contentValues.put(DBhelper.KEY_UNITS, exrciseUnits);
+                contentValues.put(DBhelper.KEY_UNITS, exerciseUnits);
                 dBhelper.getWritableDatabase().insert(DBhelper.TABLE_EXERISES_NAME, null, contentValues);
                 finish();
             }
