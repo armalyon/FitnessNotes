@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.n0153.fitnessnotes.MainActivity;
 import com.n0153.fitnessnotes.db_utils.models.ExOptionsDataModel;
 import com.n0153.fitnessnotes.db_utils.models.SetOptionsDataModel;
 
@@ -272,12 +273,10 @@ public class DBhelper extends SQLiteOpenHelper {
             e.printStackTrace();
         }
 
-        long endOfDay = day + 86400000;
+        long endOfDay = day + MainActivity.MILS_IN_A_DAY;
         Cursor cursor = db.query(TABLE_SETS_NAME, new String[]{KEY_NAME, KEY_DATE, KEY_WEIGHT_DIST, KEY_REPS_TIME, KEY_NOTES}, KEY_DATE + " >= ?" + " AND " + KEY_DATE + " < ?",
                 new String[]{String.valueOf(day), String.valueOf(endOfDay)}, null, null, null);
         ArrayList<SetOptionsDataModel> list = new ArrayList<>();
-
-        Log.d(LOG_TAG, "setsByDay size: " + cursor.getCount());
 
         if (cursor.moveToFirst()) {
             do {
@@ -304,6 +303,31 @@ public class DBhelper extends SQLiteOpenHelper {
         return list;
     }
 
+    public boolean isNextDatesAvailable(long dateToday){
+        long date = dateToday + MainActivity.MILS_IN_A_DAY;
+        Cursor cursor = db.query(TABLE_SETS_NAME, new String[]{KEY_DATE}, KEY_DATE + " >= ?", new String[]{String.valueOf(date)}, null, null, null);
+        boolean result = cursor.moveToFirst();
+        Log.d(LOG_TAG, " next date available: " + result);
+        cursor.close();
+        return result;
+    }
+
+    public boolean isPrevDatesAvailable(long dateToday){
+
+        Log.d(LOG_TAG, "isPrevDatesAvailable started");
+
+        Cursor cursor = db.query(TABLE_SETS_NAME, new String[]{KEY_DATE}, KEY_DATE + " <= ?", new String[]{String.valueOf(dateToday)}, null, null, null);
+
+        Log.d(LOG_TAG, "Cursor size is " + cursor.getCount());
+
+        boolean result = cursor.moveToFirst();
+        Log.d(LOG_TAG, " prev date available: " + result);
+        cursor.close();
+        return result;
+    }
+
+
+
     private String getExerciseUnits(String exerciseName){
         Cursor cursor = db.query(TABLE_EXERISES_NAME, new String[]{KEY_UNITS}, KEY_NAME + " = ?",
                 new String[]{exerciseName}, null, null, null);
@@ -314,5 +338,7 @@ public class DBhelper extends SQLiteOpenHelper {
         return units;
 
     }
+
+
 
 }

@@ -12,11 +12,14 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.n0153.fitnessnotes.db_utils.DBhelper;
+import com.n0153.fitnessnotes.db_utils.models.SetOptionsDataModel;
 import com.n0153.fitnessnotes.fragments.WorkoutFragment;
 import com.n0153.fitnessnotes.interfaces.DateGettable;
 import com.n0153.fitnessnotes.interfaces.WorkoutFragmentGettable;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, DateGettable, WorkoutFragmentGettable {
@@ -27,11 +30,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private TextView header;
     private WorkoutFragment workoutFragment;
+    public static final int MILS_IN_A_DAY = 86400000;
 
 
     private SimpleDateFormat dateFormat;
     String dateString;
     private long dateLong;
+    private DBhelper dBhelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dateLong = date.getTime();
         dateString = dateFormat.format(date);
         header.setText(dateString);
+        dBhelper = new DBhelper(this);
 
         openTodayFragment();
 
@@ -62,24 +68,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent;
         switch (v.getId()) {
             case (R.id.addTrainingButton):
-                Log.d(LOG_TAG_MAIN, "Add pressed");
                 intent = new Intent(this, CategoriesActivity.class);
                 startActivity(intent);
                 break;
             case (R.id.rightSlideButton):
-//for tests, should be changed
-                Log.d(LOG_TAG_MAIN, "OnClick");
-                dateLong += 86400000;
-                header.setText(dateFormat.format(new Date(dateLong)));
-
-                openRightFragment();
+                if (dBhelper.isNextDatesAvailable(dateLong)) {
+                    setNextAvailableDate(1);
+                    header.setText(dateFormat.format(new Date(dateLong)));
+                    openRightFragment();
+                }
                 break;
 
             case (R.id.leftSlideButton):
-                dateLong -= 86400000;
-                header.setText(dateFormat.format(new Date(dateLong)));
-                openLeftFragment();
-
+                if (dBhelper.isPrevDatesAvailable(dateLong)) {
+                    setNextAvailableDate(-1);
+                    header.setText(dateFormat.format(new Date(dateLong)));
+                    openLeftFragment();
+                }
                 break;
         }
 
@@ -90,6 +95,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public long getLongDate() {
         return dateLong;
     }
+
+
+
+    private void setNextAvailableDate(int sign) {
+        int day = sign * MILS_IN_A_DAY;
+
+        long nextDay = dateLong+ day;
+
+        ArrayList<SetOptionsDataModel> list = dBhelper.getSetsByDay(nextDay);;
+
+       while (list.size()<=0){
+           nextDay+=day;
+           list = dBhelper.getSetsByDay(nextDay);
+
+       }
+
+        dateLong = nextDay;
+
+    }
+
 
     private void openRightFragment() {
 
@@ -121,12 +146,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         transaction.add(R.id.mainFragmentContainer, workoutFragment);
         transaction.commit();
 
-
     }
+
+
 
 
     @Override
     public WorkoutFragment getWorkoutFragment() {
         return workoutFragment;
     }
+
+
 }
+
+
