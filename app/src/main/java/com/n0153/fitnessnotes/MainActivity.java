@@ -102,8 +102,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void setNextAvailableDate(int sign) {
         int day = sign * MILS_IN_A_DAY;
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd : HH:mm:ss:SSS");
-
         long nextDay = 0;
         try {
             nextDay = dateFormat.parse(dateFormat.format(new Date(dateLong))).getTime() + day;

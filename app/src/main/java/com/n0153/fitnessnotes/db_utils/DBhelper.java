@@ -123,7 +123,6 @@ public class DBhelper extends SQLiteOpenHelper {
 
     public List getExercisesList(String category) {
 
-        Log.d(LOG_TAG, "category " + category);
         Cursor cursor = db.query(TABLE_EXERISES_NAME, new String[]{KEY_NAME},
                 KEY_CATEGORY + " = ?", new String[]{category}, null, null, null);
 
@@ -146,7 +145,6 @@ public class DBhelper extends SQLiteOpenHelper {
         Cursor cursor = db.query(TABLE_EXERISES_NAME, columns, KEY_NAME + " = ?",
                 new String[]{exercise}, null, null, null);
 
-        Log.d(LOG_TAG, "Cursor size" + cursor.getCount());
         String type = null, units = null;
 
         cursor.moveToFirst();
@@ -207,8 +205,6 @@ public class DBhelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
 
         }
-
-        Log.d(LOG_TAG, " setOpionsList  size = " + list.size());
 
         cursor.close();
 
@@ -312,11 +308,7 @@ public class DBhelper extends SQLiteOpenHelper {
 
     public boolean isPrevDatesAvailable(long dateToday){
 
-        Log.d(LOG_TAG, "isPrevDatesAvailable started");
-
         Cursor cursor = db.query(TABLE_SETS_NAME, new String[]{KEY_DATE}, KEY_DATE + " <= ?", new String[]{String.valueOf(dateToday)}, null, null, null);
-
-        Log.d(LOG_TAG, "Cursor size is " + cursor.getCount());
 
         boolean result = cursor.moveToFirst();
         Log.d(LOG_TAG, " prev date available: " + result);
