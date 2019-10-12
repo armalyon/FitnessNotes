@@ -18,8 +18,6 @@ import com.n0153.fitnessnotes.UpdateSetActivity;
 import com.n0153.fitnessnotes.ViewWorkoutActivity;
 import com.n0153.fitnessnotes.adapters.CardRecyclerAdapter;
 import com.n0153.fitnessnotes.db_utils.DBhelper;
-import com.n0153.fitnessnotes.fragments.HistoryTabFragment;
-import com.n0153.fitnessnotes.fragments.WorkoutFragment;
 import com.n0153.fitnessnotes.interfaces.WorkoutFragmentGettable;
 
 

@@ -10,13 +10,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
 import com.n0153.fitnessnotes.db_utils.DBhelper;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class CategoriesActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class CategoriesActivity extends AppCompatActivity implements View.OnClickListener,
+        AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
 
     private FloatingActionButton floatingActionButton;
@@ -35,6 +34,7 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
         dBhelper = new DBhelper(this);
         listView = findViewById(R.id.lvCategories);
         listView.setOnItemClickListener(this);
+        listView.setOnItemLongClickListener(this);
 
         updateList();
 
@@ -66,7 +66,7 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
 
         List<String> categoriesList = dBhelper.getCategories();
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> adapter = new ArrayAdapter(this,
                 R.layout.listraw_layout, R.id.textView2, categoriesList);
 
         listView.setAdapter(adapter);
@@ -81,5 +81,11 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
         intent.putExtra(CATEGORY_EXTRA, selectedCategory);
         startActivity(intent);
 
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+        return true;
     }
 }
