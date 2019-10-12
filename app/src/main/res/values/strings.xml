@@ -28,6 +28,7 @@
     <string name="item_clear" translatable="false">Clear</string>
     <string name="item_delete_set" translatable="false">Delete set</string>
     <string name="item_delete_exercise" translatable="false">Delete exercise</string>
+    <string name="item_delete_category" translatable="false">Delete category</string>
     <string name="item_update_set" translatable="false">Update set</string>
     <string name="item_update" translatable="false">Update</string>
 

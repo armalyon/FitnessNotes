@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    >
+
+
+    <Button
+        android:id="@+id/buttonUpdateCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_style"
+        android:text="@string/item_update" />
+
+    <Button
+        android:id="@+id/buttonDeleteCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_style"
+        android:text="@string/item_delete_category" />
+
+    <Button
+        android:id="@+id/buttonCancelCategory"
+        android:layout_width="@dimen/buttons_modify_set_width"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_style"
+        android:text="@string/item_cancel"
+        />
+</LinearLayout>

@@ -10,7 +10,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import com.n0153.fitnessnotes.db_utils.DBhelper;
+import com.n0153.fitnessnotes.dialogs.ModifyCategoryFragment;
+import com.n0153.fitnessnotes.dialogs.ModifyExerciseFragment;
 
 import java.util.List;
 
@@ -20,6 +24,8 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
 
     private FloatingActionButton floatingActionButton;
     private final String LOG_TAG = "Categories_Log:";
+    private final String MODIFY_CATEG_TAG  = "Modify category";
+    public static final String SELECTED_CATEGORY_KEY = "Selected category";
     private DBhelper dBhelper;
     private ListView listView;
     final static String CATEGORY_EXTRA = "CATEGORY";
@@ -85,7 +91,12 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
+        String category = ((TextView)view.findViewById(R.id.textView2)).getText().toString();
+        ModifyCategoryFragment fragment = new ModifyCategoryFragment();
+        Bundle args = new Bundle();
+        args.putString(SELECTED_CATEGORY_KEY, category);
+        fragment.setArguments(args);
+        fragment.show(getSupportFragmentManager(), MODIFY_CATEG_TAG );
         return true;
     }
 }
