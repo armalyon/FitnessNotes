@@ -208,7 +208,7 @@ public class DBhelper extends SQLiteOpenHelper {
 
         cursor.close();
 
-        //sort by date newes irst
+        //sort by date newest irst
         Collections.sort(list, new Comparator<SetOptionsDataModel>() {
             @Override
             public int compare(SetOptionsDataModel o1, SetOptionsDataModel o2) {

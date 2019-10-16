@@ -12,10 +12,10 @@ import com.n0153.fitnessnotes.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ConfirmCategoryFragment extends Fragment {
+public class ConfirmExDeleteFragment extends Fragment {
 
 
-    public ConfirmCategoryFragment() {
+    public ConfirmExDeleteFragment() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,14 @@ public class ConfirmCategoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_confirm, container, false);
+        return inflater.inflate(R.layout.fragment_confirm_ex_delete, container, false);
+    }
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
     }
 
 }

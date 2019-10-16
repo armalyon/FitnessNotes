@@ -10,13 +10,11 @@ import android.view.ViewGroup;
 
 import com.n0153.fitnessnotes.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class RenameCategoryFragment extends DialogFragment {
+
+public class RenameExFragment extends DialogFragment {
 
 
-    public RenameCategoryFragment() {
+    public RenameExFragment() {
         // Required empty public constructor
     }
 
@@ -24,8 +22,10 @@ public class RenameCategoryFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_rename_category, container, false);
+
+        View v = inflater.inflate(R.layout.fragment_rename_ex, container, false);
+
+        return v;
     }
 
 

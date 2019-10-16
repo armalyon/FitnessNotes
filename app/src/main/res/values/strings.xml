@@ -6,6 +6,9 @@
     <string name="title_add_category_dialog" translatable="false">Add Category:</string>
     <string name="title_update_set" translatable="false">Update set</string>
     <string name="title_rename_category" translatable="false">Rename category</string>
+    <string name="title_confirmation_ex" translatable="false">All recorded sets will be deleted. \n Are you sure?</string>
+    <string name="title_confirmation_categ" translatable="false">All related exercises and recorded sets \n will be deleted. \n Are you sure?</string>
+    <string name="title_rename_ex" translatable="false">Rename exercise</string>
 
     <string name="title_categories" translatable="false">Categories</string>
     <string name="title_add_ex" translatable="false">Add Exercise</string>
@@ -33,6 +36,7 @@
     <string name="item_update_set" translatable="false">Update set</string>
     <string name="item_update" translatable="false">Update</string>
     <string name="item_rename" translatable="false">Rename</string>
+    <string name="item_delete" translatable="false">Delete</string>
 
 
     <string name="toast_new_category">New category: </string>
