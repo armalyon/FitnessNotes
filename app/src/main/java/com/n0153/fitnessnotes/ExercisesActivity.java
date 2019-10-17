@@ -55,7 +55,7 @@ public class ExercisesActivity extends AppCompatActivity implements AdapterView.
 
     }
 
-    private void updateList(){
+    public void updateList(){
         List<String> exerciesesList = dBhelper.getExercisesList(categoryToOpen);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 R.layout.listraw_layout, R.id.textView2, exerciesesList);

@@ -8,16 +8,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.n0153.fitnessnotes.ExercisesActivity;
 import com.n0153.fitnessnotes.R;
+import com.n0153.fitnessnotes.db_utils.DBhelper;
 
 
 public class RenameExFragment extends DialogFragment implements View.OnClickListener {
 
     private String exerciseToReneame;
     private Button renameButton, cancelButton;
-
+    private EditText renameEditText;
 
     public RenameExFragment() {
         // Required empty public constructor
@@ -33,6 +36,7 @@ public class RenameExFragment extends DialogFragment implements View.OnClickList
         cancelButton = v.findViewById(R.id.buttonCancelRenameEx);
         renameButton.setOnClickListener(this);
         cancelButton.setOnClickListener(this);
+        renameEditText = v.findViewById(R.id.editRenameEx);
 
         return v;
     }
@@ -52,8 +56,11 @@ public class RenameExFragment extends DialogFragment implements View.OnClickList
                 dismiss();
                 break;
             case R.id.buttonRenameEx:
-
-
+                String newName = renameEditText.getText().toString();
+                DBhelper dBhelper = new DBhelper(getContext());
+                dBhelper.updateExerciseName(exerciseToReneame, newName);
+                ((ExercisesActivity)getActivity()).updateList();
+                dBhelper.close();
                 dismiss();
                 break;
 

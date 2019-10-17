@@ -10,11 +10,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.n0153.fitnessnotes.ExercisesActivity;
 import com.n0153.fitnessnotes.R;
+import com.n0153.fitnessnotes.db_utils.DBhelper;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class ConfirmExDeleteFragment extends DialogFragment implements View.OnClickListener {
 
     private String exerciseToDelete;
@@ -33,7 +33,7 @@ public class ConfirmExDeleteFragment extends DialogFragment implements View.OnCl
         buttonCancel = v.findViewById(R.id.buttonCancelExDelete);
         buttonDelete = v.findViewById(R.id.buttonConfirmExDelete);
         buttonDelete.setOnClickListener(this);
-        buttonDelete.setOnClickListener(this);
+        buttonCancel.setOnClickListener(this);
 
         return v;
     }
@@ -48,15 +48,17 @@ public class ConfirmExDeleteFragment extends DialogFragment implements View.OnCl
 
     @Override
     public void onClick(View v) {
+
         switch (v.getId()) {
             case R.id.buttonCancelExDelete:
-
 
                 dismiss();
                 break;
             case R.id.buttonConfirmExDelete:
-
-
+                DBhelper dBhelper = new DBhelper(getContext());
+                dBhelper.deleteExerciseAndSets(exerciseToDelete);
+                dBhelper.close();
+                ((ExercisesActivity)getActivity()).updateList();
                 dismiss();
                 break;
 

@@ -10,6 +10,7 @@
         android:id="@+id/confirmationExDeletingTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="2dp"
         android:text="@string/title_confirmation_ex"
         android:textAlignment="center" />
 
