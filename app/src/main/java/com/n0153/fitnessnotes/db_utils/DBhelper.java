@@ -352,6 +352,26 @@ public class DBhelper extends SQLiteOpenHelper {
         }
     }
 
+    public void upddateCategoryName(String oldName, String newName){
+
+        ContentValues cvCategories = new ContentValues();
+        cvCategories.put(KEY_CATEGORIES, newName);
+
+        ContentValues cvExercises = new ContentValues();
+        cvExercises.put(KEY_CATEGORY, newName);
+
+
+        db.beginTransaction();
+        try {
+            db.update(TABLE_CATEGORIES_NAME, cvCategories, KEY_CATEGORIES + " = ?", new String[]{oldName});
+            db.update(TABLE_EXERISES_NAME, cvExercises, KEY_CATEGORY + " = ?", new String[]{oldName});
+
+       db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+    }
+
 
 }
 

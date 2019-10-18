@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.n0153.fitnessnotes.CategoriesActivity;
 import com.n0153.fitnessnotes.R;
@@ -14,9 +13,9 @@ import com.n0153.fitnessnotes.R;
 
 public class ModifyCategoryFragment extends DialogFragment implements View.OnClickListener {
 
-
-    String categoryName;
-    Button updateButton, deleteButton, cancelButton;
+    private String categoryName;
+    private Button updateButton, deleteButton, cancelButton;
+    private static final String UPDATE_TAG = "update category";
 
     public ModifyCategoryFragment() {
         // Required empty public constructor
@@ -50,17 +49,22 @@ public class ModifyCategoryFragment extends DialogFragment implements View.OnCli
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.buttonCancelCategory:
                 dismiss();
                 break;
             case R.id.buttonDeleteCategory:
 
+
+                dismiss();
                 break;
             case R.id.buttonUpdateCategory:
+                RenameCategoryFragment renameCategoryFragment = new RenameCategoryFragment();
+                renameCategoryFragment.setCategoryToRename(categoryName);
+                renameCategoryFragment.show(getFragmentManager(), UPDATE_TAG);
 
-
-            break;
+                dismiss();
+                break;
         }
 
     }

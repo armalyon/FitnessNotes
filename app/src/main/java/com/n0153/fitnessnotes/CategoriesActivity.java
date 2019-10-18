@@ -68,7 +68,7 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
     }
 
 
-    private void updateList() {
+    public void updateList() {
 
         List<String> categoriesList = dBhelper.getCategories();
 
