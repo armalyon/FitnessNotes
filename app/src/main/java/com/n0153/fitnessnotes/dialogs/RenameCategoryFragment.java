@@ -51,7 +51,7 @@ public class RenameCategoryFragment extends DialogFragment implements View.OnCli
             case R.id.buttonRenameCategory:
                 String newCategoryName = renameEditText.getText().toString();
                 DBhelper dBhelper = new DBhelper(getContext());
-                dBhelper.upddateCategoryName(categoryToRename, newCategoryName);
+                dBhelper.updateCategoryName(categoryToRename, newCategoryName);
                 dBhelper.close();
                 ((CategoriesActivity)getActivity()).updateList();
                 dismiss();

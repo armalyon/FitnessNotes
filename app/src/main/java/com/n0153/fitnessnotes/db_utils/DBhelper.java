@@ -352,7 +352,7 @@ public class DBhelper extends SQLiteOpenHelper {
         }
     }
 
-    public void upddateCategoryName(String oldName, String newName) {
+    public void updateCategoryName(String oldName, String newName) {
 
         ContentValues cvCategories = new ContentValues();
         cvCategories.put(KEY_CATEGORIES, newName);

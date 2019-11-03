@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +47,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
     ConstraintLayout parentLayout;
     HistoryTabFragment historyTabFragment;
     ArrayList<SetOptionsDataModel> setsList;
+    ListView exerciseSetListView;
 
     public static final String DATE_FORMAT = "YYYY-MM-dd";
 
@@ -108,6 +110,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
         setButtonsLayout = v.findViewById(R.id.setButtonslatout);
         unitsAmountLayout = v.findViewById(R.id.unitsAmountLayout);
 
+        exerciseSetListView = v.findViewById(R.id.exerciseSeteListView);
 
         saveBtn.setOnClickListener(this);
         clearBtn.setOnClickListener(this);
