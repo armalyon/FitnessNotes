@@ -352,7 +352,7 @@ public class DBhelper extends SQLiteOpenHelper {
         }
     }
 
-    public void upddateCategoryName(String oldName, String newName){
+    public void upddateCategoryName(String oldName, String newName) {
 
         ContentValues cvCategories = new ContentValues();
         cvCategories.put(KEY_CATEGORIES, newName);
@@ -366,10 +366,53 @@ public class DBhelper extends SQLiteOpenHelper {
             db.update(TABLE_CATEGORIES_NAME, cvCategories, KEY_CATEGORIES + " = ?", new String[]{oldName});
             db.update(TABLE_EXERISES_NAME, cvExercises, KEY_CATEGORY + " = ?", new String[]{oldName});
 
-       db.setTransactionSuccessful();
+            db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
         }
+    }
+
+    public void deleteCategoryAndExercises(String categoryToDelete) {
+
+        Cursor c = db.query(TABLE_EXERISES_NAME, new String[]{KEY_NAME}, KEY_CATEGORY + " = ?", new String[]{categoryToDelete}, null, null, null);
+
+        int numberOfExercisesToDelete = c.getCount();
+        ArrayList<String> exToDelete = new ArrayList<>(numberOfExercisesToDelete);
+
+        if (numberOfExercisesToDelete <= 0) {
+            db.delete(TABLE_CATEGORIES_NAME, KEY_CATEGORIES + " = ?", new String[]{categoryToDelete});
+
+            c.close();
+        } else {
+
+            if (c.moveToFirst()) {
+                do {
+                    exToDelete.add(c.getString(c.getColumnIndex(KEY_NAME)));
+
+                } while (c.moveToNext());
+                c.close();
+            }
+
+
+            db.beginTransaction();
+            try {
+                for (int i = 0; i < numberOfExercisesToDelete; i++) {
+
+                    db.delete(TABLE_SETS_NAME, KEY_NAME + " = ?", new String[]{exToDelete.get(i)});
+
+                }
+
+
+                db.delete(TABLE_CATEGORIES_NAME, KEY_CATEGORIES + " = ?", new String[]{categoryToDelete});
+
+                db.delete(TABLE_EXERISES_NAME, KEY_CATEGORY + " = ?", new String[]{categoryToDelete});
+                db.setTransactionSuccessful();
+            } finally {
+                db.endTransaction();
+            }
+
+        }
+
     }
 
 
