@@ -42,7 +42,7 @@ public class TrackSetsAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = layoutInflater.inflate(R.layout.history_card_listraw, parent, false);
-        String setInfo = SetsInADayAdapter.getSetString(position, setsList.get(position), context);
+        String setInfo = SetsInADayAdapter.getSetString(position + 1, setsList.get(position), context);
 
         ((TextView)convertView.findViewById(R.id.textViewSet)).setText(setInfo);
         ((TextView)convertView.findViewById(R.id.textViewSetDate)).setText(String.valueOf(setsList.get(position).getDate().getTime()));

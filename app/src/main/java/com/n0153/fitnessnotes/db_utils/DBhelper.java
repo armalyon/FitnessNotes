@@ -307,9 +307,11 @@ public class DBhelper extends SQLiteOpenHelper {
 
     public boolean isPrevDatesAvailable(long dateToday) {
 
+        Log.d(LOG_TAG, "isPrevDatesAvailable");
         Cursor cursor = db.query(TABLE_SETS_NAME, new String[]{KEY_DATE}, KEY_DATE + " <= ?", new String[]{String.valueOf(dateToday)}, null, null, null);
 
         boolean result = cursor.moveToFirst();
+
         Log.d(LOG_TAG, " prev date available: " + result);
         cursor.close();
         return result;

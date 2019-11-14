@@ -14,6 +14,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,7 +38,7 @@ import java.util.Comparator;
 import java.util.Date;
 
 
-public class TrackTabFragment extends Fragment implements View.OnClickListener {
+public class TrackTabFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemLongClickListener {
 
     private DBhelper dBhelper;
     TextView unitsTextView, amountTextView;
@@ -116,6 +117,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
 
         saveBtn.setOnClickListener(this);
         clearBtn.setOnClickListener(this);
+        exerciseSetListView.setOnItemLongClickListener(this);
 
         setTextFields();
         setDividersSize();
@@ -428,5 +430,8 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
     }
 
 
-
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        return false;
+    }
 }
