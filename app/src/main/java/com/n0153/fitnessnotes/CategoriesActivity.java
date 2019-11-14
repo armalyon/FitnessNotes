@@ -72,7 +72,7 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
 
         List<String> categoriesList = dBhelper.getCategories();
 
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,
+        ArrayAdapter adapter = new ArrayAdapter(this,
                 R.layout.listraw_layout, R.id.textView2, categoriesList);
 
         listView.setAdapter(adapter);

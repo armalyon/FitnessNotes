@@ -107,7 +107,7 @@ public class SetsInADayAdapter extends BaseAdapter {
         ArrayList<SetDataModel> recyclerList = new ArrayList<>(n);
 
         for (int i = 0; i < n; i++) {
-            String setText = getSetString(i + 1, setstOptionsList.get(i));
+            String setText = getSetString(i + 1, setstOptionsList.get(i), context);
             recyclerList.add(new SetDataModel(name, setText, setstOptionsList.get(i).getDate()));
         }
 
@@ -121,7 +121,7 @@ public class SetsInADayAdapter extends BaseAdapter {
     }
 
     // set text of the set in history card dependant of type
-    private String getSetString(int position, SetOptionsDataModel setOptionsData) {
+    public static String getSetString(int position, SetOptionsDataModel setOptionsData, Context context) {
         DBhelper dBhelper = new DBhelper(context);
 
         String type = dBhelper.getExeriseType(setOptionsData.getName());

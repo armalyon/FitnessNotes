@@ -14,6 +14,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 
 import com.n0153.fitnessnotes.NewSetActivity;
 import com.n0153.fitnessnotes.R;
+import com.n0153.fitnessnotes.adapters.TrackSetsAdapter;
 import com.n0153.fitnessnotes.db_utils.DBhelper;
 import com.n0153.fitnessnotes.db_utils.models.ExOptionsDataModel;
 import com.n0153.fitnessnotes.db_utils.models.SetOptionsDataModel;
@@ -121,6 +123,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
         rearangeTimeFields();
 
         setFieldsValuesOnStart();
+        updateExerciseSetsList();
 
         return v;
 
@@ -202,6 +205,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
             case (R.id.buttonSaveSet):
                 saveSet();
                 historyTabFragment.updateMainList();
+                updateExerciseSetsList();
                 break;
         }
 
@@ -211,7 +215,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
 
         //method to hide unnecessary views (dividers and text) if type requires only one value
 
-       // String type = dBhelper.getExeriseType(exercise);
+        // String type = dBhelper.getExeriseType(exercise);
         String timeType = getString(R.string.sp_time);
         String repsType = getString(R.string.sp_reps);
 
@@ -238,7 +242,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
 
     private void saveSet() {
 
-       // String type = dBhelper.getExeriseType(exercise);
+        // String type = dBhelper.getExeriseType(exercise);
 
         String weightOrDistString = unitsAmountEditText.getText().toString();
 
@@ -341,8 +345,7 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
                 //Set fields valuse for all types of exercises
                 setFieldsValues(firstSetOfLastDate);
 
-            }
-            else setFieldsValues(setsList.get(0));
+            } else setFieldsValues(setsList.get(0));
 
 
         }
@@ -384,7 +387,6 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
     }
 
 
-
     private void setFieldsValues(SetOptionsDataModel set) {
         unitsAmountEditText.setText(set.getWeightOrDist());
         if ((type.equals(getString(R.string.sp_weight_reps)) || type.equals(getString(R.string.sp_reps)))) {
@@ -393,12 +395,38 @@ public class TrackTabFragment extends Fragment implements View.OnClickListener {
 
         if ((type.equals(getString(R.string.sp_time))) || type.equals(getString(R.string.sp_dist_time))) {
             String quantity = set.getRepsOrTime();
-            hoursEditText.setText(quantity.substring(0,2));
-            minutesEditText.setText(quantity.substring(3,5));
+            hoursEditText.setText(quantity.substring(0, 2));
+            minutesEditText.setText(quantity.substring(3, 5));
             secondsEditText.setText(quantity.substring(6));
         }
 
     }
+
+    private void updateExerciseSetsList() {
+        ArrayList<SetOptionsDataModel> setsList = getExerciseSetsList();
+        TrackSetsAdapter adapter = new TrackSetsAdapter(getContext(), setsList);
+        exerciseSetListView.setAdapter(adapter);
+
+
+
+    }
+
+
+    //Method to get sets in the day with necessary exercise name
+    private ArrayList<SetOptionsDataModel> getExerciseSetsList(){
+        ArrayList<SetOptionsDataModel> inDateList = dBhelper.getSetsByDay(new Date().getTime());
+        int n = inDateList.size();
+        ArrayList<SetOptionsDataModel> setsList = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            if (inDateList.get(i).getName().equals(exercise)){
+                setsList.add(inDateList.get(i));
+            }
+
+        }
+
+        return setsList;
+    }
+
 
 
 }

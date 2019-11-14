@@ -271,6 +271,8 @@
         android:id="@+id/exerciseSeteListView"
         android:layout_width="409dp"
         android:layout_height="176dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/setButtonslatout"
         tools:layout_editor_absoluteX="1dp" />
 
