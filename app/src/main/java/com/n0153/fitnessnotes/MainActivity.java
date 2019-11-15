@@ -176,8 +176,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-       Intent intent = new Intent(this, SettingsActivity.class);
-       startActivity(intent);
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.action_settings:
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.action_calendar:
+
+                break;
+
+        }
+
 
         return true;
     }
