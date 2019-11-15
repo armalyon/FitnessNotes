@@ -256,15 +256,7 @@ public class DBhelper extends SQLiteOpenHelper {
 
     //get sets for particular day
     public ArrayList<SetOptionsDataModel> getSetsByDay(long date) {
-        Date dateThis = new Date(date);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String dateString = sdf.format(dateThis);
-        long day = 0;
-        try {
-            day = sdf.parse(dateString).getTime();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        Long day = getBeginigOfTheDay(date);
 
         long endOfDay = day + MainActivity.MILS_IN_A_DAY;
         Cursor cursor = db.query(TABLE_SETS_NAME, new String[]{KEY_NAME, KEY_DATE, KEY_WEIGHT_DIST, KEY_REPS_TIME, KEY_NOTES}, KEY_DATE + " >= ?" + " AND " + KEY_DATE + " < ?",
@@ -297,6 +289,9 @@ public class DBhelper extends SQLiteOpenHelper {
     }
 
     public boolean isNextDatesAvailable(long dateToday) {
+
+        dateToday = getBeginigOfTheDay(dateToday);
+
         long date = dateToday + MainActivity.MILS_IN_A_DAY;
         Cursor cursor = db.query(TABLE_SETS_NAME, new String[]{KEY_DATE}, KEY_DATE + " >= ?", new String[]{String.valueOf(date)}, null, null, null);
         boolean result = cursor.moveToFirst();
@@ -308,6 +303,8 @@ public class DBhelper extends SQLiteOpenHelper {
     public boolean isPrevDatesAvailable(long dateToday) {
 
         Log.d(LOG_TAG, "isPrevDatesAvailable");
+        dateToday = getBeginigOfTheDay(dateToday);
+
         Cursor cursor = db.query(TABLE_SETS_NAME, new String[]{KEY_DATE}, KEY_DATE + " <= ?", new String[]{String.valueOf(dateToday)}, null, null, null);
 
         boolean result = cursor.moveToFirst();
@@ -415,6 +412,21 @@ public class DBhelper extends SQLiteOpenHelper {
 
         }
 
+    }
+
+    private long getBeginigOfTheDay(long date){
+
+        Date dateThis = new Date(date);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = sdf.format(dateThis);
+        long day = 0;
+        try {
+            day = sdf.parse(dateString).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return day;
     }
 
 

@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private SimpleDateFormat dateFormat;
     String dateString;
     private long dateLong;
-    private DBhelper dBhelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dateLong = date.getTime();
         dateString = dateFormat.format(date);
         header.setText(dateString);
-        dBhelper = new DBhelper(this);
 
         openTodayFragment();
 
@@ -67,36 +66,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
 
         Intent intent;
+        DBhelper dBhelper = new DBhelper(this);
         switch (v.getId()) {
             case (R.id.addTrainingButton):
                 intent = new Intent(this, CategoriesActivity.class);
                 startActivity(intent);
                 break;
             case (R.id.rightSlideButton):
+
                 if (dBhelper.isNextDatesAvailable(dateLong)) {
                     setNextAvailableDate(1);
                     header.setText(dateFormat.format(new Date(dateLong)));
                     openRightFragment();
+
                 }
+
                 break;
 
             case (R.id.leftSlideButton):
+
                 if (dBhelper.isPrevDatesAvailable(dateLong)) {
                     setNextAvailableDate(-1);
                     header.setText(dateFormat.format(new Date(dateLong)));
                     openLeftFragment();
+                    dBhelper.close();
                 }
                 break;
         }
 
-
+        dBhelper.close();
     }
 
     @Override
     public long getLongDate() {
         return dateLong;
     }
-
 
 
     private void setNextAvailableDate(int sign) {
@@ -109,15 +113,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             e.printStackTrace();
         }
 
+        DBhelper dBhelper = new DBhelper(this);
+        ArrayList<SetOptionsDataModel> list = dBhelper.getSetsByDay(nextDay);
+        ;
+        while (list.size() <= 0) {
+            nextDay += day;
+            list = dBhelper.getSetsByDay(nextDay);
 
-        ArrayList<SetOptionsDataModel> list = dBhelper.getSetsByDay(nextDay);;
-       while (list.size()<=0){
-           nextDay+=day;
-           list = dBhelper.getSetsByDay(nextDay);
-
-       }
+        }
         dateLong = nextDay;
-
+        dBhelper.close();
     }
 
 
@@ -136,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void openLeftFragment() {
 
         workoutFragment = new WorkoutFragment();
+        Log.d(LOG_TAG_MAIN, workoutFragment.toString());
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.animator.enter_from_left, R.animator.exit_to_right, R.animator.enter_from_right, R.animator.enter_from_left);
@@ -152,8 +158,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         transaction.commit();
 
     }
-
-
 
 
     @Override
