@@ -14,6 +14,7 @@
     <string name="title_settings" translatable="false">Settings</string>
     <string name="title_add_ex" translatable="false">Add Exercise</string>
     <string name="title_workout" translatable="false">Workout</string>
+    <string name="title_backup_to" translatable="false">Backup to:</string>
 
     <string name="field_name" translatable="false">Name:</string>
     <string name="field_category" translatable="false">Category:</string>
@@ -26,6 +27,8 @@
     <string name="item_reps" translatable="false">Reps:</string>
     <string name="item_time" translatable="false">Time:</string>
     <string name="item_notes" translatable="false">Notes:\u0020</string>
+    <string name="item_locally" translatable="false">Locally</string>
+    <string name="item_share" translatable="false">Share</string>
 
     <string name="item_cancel">Cancel</string>
     <string name="item_save" translatable="false">Save</string>

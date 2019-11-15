@@ -20,5 +20,12 @@
         <item>@string/item_delete_description</item>
     </string-array>
 
+    <string-array name="backupItemsArray">
+        <item>@string/item_locally</item>
+        <item>@string/item_share</item>
+        <item>@string/item_cancel</item>
+
+    </string-array>
+
 
 </resources>

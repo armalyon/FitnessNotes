@@ -14,8 +14,8 @@ import java.util.ArrayList;
 
 public class TrackSetsAdapter extends BaseAdapter {
 
-    Context context;
-    ArrayList <SetOptionsDataModel> setsList;
+    private Context context;
+    private ArrayList <SetOptionsDataModel> setsList;
     private LayoutInflater layoutInflater;
 
     public TrackSetsAdapter(Context context, ArrayList<SetOptionsDataModel> setsList) {
