@@ -8,4 +8,17 @@
         <item>@string/sp_time</item>
     </string-array>
 
+    <string-array name="settingsArrayNames">
+        <item>@string/item_backup_data</item>
+        <item>@string/item_restore_data</item>
+        <item>@string/item_delete_data</item>
+    </string-array>
+
+    <string-array name="settingsArrayDescriptions">
+        <item>@string/item_backup_description</item>
+        <item>@string/item_restore_description</item>
+        <item>@string/item_delete_description</item>
+    </string-array>
+
+
 </resources>

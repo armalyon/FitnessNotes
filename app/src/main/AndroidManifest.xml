@@ -21,6 +21,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_settings"/>
+        <activity
             android:name=".CategoriesActivity"
             android:label="@string/title_categories"
             android:screenOrientation="portrait" />
@@ -39,8 +42,9 @@
         <activity
             android:name=".NewSetActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ViewWorkoutActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ViewWorkoutActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

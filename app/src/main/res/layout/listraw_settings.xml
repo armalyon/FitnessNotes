@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <View
+        android:id="@+id/dividerThin11"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorActionBar" />
+
+    <TextView
+        android:id="@+id/settingsNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="@dimen/header_cards_size"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/settingsDescriptionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+    <View
+        android:id="@+id/dividerThin12"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorActionBar" />
+</LinearLayout>
