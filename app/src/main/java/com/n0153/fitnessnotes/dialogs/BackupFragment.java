@@ -7,13 +7,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.n0153.fitnessnotes.R;
 import com.n0153.fitnessnotes.adapters.BackUpListAdapter;
 
 
-public class BackupFragment extends DialogFragment {
+public class BackupFragment extends DialogFragment implements AdapterView.OnItemClickListener {
 
      ListView backUpListView;
 
@@ -31,8 +32,23 @@ public class BackupFragment extends DialogFragment {
         backUpListView = v.findViewById(R.id.backupDialogListView);
         BackUpListAdapter adapter = new BackUpListAdapter(getContext());
         backUpListView.setAdapter(adapter);
+        backUpListView.setOnItemClickListener(this);
 
         return v;
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        switch (position){
+            case 2:
+                dismiss();
+                break;
+            case 0:
+
+                break;
+
+        }
+
+
+    }
 }

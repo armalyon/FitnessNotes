@@ -33,9 +33,12 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        BackupFragment backupFragment = new BackupFragment();
-        backupFragment.show(getSupportFragmentManager(), BACKUP_TAG);
-
+        switch (position) {
+            case 0:
+                BackupFragment backupFragment = new BackupFragment();
+                backupFragment.show(getSupportFragmentManager(), BACKUP_TAG);
+                break;
+        }
 
     }
 }
